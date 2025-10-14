@@ -123,8 +123,8 @@
                      <!-- Summary inputs for Administrasi -->
                     <div id="summary-administrasi" class="hidden space-y-4">
                         <div>
-                            <label for="tindak_lanjut_admin" class="block text-sm font-medium text-gray-600">Tindak Lanjut / Saran</label>
-                            <textarea id="tindak_lanjut_admin" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            <label for="komentar_admin" class="block text-sm font-medium text-gray-600">Komentar / Saran</label>
+                            <textarea id="komentar_admin" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                         <p class="text-lg">Skor Total: <span id="skor_total" class="font-bold">0</span></p>
                         <p class="text-lg">Skor Maksimal: <span id="skor_maksimal" class="font-bold">0</span></p>
                         <p class="text-lg">Nilai Akhir: <span id="nilai_akhir" class="font-bold">0%</span></p>
-                        <p class="text-xl mt-2">Keterangan: <span id="keterangan_nilai" class="font-bold text-blue-700">-</span></p>
+                        <p class="text-xl mt-2">Peringkat: <span id="keterangan_nilai" class="font-bold text-blue-700">-</span></p>
                     </div>
                 </div>
 
@@ -172,7 +172,7 @@
     </div>
 
     <script>
-        // Data instrumen berdasarkan PDF
+        // Data instrumen Bimbingan Klasikal
         const instrumenKlasikal = [
             { kategori: 'A. PERSIAPAN PELAKSANAAN BIMBINGAN KLASIKAL', aspek: 'Melaksanakan asesmen kebutuhan materi bimbingan klasikal', id: 'klasikal_1' },
             { kategori: 'A. PERSIAPAN PELAKSANAAN BIMBINGAN KLASIKAL', aspek: 'Terjadwal masuk kelas secara rutin', id: 'klasikal_2' },
@@ -198,49 +198,58 @@
             { kategori: 'Tahap Akhir/Terminasi', aspek: 'Kemampuan untuk mengajak siswa merefleksikan pengalaman (bisa menjadi dasar evaluasi hasil)', id: 'klasikal_22' },
             { kategori: 'Tahap Akhir/Terminasi', aspek: 'Menyimpulkan hasil pertemuan secara efektif dan menutup pertemuan dengan simpatik (framming)', id: 'klasikal_23' },
         ];
-
+        
+        // Data instrumen Administrasi BK (TEMPLATE BARU)
         const instrumenAdministrasi = [
-            { komponen: 'Struktur Organisasi BK', id: 'admin_1' },
-            { komponen: 'Kalender Pendidik', id: 'admin_2' },
-            { komponen: 'Program Tahunan', id: 'admin_3' },
-            { komponen: 'Program Semester', id: 'admin_4' },
-            { komponen: 'Pola 17 Plus BK', id: 'admin_5' },
-            { komponen: 'Silabus', id: 'admin_6' },
-            { komponen: 'Satuan Layanan Kel/Kelas', id: 'admin_7' },
-            { komponen: 'Satuan Layanan Individu', id: 'admin_8' },
-            { komponen: 'Buku/Kartu Pribadi Siswa', id: 'admin_9' },
-            { komponen: 'Kartu Kasus', id: 'admin_10' },
-            { komponen: 'Mekanisme Penanganan Kasus', id: 'admin_11' },
-            { komponen: 'Catatan Kasus', id: 'admin_12' },
-            { komponen: 'Peta Siswa', id: 'admin_13' },
-            { komponen: 'Peta Kelas', id: 'admin_14' },
-            { komponen: 'Sosiogram/Sosiometri', id: 'admin_15' },
-            { komponen: 'Angket Siswa', id: 'admin_16' },
-            { komponen: 'Satuan Pendukung', id: 'admin_17' },
-            { komponen: 'Laporan Pelaksanaan Program', id: 'admin_18' },
-            { komponen: 'Evaluasi, Analisis, dan Tindak Lanjut', id: 'admin_19' },
-            { komponen: 'Dokumentasi Kegiatan Layanan', id: 'admin_20' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Angket Kebutuhan Peserta Didik', id: 'admin_new_1' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Data Analisis Kebutuhan Siswa', id: 'admin_new_2' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Program Layanan BK', id: 'admin_new_3' },
+            { kategori: 'Dokumen Wajib', komponen: 'Kalender Pendidikan dan analisis minggu efektif', id: 'admin_new_4' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Jadwal Layanan BK', id: 'admin_new_5' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Standar Kompetensi Kemandirian Peserta Didik.', id: 'admin_new_6' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Rencana Persiapan Layanan (RPL)', id: 'admin_new_7' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Kumpulan Materi Layanan BK', id: 'admin_new_8' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Buku Kolaborasi', id: 'admin_new_9' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Agenda Guru / Jurnal Layanan Bimbingan', id: 'admin_new_10' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Buku Catatan Konseling', id: 'admin_new_11' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Dokumen Home Visit', id: 'admin_new_12' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Dokumen Evaluasi Layanan BK', id: 'admin_new_13' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki dokumen tindak lanjut layanan BK', id: 'admin_new_14' },
+            { kategori: 'Dokumen Penunjang', komponen: 'Memiliki daftar hadir peserta didik', id: 'admin_new_15' },
+            { kategori: 'Dokumen Penunjang', komponen: 'Melakukan Pengembangan Keprofesian Berkelanjutan', id: 'admin_new_16' }
         ];
 
         let currentTab = 'klasikal';
 
         // Fungsi untuk render form
         function renderForms() {
+            // Render form Klasikal
             const containerKlasikal = document.getElementById('instrumen-klasikal-container');
-            let currentKategori = '';
+            containerKlasikal.innerHTML = ''; // Clear previous content
+            let currentKategoriKlasikal = '';
             instrumenKlasikal.forEach((item, index) => {
-                if (item.kategori !== currentKategori) {
-                    currentKategori = item.kategori;
+                if (item.kategori !== currentKategoriKlasikal) {
+                    currentKategoriKlasikal = item.kategori;
                     const kategoriHeader = document.createElement('h3');
                     kategoriHeader.className = 'text-lg font-semibold mt-6 pt-4 border-t text-blue-600';
-                    kategoriHeader.textContent = currentKategori;
+                    kategoriHeader.textContent = currentKategoriKlasikal;
                     containerKlasikal.appendChild(kategoriHeader);
                 }
                 containerKlasikal.appendChild(createKlasikalItem(item, index + 1));
             });
             
+            // Render form Administrasi
             const containerAdministrasi = document.getElementById('instrumen-administrasi-container');
+            containerAdministrasi.innerHTML = ''; // Clear previous content
+            let currentKategoriAdmin = '';
             instrumenAdministrasi.forEach((item, index) => {
+                 if (item.kategori !== currentKategoriAdmin) {
+                    currentKategoriAdmin = item.kategori;
+                    const kategoriHeader = document.createElement('h3');
+                    kategoriHeader.className = 'text-lg font-semibold mt-6 pt-4 border-t text-blue-600';
+                    kategoriHeader.textContent = currentKategoriAdmin;
+                    containerAdministrasi.appendChild(kategoriHeader);
+                }
                 containerAdministrasi.appendChild(createAdministrasiItem(item, index + 1));
             });
         }
@@ -273,25 +282,33 @@
 
         function createAdministrasiItem(item, number) {
             const itemDiv = document.createElement('div');
-            itemDiv.className = 'p-4 border rounded-lg hover:bg-gray-50 grid grid-cols-1 md:grid-cols-3 gap-4 items-center';
+            itemDiv.className = 'p-4 border rounded-lg hover:bg-gray-50';
             
             const content = `
-                <p class="font-medium md:col-span-1">${number}. ${item.komponen}</p>
-                <div class="flex items-center space-x-4 md:col-span-1">
+                <p class="font-medium">${number}. ${item.komponen}</p>
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2">
+                    <div class="flex items-center">
+                        <input type="radio" id="${item.id}_0" name="${item.id}" value="0" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <label for="${item.id}_0" class="ml-2 block text-sm text-gray-900">0</label>
+                    </div>
                     <div class="flex items-center">
                         <input type="radio" id="${item.id}_1" name="${item.id}" value="1" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                        <label for="${item.id}_1" class="ml-2 block text-sm text-gray-900">1 (Tidak Ada)</label>
+                        <label for="${item.id}_1" class="ml-2 block text-sm text-gray-900">1</label>
                     </div>
                     <div class="flex items-center">
                         <input type="radio" id="${item.id}_2" name="${item.id}" value="2" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                        <label for="${item.id}_2" class="ml-2 block text-sm text-gray-900">2 (Kurang Lengkap)</label>
+                        <label for="${item.id}_2" class="ml-2 block text-sm text-gray-900">2</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="radio" id="${item.id}_3" name="${item.id}" value="3" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
-                        <label for="${item.id}_3" class="ml-2 block text-sm text-gray-900">3 (Lengkap)</label>
+                        <input type="radio" id="${item.id}_3" name="${item.id}" value="3" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                        <label for="${item.id}_3" class="ml-2 block text-sm text-gray-900">3</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="${item.id}_4" name="${item.id}" value="4" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+                        <label for="${item.id}_4" class="ml-2 block text-sm text-gray-900">4</label>
                     </div>
                 </div>
-                 <textarea id="keterangan_${item.id}" placeholder="Keterangan..." class="md:col-span-1 w-full px-3 py-2 text-sm bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                 <textarea id="keterangan_${item.id}" placeholder="Keterangan..." class="mt-2 w-full px-3 py-2 text-sm bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
             `;
             itemDiv.innerHTML = content;
             return itemDiv;
@@ -335,20 +352,25 @@
                 else if (finalPercentage >= 76) grade = 'Baik';
                 else if (finalPercentage >= 61) grade = 'Cukup';
                 else grade = 'Kurang';
+                // Update label for result
+                document.querySelector('#hasil-penilaian p:last-child').innerHTML = `Keterangan: <span id="keterangan_nilai" class="font-bold text-blue-700">-</span>`;
 
-            } else { // administrasi
+            } else { // administrasi (template baru)
                  instrumenAdministrasi.forEach(item => {
                     const score = document.querySelector(`input[name="${item.id}"]:checked`);
                     if (score) {
                         totalScore += parseInt(score.value);
                     }
                 });
-                maxScore = instrumenAdministrasi.length * 3;
-                finalPercentage = maxScore > 0 ? ((totalScore / maxScore) * 100).toFixed(2) : 0;
+                maxScore = instrumenAdministrasi.length * 4;
+                finalPercentage = maxScore > 0 ? ((totalScore / maxScore) * 100).toFixed(0) : 0;
                 
-                if (finalPercentage >= 86) grade = 'Sangat Baik';
-                else if (finalPercentage >= 70) grade = 'Baik';
-                else grade = 'Kurang';
+                if (finalPercentage > 90) grade = 'Amat Baik (AB)';
+                else if (finalPercentage > 80) grade = 'Baik (B)';
+                else if (finalPercentage > 70) grade = 'Cukup (C)';
+                else grade = 'Kurang (K)';
+                // Update label for result
+                document.querySelector('#hasil-penilaian p:last-child').innerHTML = `Peringkat: <span id="keterangan_nilai" class="font-bold text-blue-700">-</span>`;
             }
 
             document.getElementById('skor_total').textContent = totalScore;
@@ -408,16 +430,16 @@
                 csvContent += `Tipe Supervisi,Administrasi BK\n`;
                 csvContent += `Tahun Pelajaran,${tahun}\n`;
                 csvContent += `Semester,${semester}\n\n`;
-                csvContent += "No,Komponen Administrasi,Skor (1-3),Keterangan\n";
+                csvContent += "No,Kategori,Komponen Administrasi,Skor (0-4),Keterangan\n";
                 
                 instrumenAdministrasi.forEach((item, index) => {
                     const score = document.querySelector(`input[name="${item.id}"]:checked`)?.value || 'N/A';
                     const keterangan = document.getElementById(`keterangan_${item.id}`).value.replace(/,/g, ';').replace(/\n/g, ' ');
-                    csvContent += `${index + 1},"${item.komponen}",${score},"${keterangan}"\n`;
+                    csvContent += `${index + 1},"${item.kategori}","${item.komponen}",${score},"${keterangan}"\n`;
                 });
 
                 csvContent += "\nRINGKASAN\n";
-                csvContent += `Tindak Lanjut / Saran,"${document.getElementById('tindak_lanjut_admin').value.replace(/,/g, ';').replace(/\n/g, ' ')}"\n`;
+                csvContent += `Komentar / Saran,"${document.getElementById('komentar_admin').value.replace(/,/g, ';').replace(/\n/g, ' ')}"\n`;
             }
 
             // Hasil Akhir
@@ -430,7 +452,7 @@
             csvContent += `Skor Total,${skorTotal}\n`;
             csvContent += `Skor Maksimal,${skorMaksimal}\n`;
             csvContent += `Nilai Akhir,${nilaiAkhir}\n`;
-            csvContent += `Keterangan,${keteranganNilai}\n`;
+            csvContent += `Peringkat,${keteranganNilai}\n`;
 
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
