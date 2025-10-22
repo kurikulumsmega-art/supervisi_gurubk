@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -21,13 +22,16 @@
             .no-print {
                 display: none !important;
             }
+            .print-only {
+                display: block !important;
+            }
             body {
                 background-color: #fff;
             }
             .container {
                 padding: 0;
             }
-            div[class*="shadow-md"] {
+            div[class*="shadow"] {
                 box-shadow: none;
                 border: 1px solid #e5e7eb;
             }
@@ -35,17 +39,73 @@
                 page-break-inside: avoid;
             }
         }
+        .print-only {
+            display: none;
+        }
+        .required-field::after {
+            content: " *";
+            color: #ef4444;
+        }
+        .signature-box {
+            border: 1px solid #e5e7eb;
+            height: 100px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-50 text-gray-800">
 
     <div class="container mx-auto p-4 sm:p-6 md:p-8">
-        <header class="text-center mb-8 bg-white p-6 rounded-xl shadow-md no-print">
+        <!-- Header untuk Print -->
+        <header class="text-center mb-8 bg-white p-6 rounded-xl shadow-sm print-only">
             <h1 class="text-2xl md:text-3xl font-bold text-blue-600">Supervisi Guru BK</h1>
             <p class="text-lg md:text-xl font-semibold text-gray-700">SMK Negeri 1 Purbalingga</p>
         </header>
 
-        <!-- Tab Buttons -->
+        <!-- Header untuk Screen -->
+        <header class="text-center mb-8 bg-white p-6 rounded-xl shadow-sm no-print">
+            <h1 class="text-2xl md:text-3xl font-bold text-blue-600">Supervisi Guru BK</h1>
+            <p class="text-lg md:text-xl font-semibold text-gray-700">SMK Negeri 1 Purbalingga</p>
+        </header>
+
+        <!-- Informasi Personal -->
+        <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
+            <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Personal</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Supervisor -->
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="text-lg font-semibold text-blue-600 mb-3">Supervisor</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label for="nama_supervisor" class="block text-sm font-medium text-gray-600 required-field">Nama Supervisor</label>
+                            <input type="text" id="nama_supervisor" value="Maryono, S.Pd., M.Si" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="nip_supervisor" class="block text-sm font-medium text-gray-600 required-field">NIP Supervisor</label>
+                            <input type="text" id="nip_supervisor" value="196607012000121002" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Guru BK -->
+                <div class="border-l-4 border-green-500 pl-4">
+                    <h3 class="text-lg font-semibold text-green-600 mb-3">Guru BK</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label for="nama_guru" class="block text-sm font-medium text-gray-600 required-field">Nama Guru BK</label>
+                            <input type="text" id="nama_guru" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="nip" class="block text-sm font-medium text-gray-600 required-field">NIP Guru BK</label>
+                            <input type="text" id="nip" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
         <div class="mb-6 flex justify-center border-b border-gray-300 no-print">
             <button id="tab-klasikal-btn" class="tab-btn active text-lg py-3 px-6 border-b-2 border-transparent transition-colors duration-300" onclick="switchTab('klasikal')">Bimbingan Klasikal</button>
             <button id="tab-administrasi-btn" class="tab-btn text-lg py-3 px-6 border-b-2 border-transparent transition-colors duration-300" onclick="switchTab('administrasi')">Administrasi BK</button>
@@ -53,126 +113,161 @@
 
         <main id="app-content">
             <!-- Informasi Umum -->
-            <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
                 <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Umum</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="nama_guru" class="block text-sm font-medium text-gray-600">Nama Guru</label>
-                        <input type="text" id="nama_guru" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="nip" class="block text-sm font-medium text-gray-600">NIP</label>
-                        <input type="text" id="nip" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                     <div id="info-klasikal">
+                    <div id="info-klasikal">
                         <div>
-                            <label for="kelas_semester" class="block text-sm font-medium text-gray-600">Kelas/Semester</label>
+                            <label for="kelas_semester" class="block text-sm font-medium text-gray-600 required-field">Kelas/Semester</label>
                             <input type="text" id="kelas_semester" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div>
-                            <label for="tanggal" class="block text-sm font-medium text-gray-600">Hari, Tanggal (Jam ke)</label>
+                            <label for="tanggal" class="block text-sm font-medium text-gray-600 required-field">Hari, Tanggal (Jam ke)</label>
                             <input type="text" id="tanggal" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                         </div>
                     </div>
                     <div id="info-administrasi" class="hidden">
-                         <div>
-                            <label for="tahun_pelajaran" class="block text-sm font-medium text-gray-600">Tahun Pelajaran</label>
+                        <div>
+                            <label for="tahun_pelajaran" class="block text-sm font-medium text-gray-600 required-field">Tahun Pelajaran</label>
                             <input type="text" id="tahun_pelajaran" value="2024/2025" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div>
-                            <label for="semester" class="block text-sm font-medium text-gray-600">Semester</label>
+                            <label for="semester" class="block text-sm font-medium text-gray-600 required-field">Semester</label>
                             <input type="text" id="semester" value="Ganjil" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Konten Tab -->
+            <!-- Konten Tab Klasikal -->
             <div id="tab-klasikal-content">
-                <form id="form-klasikal" class="bg-white p-6 rounded-xl shadow-md">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
                     <h2 class="text-xl font-bold mb-4 text-gray-700">Instrumen Supervisi Bimbingan Klasikal</h2>
                     <div id="instrumen-klasikal-container" class="space-y-4"></div>
-                </form>
-            </div>
-
-            <div id="tab-administrasi-content" class="hidden">
-                <form id="form-administrasi" class="bg-white p-6 rounded-xl shadow-md">
-                    <h2 class="text-xl font-bold mb-4 text-gray-700">Supervisi Administrasi Guru BK</h2>
-                    <div id="instrumen-administrasi-container" class="space-y-4"></div>
-                </form>
-            </div>
-            
-            <!-- Hasil & Aksi -->
-            <div class="bg-white p-6 rounded-xl shadow-md mt-6">
-                <div id="summary-section">
-                    <!-- Summary inputs for Klasikal -->
-                    <div id="summary-klasikal" class="space-y-4">
+                    
+                    <!-- Summary Klasikal -->
+                    <div id="summary-klasikal" class="mt-6 space-y-4">
                         <div>
-                            <label for="kesimpulan_klasikal" class="block text-sm font-medium text-gray-600">Kesimpulan</label>
+                            <label for="kesimpulan_klasikal" class="block text-sm font-medium text-gray-600 required-field">Kesimpulan</label>
                             <textarea id="kesimpulan_klasikal" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
                         </div>
                         <div>
-                            <label for="refleksi_klasikal" class="block text-sm font-medium text-gray-600">Refleksi</label>
+                            <label for="refleksi_klasikal" class="block text-sm font-medium text-gray-600 required-field">Refleksi</label>
                             <textarea id="refleksi_klasikal" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
                         </div>
                         <div>
-                            <label for="rekomendasi_klasikal" class="block text-sm font-medium text-gray-600">Rekomendasi</label>
+                            <label for="rekomendasi_klasikal" class="block text-sm font-medium text-gray-600 required-field">Rekomendasi</label>
                             <textarea id="rekomendasi_klasikal" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
                         </div>
                     </div>
-                     <!-- Summary inputs for Administrasi -->
-                    <div id="summary-administrasi" class="hidden space-y-4">
+                </div>
+            </div>
+
+            <!-- Konten Tab Administrasi -->
+            <div id="tab-administrasi-content" class="hidden">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h2 class="text-xl font-bold mb-4 text-gray-700">Supervisi Administrasi Guru BK</h2>
+                    <div id="instrumen-administrasi-container" class="space-y-4"></div>
+                    
+                    <!-- Summary Administrasi -->
+                    <div id="summary-administrasi" class="mt-6 space-y-4">
                         <div>
-                            <label for="komentar_admin" class="block text-sm font-medium text-gray-600">Komentar / Saran</label>
+                            <label for="komentar_admin" class="block text-sm font-medium text-gray-600 required-field">Komentar / Saran</label>
                             <textarea id="komentar_admin" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="flex flex-col sm:flex-row items-center justify-between mt-6 pt-6 border-t no-print">
-                     <div class="flex flex-wrap gap-2 justify-center w-full">
-                        <button onclick="calculateScores()" class="flex-grow sm:flex-grow-0 bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">Hitung Skor & Simpan</button>
-                        <button onclick="exportToCSV()" class="flex-grow sm:flex-grow-0 bg-green-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-700 transition duration-300 shadow-md">Export ke CSV</button>
-                        <button onclick="window.print()" class="flex-grow sm:flex-grow-0 bg-gray-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-700 transition duration-300 shadow-md">Cetak Laporan</button>
+            <!-- Action Buttons -->
+            <div class="bg-white p-6 rounded-xl shadow-sm mt-6 no-print">
+                <div class="flex flex-col sm:flex-row items-center justify-between">
+                    <div class="flex flex-wrap gap-2 justify-center w-full">
+                        <button onclick="validateAndCalculate()" class="flex-grow sm:flex-grow-0 bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 shadow-sm">
+                            <i class="fas fa-calculator mr-2"></i>Hitung Skor & Simpan
+                        </button>
+                        <button onclick="exportToCSV()" class="flex-grow sm:flex-grow-0 bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300 shadow-sm">
+                            <i class="fas fa-file-csv mr-2"></i>Export ke CSV
+                        </button>
+                        <button onclick="window.print()" class="flex-grow sm:flex-grow-0 bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700 transition duration-300 shadow-sm">
+                            <i class="fas fa-print mr-2"></i>Cetak Laporan
+                        </button>
+                        <button onclick="resetForm()" class="flex-grow sm:flex-grow-0 bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition duration-300 shadow-sm">
+                            <i class="fas fa-redo mr-2"></i>Reset Form
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                <div id="hasil-penilaian" class="mt-6 hidden">
-                    <h3 class="text-lg font-bold text-gray-800">Hasil Penilaian</h3>
-                    <div class="mt-2 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                        <p class="text-lg">Skor Total: <span id="skor_total" class="font-bold">0</span></p>
-                        <p class="text-lg">Skor Maksimal: <span id="skor_maksimal" class="font-bold">0</span></p>
-                        <p class="text-lg">Nilai Akhir: <span id="nilai_akhir" class="font-bold">0%</span></p>
-                        <p class="text-xl mt-2">Peringkat: <span id="keterangan_nilai" class="font-bold text-blue-700">-</span></p>
-                    </div>
-                </div>
-
-                <!-- Tanda Tangan Section -->
-                <div id="signature-section" class="mt-10 pt-6 border-t border-gray-200 hidden">
-                    <div class="flex justify-between items-start text-center text-sm sm:text-base">
-                        <div class="w-1/2 px-2">
-                            <p>Mengetahui,</p>
-                            <p>Kepala Sekolah selaku Supervisor</p>
-                            <div class="h-16"></div>
-                            <p class="font-bold underline">Maryono, S.Pd., M.Si</p>
-                            <p>NIP. 19660701 200012 1002</p>
+            <!-- Hasil Penilaian -->
+            <div id="hasil-penilaian" class="bg-white p-6 rounded-xl shadow-sm mt-6 hidden">
+                <h3 class="text-lg font-bold text-gray-800 mb-4">Hasil Penilaian</h3>
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div>
+                            <p class="text-sm text-gray-600">Skor Total</p>
+                            <p class="text-2xl font-bold text-blue-700" id="skor_total">0</p>
                         </div>
-                        <div class="w-1/2 px-2">
-                            <p id="signature-date-location">Purbalingga, [Tanggal]</p>
-                            <p>Guru BK</p>
-                            <div class="h-16"></div>
-                            <p class="font-bold underline" id="guru-bk-nama-ttd">[Nama Guru BK]</p>
-                            <p>NIP. <span id="guru-bk-nip-ttd">[NIP Guru BK]</span></p>
+                        <div>
+                            <p class="text-sm text-gray-600">Skor Maksimal</p>
+                            <p class="text-2xl font-bold text-blue-700" id="skor_maksimal">0</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Nilai Akhir</p>
+                            <p class="text-2xl font-bold text-blue-700" id="nilai_akhir">0%</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600" id="peringkat-label">Peringkat</p>
+                            <p class="text-2xl font-bold text-blue-700" id="keterangan_nilai">-</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
 
+            <!-- Section Validasi / Tanda Tangan -->
+            <section id="signature-section" class="bg-white p-6 rounded-xl shadow-sm mt-6">
+                <h2 class="text-xl font-bold text-indigo-700 mb-6 flex items-center">
+                    <i class="fas fa-file-signature mr-3"></i>VALIDASI
+                </h2>
+                
+                <div class="text-center mb-6">
+                    <label class="text-sm font-medium text-gray-700 mr-2">Purbalingga,</label>
+                    <input type="date" id="signatureDate" class="p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="text-center flex flex-col">
+                        <p class="font-semibold text-gray-700">Supervisor</p>
+                        <div class="signature-box flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">Tanda Tangan</span>
+                        </div>
+                        <p class="font-bold text-gray-800 border-t pt-2 mt-2" id="supervisorNameDisplay">........................................</p>
+                        <p class="text-xs text-gray-500" id="supervisorNipDisplay">NIP. .............................</p>
+                    </div>
+                    <div class="text-center flex flex-col">
+                        <p class="font-semibold text-gray-700">Guru BK</p>
+                        <div class="signature-box flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">Tanda Tangan</span>
+                        </div>
+                        <p class="font-bold text-gray-800 border-t pt-2 mt-2" id="teacherNameDisplay">........................................</p>
+                        <p class="text-xs text-gray-500" id="teacherNipDisplay">NIP. .............................</p>
+                    </div>
+                </div>
+                
+                <div class="text-center pt-6 border-t border-dashed">
+                    <p class="font-semibold text-gray-700">Mengetahui, Kepala Sekolah</p>
+                    <div class="signature-box mx-auto flex items-center justify-center" style="max-width: 300px;">
+                        <span class="text-gray-400 text-sm">Tanda Tangan</span>
+                    </div>
+                    <p class="font-bold text-gray-800 border-t pt-2 mt-2 mx-auto" style="max-width: 300px;">Maryono S.Pd, M.Si</p>
+                    <p class="text-xs text-gray-500">NIP. 19660701 2000121002</p>
+                </div>
+            </section>
+        </main>
     </div>
 
     <script>
-        // Data instrumen Bimbingan Klasikal
+        // Data Instrumen
         const instrumenKlasikal = [
             { kategori: 'A. PERSIAPAN PELAKSANAAN BIMBINGAN KLASIKAL', aspek: 'Melaksanakan asesmen kebutuhan materi bimbingan klasikal', id: 'klasikal_1' },
             { kategori: 'A. PERSIAPAN PELAKSANAAN BIMBINGAN KLASIKAL', aspek: 'Terjadwal masuk kelas secara rutin', id: 'klasikal_2' },
@@ -199,7 +294,6 @@
             { kategori: 'Tahap Akhir/Terminasi', aspek: 'Menyimpulkan hasil pertemuan secara efektif dan menutup pertemuan dengan simpatik (framming)', id: 'klasikal_23' },
         ];
         
-        // Data instrumen Administrasi BK (TEMPLATE BARU)
         const instrumenAdministrasi = [
             { kategori: 'Dokumen Wajib', komponen: 'Memiliki Angket Kebutuhan Peserta Didik', id: 'admin_new_1' },
             { kategori: 'Dokumen Wajib', komponen: 'Memiliki Data Analisis Kebutuhan Siswa', id: 'admin_new_2' },
@@ -221,251 +315,313 @@
 
         let currentTab = 'klasikal';
 
-        // Fungsi untuk render form
+        // Initialize Application
+        function initApp() {
+            renderForms();
+            setCurrentDate();
+            updateSignatureDisplay();
+        }
+
+        // Set current date for signature
+        function setCurrentDate() {
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            document.getElementById('signatureDate').value = formattedDate;
+        }
+
+        // Update signature display with current data
+        function updateSignatureDisplay() {
+            const supervisorName = document.getElementById('nama_supervisor').value;
+            const supervisorNip = document.getElementById('nip_supervisor').value;
+            const guruName = document.getElementById('nama_guru').value;
+            const guruNip = document.getElementById('nip').value;
+
+            document.getElementById('supervisorNameDisplay').textContent = supervisorName || '........................................';
+            document.getElementById('supervisorNipDisplay').textContent = `NIP. ${supervisorNip || '.............................'}`;
+            document.getElementById('teacherNameDisplay').textContent = guruName || '........................................';
+            document.getElementById('teacherNipDisplay').textContent = `NIP. ${guruNip || '.............................'}`;
+        }
+
+        // Render Forms
         function renderForms() {
-            // Render form Klasikal
-            const containerKlasikal = document.getElementById('instrumen-klasikal-container');
-            containerKlasikal.innerHTML = ''; // Clear previous content
-            let currentKategoriKlasikal = '';
-            instrumenKlasikal.forEach((item, index) => {
-                if (item.kategori !== currentKategoriKlasikal) {
-                    currentKategoriKlasikal = item.kategori;
-                    const kategoriHeader = document.createElement('h3');
-                    kategoriHeader.className = 'text-lg font-semibold mt-6 pt-4 border-t text-blue-600';
-                    kategoriHeader.textContent = currentKategoriKlasikal;
-                    containerKlasikal.appendChild(kategoriHeader);
-                }
-                containerKlasikal.appendChild(createKlasikalItem(item, index + 1));
-            });
+            renderKlasikalForm();
+            renderAdministrasiForm();
+        }
+
+        function renderKlasikalForm() {
+            const container = document.getElementById('instrumen-klasikal-container');
+            container.innerHTML = '';
+            let currentKategori = '';
             
-            // Render form Administrasi
-            const containerAdministrasi = document.getElementById('instrumen-administrasi-container');
-            containerAdministrasi.innerHTML = ''; // Clear previous content
-            let currentKategoriAdmin = '';
-            instrumenAdministrasi.forEach((item, index) => {
-                 if (item.kategori !== currentKategoriAdmin) {
-                    currentKategoriAdmin = item.kategori;
-                    const kategoriHeader = document.createElement('h3');
-                    kategoriHeader.className = 'text-lg font-semibold mt-6 pt-4 border-t text-blue-600';
-                    kategoriHeader.textContent = currentKategoriAdmin;
-                    containerAdministrasi.appendChild(kategoriHeader);
+            instrumenKlasikal.forEach((item, index) => {
+                if (item.kategori !== currentKategori) {
+                    currentKategori = item.kategori;
+                    const header = document.createElement('h3');
+                    header.className = 'text-lg font-semibold mt-6 pt-4 border-t text-blue-600';
+                    header.textContent = currentKategori;
+                    container.appendChild(header);
                 }
-                containerAdministrasi.appendChild(createAdministrasiItem(item, index + 1));
+                container.appendChild(createKlasikalItem(item, index + 1));
+            });
+        }
+
+        function renderAdministrasiForm() {
+            const container = document.getElementById('instrumen-administrasi-container');
+            container.innerHTML = '';
+            let currentKategori = '';
+            
+            instrumenAdministrasi.forEach((item, index) => {
+                if (item.kategori !== currentKategori) {
+                    currentKategori = item.kategori;
+                    const header = document.createElement('h3');
+                    header.className = 'text-lg font-semibold mt-6 pt-4 border-t text-blue-600';
+                    header.textContent = currentKategori;
+                    container.appendChild(header);
+                }
+                container.appendChild(createAdministrasiItem(item, index + 1));
             });
         }
 
         function createKlasikalItem(item, number) {
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'p-4 border rounded-lg hover:bg-gray-50';
-            
-            const content = `
-                <p class="font-medium">${number}. ${item.aspek}</p>
-                <div class="flex items-center space-x-6 mt-2">
+            const div = document.createElement('div');
+            div.className = 'p-4 border rounded-lg hover:bg-gray-50 transition-colors';
+            div.innerHTML = `
+                <p class="font-medium text-gray-800">${number}. ${item.aspek}</p>
+                <div class="flex flex-wrap items-center gap-4 mt-3">
                     <div class="flex items-center">
-                        <input type="radio" id="${item.id}_0" name="${item.id}" value="0" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                        <label for="${item.id}_0" class="ml-2 block text-sm text-gray-900">0 (Tidak Sesuai)</label>
+                        <input type="radio" id="${item.id}_0" name="${item.id}" value="0" class="h-4 w-4 text-blue-600">
+                        <label for="${item.id}_0" class="ml-2 text-sm">0 (Tidak Sesuai)</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="radio" id="${item.id}_1" name="${item.id}" value="1" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                        <label for="${item.id}_1" class="ml-2 block text-sm text-gray-900">1 (Sesuai Sebagian)</label>
+                        <input type="radio" id="${item.id}_1" name="${item.id}" value="1" class="h-4 w-4 text-blue-600">
+                        <label for="${item.id}_1" class="ml-2 text-sm">1 (Sesuai Sebagian)</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="radio" id="${item.id}_2" name="${item.id}" value="2" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
-                        <label for="${item.id}_2" class="ml-2 block text-sm text-gray-900">2 (Sesuai Semua)</label>
+                        <input type="radio" id="${item.id}_2" name="${item.id}" value="2" class="h-4 w-4 text-blue-600" checked>
+                        <label for="${item.id}_2" class="ml-2 text-sm">2 (Sesuai Semua)</label>
                     </div>
                 </div>
-                <textarea id="catatan_${item.id}" placeholder="Catatan..." class="mt-2 w-full px-3 py-2 text-sm bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                <textarea id="catatan_${item.id}" placeholder="Catatan..." class="mt-3 w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" rows="2"></textarea>
             `;
-            itemDiv.innerHTML = content;
-            return itemDiv;
+            return div;
         }
 
         function createAdministrasiItem(item, number) {
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'p-4 border rounded-lg hover:bg-gray-50';
-            
-            const content = `
-                <p class="font-medium">${number}. ${item.komponen}</p>
-                <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2">
-                    <div class="flex items-center">
-                        <input type="radio" id="${item.id}_0" name="${item.id}" value="0" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                        <label for="${item.id}_0" class="ml-2 block text-sm text-gray-900">0</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="${item.id}_1" name="${item.id}" value="1" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                        <label for="${item.id}_1" class="ml-2 block text-sm text-gray-900">1</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="${item.id}_2" name="${item.id}" value="2" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                        <label for="${item.id}_2" class="ml-2 block text-sm text-gray-900">2</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="${item.id}_3" name="${item.id}" value="3" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                        <label for="${item.id}_3" class="ml-2 block text-sm text-gray-900">3</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="${item.id}_4" name="${item.id}" value="4" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
-                        <label for="${item.id}_4" class="ml-2 block text-sm text-gray-900">4</label>
-                    </div>
+            const div = document.createElement('div');
+            div.className = 'p-4 border rounded-lg hover:bg-gray-50 transition-colors';
+            div.innerHTML = `
+                <p class="font-medium text-gray-800">${number}. ${item.komponen}</p>
+                <div class="flex flex-wrap items-center gap-3 mt-3">
+                    ${[0,1,2,3,4].map(val => `
+                        <div class="flex items-center">
+                            <input type="radio" id="${item.id}_${val}" name="${item.id}" value="${val}" class="h-4 w-4 text-blue-600" ${val === 4 ? 'checked' : ''}>
+                            <label for="${item.id}_${val}" class="ml-1 text-sm">${val}</label>
+                        </div>
+                    `).join('')}
                 </div>
-                 <textarea id="keterangan_${item.id}" placeholder="Keterangan..." class="mt-2 w-full px-3 py-2 text-sm bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                <textarea id="keterangan_${item.id}" placeholder="Keterangan..." class="mt-3 w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" rows="2"></textarea>
             `;
-            itemDiv.innerHTML = content;
-            return itemDiv;
+            return div;
         }
 
-        // Fungsi ganti tab
+        // Tab Management
         function switchTab(tabName) {
             currentTab = tabName;
+            
+            // Update tab buttons
+            document.getElementById('tab-klasikal-btn').classList.toggle('active', tabName === 'klasikal');
+            document.getElementById('tab-administrasi-btn').classList.toggle('active', tabName === 'administrasi');
+            
+            // Update content visibility
             document.getElementById('tab-klasikal-content').classList.toggle('hidden', tabName !== 'klasikal');
             document.getElementById('tab-administrasi-content').classList.toggle('hidden', tabName !== 'administrasi');
             
+            // Update info sections
             document.getElementById('info-klasikal').classList.toggle('hidden', tabName !== 'klasikal');
             document.getElementById('info-administrasi').classList.toggle('hidden', tabName !== 'administrasi');
-
-            document.getElementById('summary-klasikal').classList.toggle('hidden', tabName !== 'klasikal');
-            document.getElementById('summary-administrasi').classList.toggle('hidden', tabName !== 'administrasi');
             
-            document.getElementById('tab-klasikal-btn').classList.toggle('active', tabName === 'klasikal');
-            document.getElementById('tab-administrasi-btn').classList.toggle('active', tabName === 'administrasi');
             document.getElementById('hasil-penilaian').classList.add('hidden');
-            document.getElementById('signature-section').classList.add('hidden');
+        }
+
+        // Validation and Calculation
+        function validateAndCalculate() {
+            const requiredFields = getRequiredFields();
+            let isValid = true;
+            let errors = [];
+
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field.id);
+                if (!element || element.value.trim() === '') {
+                    isValid = false;
+                    errors.push(field.id);
+                    element.classList.add('border-red-500');
+                } else {
+                    element.classList.remove('border-red-500');
+                }
+            });
+
+            if (!isValid) {
+                alert('Mohon lengkapi semua field yang wajib diisi!');
+                return;
+            }
+
+            calculateScores();
         }
 
         function calculateScores() {
             let totalScore = 0;
             let maxScore = 0;
-            let finalPercentage = 0;
-            let grade = '-';
+            let items = [];
 
             if (currentTab === 'klasikal') {
-                instrumenKlasikal.forEach(item => {
+                items = instrumenKlasikal;
+                items.forEach(item => {
                     const score = document.querySelector(`input[name="${item.id}"]:checked`);
-                    if (score) {
-                        totalScore += parseInt(score.value);
-                    }
+                    if (score) totalScore += parseInt(score.value);
                 });
-                maxScore = instrumenKlasikal.length * 2;
-                finalPercentage = maxScore > 0 ? ((totalScore / maxScore) * 100).toFixed(2) : 0;
-                
-                if (finalPercentage >= 91) grade = 'Sangat Baik';
-                else if (finalPercentage >= 76) grade = 'Baik';
-                else if (finalPercentage >= 61) grade = 'Cukup';
-                else grade = 'Kurang';
-                // Update label for result
-                document.querySelector('#hasil-penilaian p:last-child').innerHTML = `Keterangan: <span id="keterangan_nilai" class="font-bold text-blue-700">-</span>`;
-
-            } else { // administrasi (template baru)
-                 instrumenAdministrasi.forEach(item => {
+                maxScore = items.length * 2;
+            } else {
+                items = instrumenAdministrasi;
+                items.forEach(item => {
                     const score = document.querySelector(`input[name="${item.id}"]:checked`);
-                    if (score) {
-                        totalScore += parseInt(score.value);
-                    }
+                    if (score) totalScore += parseInt(score.value);
                 });
-                maxScore = instrumenAdministrasi.length * 4;
-                finalPercentage = maxScore > 0 ? ((totalScore / maxScore) * 100).toFixed(0) : 0;
-                
-                if (finalPercentage > 90) grade = 'Amat Baik (AB)';
-                else if (finalPercentage > 80) grade = 'Baik (B)';
-                else if (finalPercentage > 70) grade = 'Cukup (C)';
-                else grade = 'Kurang (K)';
-                // Update label for result
-                document.querySelector('#hasil-penilaian p:last-child').innerHTML = `Peringkat: <span id="keterangan_nilai" class="font-bold text-blue-700">-</span>`;
+                maxScore = items.length * 4;
             }
 
+            const percentage = maxScore > 0 ? ((totalScore / maxScore) * 100).toFixed(currentTab === 'klasikal' ? 2 : 0) : 0;
+            const grade = calculateGrade(percentage);
+
+            // Update results
             document.getElementById('skor_total').textContent = totalScore;
             document.getElementById('skor_maksimal').textContent = maxScore;
-            document.getElementById('nilai_akhir').textContent = `${finalPercentage}%`;
+            document.getElementById('nilai_akhir').textContent = `${percentage}%`;
             document.getElementById('keterangan_nilai').textContent = grade;
+            document.getElementById('peringkat-label').textContent = currentTab === 'klasikal' ? 'Keterangan' : 'Peringkat';
+
+            // Update signature section
+            updateSignatureDisplay();
+
+            // Show results
             document.getElementById('hasil-penilaian').classList.remove('hidden');
-
-            // Update and show signature section
-            const namaGuru = document.getElementById('nama_guru').value || '[Nama Guru Belum Diisi]';
-            const nipGuru = document.getElementById('nip').value || '[NIP Belum Diisi]';
-            
-            const today = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = today.toLocaleDateString('id-ID', options);
-
-            document.getElementById('guru-bk-nama-ttd').textContent = namaGuru;
-            document.getElementById('guru-bk-nip-ttd').textContent = nipGuru;
-            document.getElementById('signature-date-location').textContent = `Purbalingga, ${formattedDate}`;
-
-            document.getElementById('signature-section').classList.remove('hidden');
         }
 
-        function exportToCSV() {
-            calculateScores(); // Ensure scores are calculated before export
-            
-            let csvContent = "data:text/csv;charset=utf-8,";
-            const namaGuru = document.getElementById('nama_guru').value.replace(/,/g, '') || 'Belum Diisi';
-            const nip = document.getElementById('nip').value || '-';
+        function calculateGrade(percentage) {
+            if (currentTab === 'klasikal') {
+                if (percentage >= 91) return 'Sangat Baik';
+                if (percentage >= 76) return 'Baik';
+                if (percentage >= 61) return 'Cukup';
+                return 'Kurang';
+            } else {
+                if (percentage > 90) return 'Amat Baik (AB)';
+                if (percentage > 80) return 'Baik (B)';
+                if (percentage > 70) return 'Cukup (C)';
+                return 'Kurang (K)';
+            }
+        }
 
-            csvContent += `SUPERVISI GURU BK - SMKN 1 PURBALINGGA\n`;
-            csvContent += `Nama Guru,${namaGuru}\n`;
-            csvContent += `NIP,${nip}\n\n`;
+        function getRequiredFields() {
+            const baseFields = [
+                { id: 'nama_supervisor' }, { id: 'nip_supervisor' },
+                { id: 'nama_guru' }, { id: 'nip' }
+            ];
 
             if (currentTab === 'klasikal') {
-                const kelas = document.getElementById('kelas_semester').value || '-';
-                const tanggal = document.getElementById('tanggal').value || '-';
-                csvContent += `Tipe Supervisi,Bimbingan Klasikal\n`;
-                csvContent += `Kelas/Semester,${kelas}\n`;
-                csvContent += `Hari Tanggal,${tanggal}\n\n`;
-                csvContent += "No,Kategori,Aspek Penilaian,Skor (0-2),Catatan\n";
-                
-                instrumenKlasikal.forEach((item, index) => {
-                    const score = document.querySelector(`input[name="${item.id}"]:checked`)?.value || 'N/A';
-                    const catatan = document.getElementById(`catatan_${item.id}`).value.replace(/,/g, ';').replace(/\n/g, ' ');
-                    csvContent += `${index + 1},"${item.kategori}","${item.aspek}",${score},"${catatan}"\n`;
-                });
-                
-                csvContent += "\nRINGKASAN\n";
-                csvContent += `Kesimpulan,"${document.getElementById('kesimpulan_klasikal').value.replace(/,/g, ';').replace(/\n/g, ' ')}"\n`;
-                csvContent += `Refleksi,"${document.getElementById('refleksi_klasikal').value.replace(/,/g, ';').replace(/\n/g, ' ')}"\n`;
-                csvContent += `Rekomendasi,"${document.getElementById('rekomendasi_klasikal').value.replace(/,/g, ';').replace(/\n/g, ' ')}"\n`;
-
-            } else { // administrasi
-                const tahun = document.getElementById('tahun_pelajaran').value || '-';
-                const semester = document.getElementById('semester').value || '-';
-                csvContent += `Tipe Supervisi,Administrasi BK\n`;
-                csvContent += `Tahun Pelajaran,${tahun}\n`;
-                csvContent += `Semester,${semester}\n\n`;
-                csvContent += "No,Kategori,Komponen Administrasi,Skor (0-4),Keterangan\n";
-                
-                instrumenAdministrasi.forEach((item, index) => {
-                    const score = document.querySelector(`input[name="${item.id}"]:checked`)?.value || 'N/A';
-                    const keterangan = document.getElementById(`keterangan_${item.id}`).value.replace(/,/g, ';').replace(/\n/g, ' ');
-                    csvContent += `${index + 1},"${item.kategori}","${item.komponen}",${score},"${keterangan}"\n`;
-                });
-
-                csvContent += "\nRINGKASAN\n";
-                csvContent += `Komentar / Saran,"${document.getElementById('komentar_admin').value.replace(/,/g, ';').replace(/\n/g, ' ')}"\n`;
+                return [...baseFields,
+                    { id: 'kelas_semester' }, { id: 'tanggal' },
+                    { id: 'kesimpulan_klasikal' }, { id: 'refleksi_klasikal' }, { id: 'rekomendasi_klasikal' }
+                ];
+            } else {
+                return [...baseFields,
+                    { id: 'tahun_pelajaran' }, { id: 'semester' },
+                    { id: 'komentar_admin' }
+                ];
             }
-
-            // Hasil Akhir
-            const skorTotal = document.getElementById('skor_total').textContent;
-            const skorMaksimal = document.getElementById('skor_maksimal').textContent;
-            const nilaiAkhir = document.getElementById('nilai_akhir').textContent;
-            const keteranganNilai = document.getElementById('keterangan_nilai').textContent;
-
-            csvContent += `\nHASIL AKHIR\n`;
-            csvContent += `Skor Total,${skorTotal}\n`;
-            csvContent += `Skor Maksimal,${skorMaksimal}\n`;
-            csvContent += `Nilai Akhir,${nilaiAkhir}\n`;
-            csvContent += `Peringkat,${keteranganNilai}\n`;
-
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `supervisi_bk_${namaGuru.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
         }
 
-        // Render form saat halaman dimuat
-        window.onload = renderForms;
+        // Export to CSV
+        function exportToCSV() {
+            validateAndCalculate();
+            
+            let csv = "SUPERVISI GURU BK - SMKN 1 PURBALINGGA\n";
+            csv += `Supervisor,${document.getElementById('nama_supervisor').value}\n`;
+            csv += `NIP Supervisor,${document.getElementById('nip_supervisor').value}\n`;
+            csv += `Guru BK,${document.getElementById('nama_guru').value}\n`;
+            csv += `NIP Guru BK,${document.getElementById('nip').value}\n`;
+            csv += `Tanggal Validasi,${document.getElementById('signatureDate').value}\n\n`;
+
+            if (currentTab === 'klasikal') {
+                csv += `Tipe Supervisi,Bimbingan Klasikal\n`;
+                csv += `Kelas/Semester,${document.getElementById('kelas_semester').value}\n`;
+                csv += `Hari Tanggal,${document.getElementById('tanggal').value}\n\n`;
+                csv += "No,Kategori,Aspek Penilaian,Skor,Catatan\n";
+                instrumenKlasikal.forEach((item, index) => {
+                    const score = document.querySelector(`input[name="${item.id}"]:checked`)?.value || '0';
+                    const catatan = document.getElementById(`catatan_${item.id}`).value;
+                    csv += `${index + 1},"${item.kategori}","${item.aspek}",${score},"${catatan}"\n`;
+                });
+            } else {
+                csv += `Tipe Supervisi,Administrasi BK\n`;
+                csv += `Tahun Pelajaran,${document.getElementById('tahun_pelajaran').value}\n`;
+                csv += `Semester,${document.getElementById('semester').value}\n\n`;
+                csv += "No,Kategori,Komponen Administrasi,Skor,Keterangan\n";
+                instrumenAdministrasi.forEach((item, index) => {
+                    const score = document.querySelector(`input[name="${item.id}"]:checked`)?.value || '0';
+                    const keterangan = document.getElementById(`keterangan_${item.id}`).value;
+                    csv += `${index + 1},"${item.kategori}","${item.komponen}",${score},"${keterangan}"\n`;
+                });
+            }
+
+            // Add results
+            csv += `\nSkor Total,${document.getElementById('skor_total').textContent}\n`;
+            csv += `Skor Maksimal,${document.getElementById('skor_maksimal').textContent}\n`;
+            csv += `Nilai Akhir,${document.getElementById('nilai_akhir').textContent}\n`;
+            csv += `Peringkat,${document.getElementById('keterangan_nilai').textContent}\n`;
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `supervisi_bk_${document.getElementById('nama_guru').value.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Reset Form
+        function resetForm() {
+            if (confirm('Apakah Anda yakin ingin mereset semua data?')) {
+                document.getElementById('nama_supervisor').value = 'Maryono, S.Pd., M.Si';
+                document.getElementById('nip_supervisor').value = '196607012000121002';
+                document.getElementById('nama_guru').value = '';
+                document.getElementById('nip').value = '';
+                document.getElementById('kelas_semester').value = '';
+                document.getElementById('tanggal').value = '';
+                document.getElementById('tahun_pelajaran').value = '2024/2025';
+                document.getElementById('semester').value = 'Ganjil';
+                document.getElementById('kesimpulan_klasikal').value = '';
+                document.getElementById('refleksi_klasikal').value = '';
+                document.getElementById('rekomendasi_klasikal').value = '';
+                document.getElementById('komentar_admin').value = '';
+
+                // Reset radio buttons
+                const items = currentTab === 'klasikal' ? instrumenKlasikal : instrumenAdministrasi;
+                items.forEach(item => {
+                    const defaultValue = currentTab === 'klasikal' ? '2' : '4';
+                    document.getElementById(`${item.id}_${defaultValue}`).checked = true;
+                    const textarea = document.getElementById(`${currentTab === 'klasikal' ? 'catatan' : 'keterangan'}_${item.id}`);
+                    if (textarea) textarea.value = '';
+                });
+
+                document.getElementById('hasil-penilaian').classList.add('hidden');
+                setCurrentDate();
+                updateSignatureDisplay();
+                
+                alert('Form telah direset!');
+            }
+        }
+
+        // Initialize when page loads
+        window.onload = initApp;
     </script>
 </body>
 </html>
-
