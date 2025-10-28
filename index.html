@@ -178,12 +178,6 @@
             margin-top: 8px;
             resize: vertical;
         }
-        .table-note {
-            font-size: 0.75rem;
-            color: #6b7280;
-            margin-top: 8px;
-            font-style: italic;
-        }
         .table-responsive {
             overflow-x: auto;
             border-radius: 8px;
@@ -195,6 +189,12 @@
             padding: 12px 16px;
             font-weight: 600;
             border-radius: 8px 8px 0 0;
+        }
+        .no-border {
+            border: none !important;
+        }
+        .empty-cell {
+            background-color: transparent !important;
         }
     </style>
 </head>
@@ -288,68 +288,8 @@
                 </div>
             </div>
 
-            <!-- Konten Tab Klasikal -->
-            <div id="tab-klasikal-content">
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                    <div class="table-header">
-                        <h2 class="text-xl font-bold">Instrumen Supervisi Bimbingan Klasikal</h2>
-                    </div>
-                    
-                    <!-- Tabel untuk tampilan desktop -->
-                    <div class="table-responsive no-print">
-                        <table class="table-view">
-                            <thead>
-                                <tr>
-                                    <th width="5%">No</th>
-                                    <th width="25%">Kategori</th>
-                                    <th width="45%">Aspek Penilaian</th>
-                                    <th width="25%">Penilaian</th>
-                                </tr>
-                            </thead>
-                            <tbody id="instrumen-klasikal-container">
-                                <!-- Diisi oleh JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <!-- Tabel untuk print -->
-                    <div class="print-only">
-                        <table class="table-print">
-                            <thead>
-                                <tr>
-                                    <th width="5%">No</th>
-                                    <th width="25%">Kategori</th>
-                                    <th width="45%">Aspek Penilaian</th>
-                                    <th width="10%">Skor</th>
-                                    <th width="15%">Catatan</th>
-                                </tr>
-                            </thead>
-                            <tbody id="instrumen-klasikal-print">
-                                <!-- Diisi oleh JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <!-- Summary Klasikal -->
-                    <div id="summary-klasikal" class="p-6 space-y-4">
-                        <div>
-                            <label for="kesimpulan_klasikal" class="block text-sm font-medium text-gray-600 required-field">Kesimpulan</label>
-                            <textarea id="kesimpulan_klasikal" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
-                        <div>
-                            <label for="refleksi_klasikal" class="block text-sm font-medium text-gray-600 required-field">Refleksi</label>
-                            <textarea id="refleksi_klasikal" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
-                        <div>
-                            <label for="rekomendasi_klasikal" class="block text-sm font-medium text-gray-600 required-field">Rekomendasi</label>
-                            <textarea id="rekomendasi_klasikal" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Konten Tab Administrasi -->
-            <div id="tab-administrasi-content" class="hidden">
+            <div id="tab-administrasi-content">
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden">
                     <div class="table-header">
                         <h2 class="text-xl font-bold">Supervisi Administrasi Guru BK</h2>
@@ -513,33 +453,7 @@
     </div>
 
     <script>
-        // Data Instrumen
-        const instrumenKlasikal = [
-            { kategori: 'A. PERSIAPAN PELAKSANAAN BIMBINGAN KLASIKAL', aspek: 'Melaksanakan asesmen kebutuhan materi bimbingan klasikal', id: 'klasikal_1' },
-            { kategori: 'A. PERSIAPAN PELAKSANAAN BIMBINGAN KLASIKAL', aspek: 'Terjadwal masuk kelas secara rutin', id: 'klasikal_2' },
-            { kategori: 'A. PERSIAPAN PELAKSANAAN BIMBINGAN KLASIKAL', aspek: 'Memiliki data siswa yang menjadi ampuannya', id: 'klasikal_3' },
-            { kategori: 'RENCANA PELAKSANAAN LAYANAN (RPL)', aspek: 'Menyusun RPL bimbingan klasikal/kelompok untuk masing-masing bidang (pribadi, belajar, sosial dan karier) dan memuat fungsi layanan', id: 'klasikal_4' },
-            { kategori: 'RENCANA PELAKSANAAN LAYANAN (RPL)', aspek: 'Topik dan tujuan layanan dirumuskan dengan kalimat operasional', id: 'klasikal_5' },
-            { kategori: 'RENCANA PELAKSANAAN LAYANAN (RPL)', aspek: 'Memuat dengan jelas sasaran dan waktu pelaksanaan layanan', id: 'klasikal_6' },
-            { kategori: 'RENCANA PELAKSANAAN LAYANAN (RPL)', aspek: 'Merumuskan metode dan teknik yang akan digunakan untuk menyajikan materi bimbingan klasikal', id: 'klasikal_7' },
-            { kategori: 'RENCANA PELAKSANAAN LAYANAN (RPL)', aspek: 'Memilih media sesuai dengan karakteristik sasaran layanan', id: 'klasikal_8' },
-            { kategori: 'RENCANA PELAKSANAAN LAYANAN (RPL)', aspek: 'Menguraikan tahapan kegiatan dalam penyelenggaraan kegiatan, setidaknya memuat tahapan awal, tahap inti dan terminasi/penutupan', id: 'klasikal_9' },
-            { kategori: 'RENCANA PELAKSANAAN LAYANAN (RPL)', aspek: 'Memuat jenis evaluasi yang akan dilaksanakan, baik evaluasi proses maupun evaluasi hasil.', id: 'klasikal_10' },
-            { kategori: 'B. PELAKSANAAN - Tahapan awal', aspek: 'Keterampilan dalam membentuk hubungan dan memotivasi (contoh: memeriksa kesiapan, mengapresiasi kehadiran dan memberi perhatian bagi siswa yang tidak hadir)', id: 'klasikal_11' },
-            { kategori: 'B. PELAKSANAAN - Tahapan awal', aspek: 'Menyampaikan tujuan yang akan dicapai dan langkah-langkah kegiatan', id: 'klasikal_12' },
-            { kategori: 'B. PELAKSANAAN - Tahapan awal', aspek: 'Memberikan pengantar materi', id: 'klasikal_13' },
-            { kategori: 'Tahap Inti/Kerja', aspek: 'Kemampuan dalam menerapkan metode dan teknik dalam menyajikan topik bimbingan', id: 'klasikal_14' },
-            { kategori: 'Tahap Inti/Kerja', aspek: 'Keterampilan dalam menggunakan media', id: 'klasikal_15' },
-            { kategori: 'Tahap Inti/Kerja', aspek: 'Metode dan media yang digunakan menumbuhkan minat dan keaktifan siswa', id: 'klasikal_16' },
-            { kategori: 'Tahap Inti/Kerja', aspek: 'Kemampuan dalam mengelola kelas termasuk memberikan perhatian bagi siswa yang kesulitan', id: 'klasikal_17' },
-            { kategori: 'Tahap Inti/Kerja', aspek: 'Memberikan kesempatan untuk bertanya', id: 'klasikal_18' },
-            { kategori: 'Tahap Inti/Kerja', aspek: 'Memberikan respon dan tanggapan secara tepat', id: 'klasikal_19' },
-            { kategori: 'Tahap Inti/Kerja', aspek: 'Mengelola waktu dengan baik', id: 'klasikal_20' },
-            { kategori: 'Tahap Inti/Kerja', aspek: 'Melakukan pengamatan keaktifan siswa sebagai dasar melakukan evaluasi proses layanan', id: 'klasikal_21' },
-            { kategori: 'Tahap Akhir/Terminasi', aspek: 'Kemampuan untuk mengajak siswa merefleksikan pengalaman (bisa menjadi dasar evaluasi hasil)', id: 'klasikal_22' },
-            { kategori: 'Tahap Akhir/Terminasi', aspek: 'Menyimpulkan hasil pertemuan secara efektif dan menutup pertemuan dengan simpatik (framming)', id: 'klasikal_23' },
-        ];
-        
+        // Data Instrumen Administrasi
         const instrumenAdministrasi = [
             { kategori: 'Dokumen Wajib', komponen: 'Memiliki Angket Kebutuhan Peserta Didik', id: 'admin_new_1' },
             { kategori: 'Dokumen Wajib', komponen: 'Memiliki Data Analisis Kebutuhan Siswa', id: 'admin_new_2' },
@@ -559,7 +473,7 @@
             { kategori: 'Dokumen Penunjang', komponen: 'Melakukan Pengembangan Keprofesian Berkelanjutan', id: 'admin_new_16' }
         ];
 
-        let currentTab = 'klasikal';
+        let currentTab = 'administrasi';
         let isDrawing = false;
         let lastX = 0;
         let lastY = 0;
@@ -567,7 +481,7 @@
 
         // Initialize Application
         function initApp() {
-            renderForms();
+            renderAdministrasiForm();
             setCurrentDate();
             updateSignatureDisplay();
             initSignatureCanvas();
@@ -691,88 +605,15 @@
         }
 
         // Render Forms
-        function renderForms() {
-            renderKlasikalForm();
-            renderAdministrasiForm();
-        }
-
-        function renderKlasikalForm() {
-            const container = document.getElementById('instrumen-klasikal-container');
-            const printContainer = document.getElementById('instrumen-klasikal-print');
-            container.innerHTML = '';
-            printContainer.innerHTML = '';
-            let currentKategori = '';
-            
-            instrumenKlasikal.forEach((item, index) => {
-                // Tampilan desktop
-                const row = document.createElement('tr');
-                
-                // Jika kategori berubah, buat row dengan kategori
-                if (item.kategori !== currentKategori) {
-                    currentKategori = item.kategori;
-                    const kategoriRow = document.createElement('tr');
-                    kategoriRow.className = 'category-row';
-                    kategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3">${currentKategori}</td>`;
-                    container.appendChild(kategoriRow);
-                }
-                
-                row.innerHTML = `
-                    <td class="text-center font-medium">${index + 1}</td>
-                    <td class="text-gray-700">${item.kategori !== currentKategori ? item.kategori : ''}</td>
-                    <td class="text-gray-700">${item.aspek}</td>
-                    <td>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" id="${item.id}_0" name="${item.id}" value="0" class="h-4 w-4 text-blue-600">
-                                <label for="${item.id}_0" class="text-sm">0 (Tidak Sesuai)</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="${item.id}_1" name="${item.id}" value="1" class="h-4 w-4 text-blue-600">
-                                <label for="${item.id}_1" class="text-sm">1 (Sesuai Sebagian)</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="${item.id}_2" name="${item.id}" value="2" class="h-4 w-4 text-blue-600" checked>
-                                <label for="${item.id}_2" class="text-sm">2 (Sesuai Semua)</label>
-                            </div>
-                        </div>
-                        <textarea id="catatan_${item.id}" placeholder="Catatan..." class="score-input" rows="2"></textarea>
-                    </td>
-                `;
-                container.appendChild(row);
-                
-                // Tampilan print
-                const printRow = document.createElement('tr');
-                
-                // Jika kategori berubah, buat row dengan kategori
-                if (item.kategori !== currentKategori) {
-                    const printKategoriRow = document.createElement('tr');
-                    printKategoriRow.className = 'category-row';
-                    printKategoriRow.innerHTML = `<td colspan="5" class="py-1 px-2">${currentKategori}</td>`;
-                    printContainer.appendChild(printKategoriRow);
-                }
-                
-                printRow.innerHTML = `
-                    <td class="text-center">${index + 1}</td>
-                    <td>${item.kategori !== currentKategori ? item.kategori : ''}</td>
-                    <td>${item.aspek}</td>
-                    <td class="text-center" id="print_${item.id}">2</td>
-                    <td id="print_catatan_${item.id}"></td>
-                `;
-                printContainer.appendChild(printRow);
-            });
-        }
-
         function renderAdministrasiForm() {
             const container = document.getElementById('instrumen-administrasi-container');
             const printContainer = document.getElementById('instrumen-administrasi-print');
             container.innerHTML = '';
             printContainer.innerHTML = '';
             let currentKategori = '';
+            let itemCounter = 0;
             
             instrumenAdministrasi.forEach((item, index) => {
-                // Tampilan desktop
-                const row = document.createElement('tr');
-                
                 // Jika kategori berubah, buat row dengan kategori
                 if (item.kategori !== currentKategori) {
                     currentKategori = item.kategori;
@@ -780,11 +621,21 @@
                     kategoriRow.className = 'category-row';
                     kategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3">${currentKategori}</td>`;
                     container.appendChild(kategoriRow);
+                    
+                    // Untuk tabel print
+                    const printKategoriRow = document.createElement('tr');
+                    printKategoriRow.className = 'category-row';
+                    printKategoriRow.innerHTML = `<td colspan="5" class="py-1 px-2">${currentKategori}</td>`;
+                    printContainer.appendChild(printKategoriRow);
                 }
                 
+                // Tampilan desktop
+                const row = document.createElement('tr');
+                itemCounter++;
+                
                 row.innerHTML = `
-                    <td class="text-center font-medium">${index + 1}</td>
-                    <td class="text-gray-700">${item.kategori !== currentKategori ? item.kategori : ''}</td>
+                    <td class="text-center font-medium">${itemCounter}</td>
+                    <td class="empty-cell no-border"></td>
                     <td class="text-gray-700">${item.komponen}</td>
                     <td>
                         <div class="flex flex-wrap items-center gap-3 mb-2">
@@ -803,17 +654,9 @@
                 // Tampilan print
                 const printRow = document.createElement('tr');
                 
-                // Jika kategori berubah, buat row dengan kategori
-                if (item.kategori !== currentKategori) {
-                    const printKategoriRow = document.createElement('tr');
-                    printKategoriRow.className = 'category-row';
-                    printKategoriRow.innerHTML = `<td colspan="5" class="py-1 px-2">${currentKategori}</td>`;
-                    printContainer.appendChild(printKategoriRow);
-                }
-                
                 printRow.innerHTML = `
-                    <td class="text-center">${index + 1}</td>
-                    <td>${item.kategori !== currentKategori ? item.kategori : ''}</td>
+                    <td class="text-center">${itemCounter}</td>
+                    <td class="empty-cell no-border"></td>
                     <td>${item.komponen}</td>
                     <td class="text-center" id="print_${item.id}">4</td>
                     <td id="print_keterangan_${item.id}"></td>
@@ -877,37 +720,21 @@
             let maxScore = 0;
             let items = [];
 
-            if (currentTab === 'klasikal') {
-                items = instrumenKlasikal;
-                items.forEach(item => {
-                    const score = document.querySelector(`input[name="${item.id}"]:checked`);
-                    if (score) {
-                        const scoreValue = parseInt(score.value);
-                        totalScore += scoreValue;
-                        // Update nilai di tabel print
-                        document.getElementById(`print_${item.id}`).textContent = scoreValue;
-                        document.getElementById(`print_catatan_${item.id}`).textContent = 
-                            document.getElementById(`catatan_${item.id}`).value;
-                    }
-                });
-                maxScore = items.length * 2;
-            } else {
-                items = instrumenAdministrasi;
-                items.forEach(item => {
-                    const score = document.querySelector(`input[name="${item.id}"]:checked`);
-                    if (score) {
-                        const scoreValue = parseInt(score.value);
-                        totalScore += scoreValue;
-                        // Update nilai di tabel print
-                        document.getElementById(`print_${item.id}`).textContent = scoreValue;
-                        document.getElementById(`print_keterangan_${item.id}`).textContent = 
-                            document.getElementById(`keterangan_${item.id}`).value;
-                    }
-                });
-                maxScore = items.length * 4;
-            }
+            items = instrumenAdministrasi;
+            items.forEach(item => {
+                const score = document.querySelector(`input[name="${item.id}"]:checked`);
+                if (score) {
+                    const scoreValue = parseInt(score.value);
+                    totalScore += scoreValue;
+                    // Update nilai di tabel print
+                    document.getElementById(`print_${item.id}`).textContent = scoreValue;
+                    document.getElementById(`print_keterangan_${item.id}`).textContent = 
+                        document.getElementById(`keterangan_${item.id}`).value;
+                }
+            });
+            maxScore = items.length * 4;
 
-            const percentage = maxScore > 0 ? ((totalScore / maxScore) * 100).toFixed(currentTab === 'klasikal' ? 2 : 0) : 0;
+            const percentage = maxScore > 0 ? ((totalScore / maxScore) * 100).toFixed(0) : 0;
             const grade = calculateGrade(percentage);
 
             // Update results
@@ -915,7 +742,7 @@
             document.getElementById('skor_maksimal').textContent = maxScore;
             document.getElementById('nilai_akhir').textContent = `${percentage}%`;
             document.getElementById('keterangan_nilai').textContent = grade;
-            document.getElementById('peringkat-label').textContent = currentTab === 'klasikal' ? 'Keterangan' : 'Peringkat';
+            document.getElementById('peringkat-label').textContent = 'Peringkat';
 
             // Update signature section
             updateSignatureDisplay();
@@ -925,17 +752,10 @@
         }
 
         function calculateGrade(percentage) {
-            if (currentTab === 'klasikal') {
-                if (percentage >= 91) return 'Sangat Baik';
-                if (percentage >= 76) return 'Baik';
-                if (percentage >= 61) return 'Cukup';
-                return 'Kurang';
-            } else {
-                if (percentage > 90) return 'Amat Baik (AB)';
-                if (percentage > 80) return 'Baik (B)';
-                if (percentage > 70) return 'Cukup (C)';
-                return 'Kurang (K)';
-            }
+            if (percentage > 90) return 'Amat Baik (AB)';
+            if (percentage > 80) return 'Baik (B)';
+            if (percentage > 70) return 'Cukup (C)';
+            return 'Kurang (K)';
         }
 
         function getRequiredFields() {
@@ -944,17 +764,10 @@
                 { id: 'nama_guru' }, { id: 'nip' }
             ];
 
-            if (currentTab === 'klasikal') {
-                return [...baseFields,
-                    { id: 'kelas_semester' }, { id: 'tanggal' },
-                    { id: 'kesimpulan_klasikal' }, { id: 'refleksi_klasikal' }, { id: 'rekomendasi_klasikal' }
-                ];
-            } else {
-                return [...baseFields,
-                    { id: 'tahun_pelajaran' }, { id: 'semester' },
-                    { id: 'komentar_admin' }
-                ];
-            }
+            return [...baseFields,
+                { id: 'tahun_pelajaran' }, { id: 'semester' },
+                { id: 'komentar_admin' }
+            ];
         }
 
         // Export to CSV
@@ -968,27 +781,24 @@
             csv += `NIP Guru BK,${document.getElementById('nip').value}\n`;
             csv += `Tanggal Validasi,${document.getElementById('signatureDate').value}\n\n`;
 
-            if (currentTab === 'klasikal') {
-                csv += `Tipe Supervisi,Bimbingan Klasikal\n`;
-                csv += `Kelas/Semester,${document.getElementById('kelas_semester').value}\n`;
-                csv += `Hari Tanggal,${document.getElementById('tanggal').value}\n\n`;
-                csv += "No,Kategori,Aspek Penilaian,Skor,Catatan\n";
-                instrumenKlasikal.forEach((item, index) => {
-                    const score = document.querySelector(`input[name="${item.id}"]:checked`)?.value || '0';
-                    const catatan = document.getElementById(`catatan_${item.id}`).value;
-                    csv += `${index + 1},"${item.kategori}","${item.aspek}",${score},"${catatan}"\n`;
-                });
-            } else {
-                csv += `Tipe Supervisi,Administrasi BK\n`;
-                csv += `Tahun Pelajaran,${document.getElementById('tahun_pelajaran').value}\n`;
-                csv += `Semester,${document.getElementById('semester').value}\n\n`;
-                csv += "No,Kategori,Komponen Administrasi,Skor,Keterangan\n";
-                instrumenAdministrasi.forEach((item, index) => {
-                    const score = document.querySelector(`input[name="${item.id}"]:checked`)?.value || '0';
-                    const keterangan = document.getElementById(`keterangan_${item.id}`).value;
-                    csv += `${index + 1},"${item.kategori}","${item.komponen}",${score},"${keterangan}"\n`;
-                });
-            }
+            csv += `Tipe Supervisi,Administrasi BK\n`;
+            csv += `Tahun Pelajaran,${document.getElementById('tahun_pelajaran').value}\n`;
+            csv += `Semester,${document.getElementById('semester').value}\n\n`;
+            csv += "No,Kategori,Komponen Administrasi,Skor,Keterangan\n";
+            
+            let itemCounter = 0;
+            let currentKategori = '';
+            
+            instrumenAdministrasi.forEach((item, index) => {
+                if (item.kategori !== currentKategori) {
+                    currentKategori = item.kategori;
+                }
+                
+                itemCounter++;
+                const score = document.querySelector(`input[name="${item.id}"]:checked`)?.value || '0';
+                const keterangan = document.getElementById(`keterangan_${item.id}`).value;
+                csv += `${itemCounter},"${currentKategori}","${item.komponen}",${score},"${keterangan}"\n`;
+            });
 
             // Add results
             csv += `\nSkor Total,${document.getElementById('skor_total').textContent}\n`;
@@ -1012,21 +822,14 @@
                 document.getElementById('nip_supervisor').value = '196607012000121002';
                 document.getElementById('nama_guru').value = '';
                 document.getElementById('nip').value = '';
-                document.getElementById('kelas_semester').value = '';
-                document.getElementById('tanggal').value = '';
                 document.getElementById('tahun_pelajaran').value = '2024/2025';
                 document.getElementById('semester').value = 'Ganjil';
-                document.getElementById('kesimpulan_klasikal').value = '';
-                document.getElementById('refleksi_klasikal').value = '';
-                document.getElementById('rekomendasi_klasikal').value = '';
                 document.getElementById('komentar_admin').value = '';
 
                 // Reset radio buttons
-                const items = currentTab === 'klasikal' ? instrumenKlasikal : instrumenAdministrasi;
-                items.forEach(item => {
-                    const defaultValue = currentTab === 'klasikal' ? '2' : '4';
-                    document.getElementById(`${item.id}_${defaultValue}`).checked = true;
-                    const textarea = document.getElementById(`${currentTab === 'klasikal' ? 'catatan' : 'keterangan'}_${item.id}`);
+                instrumenAdministrasi.forEach(item => {
+                    document.getElementById(`${item.id}_4`).checked = true;
+                    const textarea = document.getElementById(`keterangan_${item.id}`);
                     if (textarea) textarea.value = '';
                 });
 
