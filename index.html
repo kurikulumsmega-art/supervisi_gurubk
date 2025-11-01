@@ -358,6 +358,16 @@
         </section>
     </div>
 
+    <!-- Notification Element -->
+    <div id="notification" class="fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 hidden">
+        <div class="flex items-center gap-3">
+            <span id="notificationText"></span>
+            <div id="notificationSpinner" class="hidden">
+                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ========== DATA INSTRUMEN RPL ==========
         const instrumenRPL = [
@@ -441,6 +451,9 @@
         ];
 
         let currentTab = 'administrasi';
+
+        // ========== URL WEB APP ANDA ==========
+        const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbx5JCLNrJ0kWSk3-9i4kKE8doszruSbwguRIcHewr4-5RdVNh1atqJSmzISIX1XG2hbCA/exec';
 
         // ========== INITIALIZE APP ==========
         function initApp() {
@@ -737,10 +750,68 @@
             }
         }
 
-        // ========== DATA MANAGEMENT ==========
+        // ========== DATA MANAGEMENT - UPDATED FOR YOUR WEB APP ==========
         function saveToSpreadsheet() {
+            // Validasi terlebih dahulu
             validateAndCalculate();
-            alert('Data berhasil disimpan ke spreadsheet!');
+            
+            // Ambil data dari form
+            const data = {
+                tanggal: document.getElementById('signatureDate').value,
+                nama_supervisor: document.getElementById('nama_supervisor').value,
+                nip_supervisor: document.getElementById('nip_supervisor').value,
+                nama_guru: document.getElementById('nama_guru').value,
+                nip: document.getElementById('nip').value,
+                tipe_supervisi: currentTab,
+                skor_total: document.getElementById('skor_total').textContent,
+                skor_maksimal: document.getElementById('skor_maksimal').textContent,
+                nilai_akhir: document.getElementById('nilai_akhir').textContent,
+                keterangan_nilai: document.getElementById('keterangan_nilai').textContent
+            };
+            
+            // Tambahkan data spesifik berdasarkan tab
+            if (currentTab === 'rpl') {
+                data.tahun_pelajaran = document.getElementById('tahun_pelajaran').value;
+                data.semester = document.getElementById('semester').value;
+                data.kelas_semester = document.getElementById('kelas_semester_rpl').value;
+                data.topik = document.getElementById('topik_rpl').value;
+                data.komentar = document.getElementById('komentar_rpl').value;
+            } else if (currentTab === 'pelaksanaan') {
+                data.tahun_pelajaran = document.getElementById('tahun_pelajaran').value;
+                data.semester = document.getElementById('semester').value;
+                data.kelas = document.getElementById('kelas').value;
+                data.tanggal_pelaksanaan = document.getElementById('tanggal_pelaksanaan').value;
+                data.topik = document.getElementById('topik_pelaksanaan').value;
+                data.komentar = document.getElementById('komentar_pelaksanaan').value;
+            } else {
+                data.tahun_pelajaran = document.getElementById('tahun_pelajaran').value;
+                data.semester = document.getElementById('semester').value;
+                data.komentar = document.getElementById('komentar_admin').value;
+            }
+            
+            // Tampilkan loading
+            showNotification('Menyimpan data ke spreadsheet...', 'success', true);
+            
+            // Kirim data ke Google Apps Script Anda
+            fetch(SPREADSHEET_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'success') {
+                    showNotification('Data berhasil disimpan ke spreadsheet!', 'success');
+                } else {
+                    showNotification('Gagal menyimpan data: ' + result.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.', 'error');
+            });
         }
 
         function exportToCSV() {
@@ -806,6 +877,39 @@
                 updateSignatureDisplay();
                 
                 alert('Form telah direset!');
+            }
+        }
+
+        // ========== NOTIFICATION SYSTEM ==========
+        function showNotification(message, type = 'success', showSpinner = false) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            const notificationSpinner = document.getElementById('notificationSpinner');
+            
+            notificationText.textContent = message;
+            
+            // Set background color based on type
+            if (type === 'success') {
+                notification.className = 'fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 bg-green-500 text-white flex items-center gap-3';
+            } else {
+                notification.className = 'fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 bg-red-500 text-white flex items-center gap-3';
+            }
+            
+            // Show/hide spinner
+            if (showSpinner) {
+                notificationSpinner.classList.remove('hidden');
+            } else {
+                notificationSpinner.classList.add('hidden');
+            }
+            
+            // Show notification
+            notification.classList.remove('hidden');
+            
+            // Auto hide after 3 seconds if not showing spinner
+            if (!showSpinner) {
+                setTimeout(() => {
+                    notification.classList.add('hidden');
+                }, 3000);
             }
         }
 
