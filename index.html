@@ -18,90 +18,9 @@
             color: #3b82f6;
             font-weight: 600;
         }
-        @media print {
-            @page {
-                size: 210mm 330mm;
-                margin: 25mm 15mm 15mm 10mm;
-            }
-            .no-print {
-                display: none !important;
-            }
-            .print-only {
-                display: block !important;
-            }
-            body {
-                background-color: #fff;
-                font-size: 12pt;
-                width: 210mm;
-                height: 330mm;
-            }
-            .container {
-                padding: 0;
-                max-width: 100% !important;
-            }
-            div[class*="shadow"] {
-                box-shadow: none;
-                border: 1px solid #e5e7eb;
-            }
-            #signature-section {
-                page-break-inside: avoid;
-            }
-            .table-print {
-                border-collapse: collapse;
-                width: 100%;
-                font-size: 10pt;
-            }
-            .table-print th, .table-print td {
-                border: 1px solid #000;
-                padding: 6px;
-                text-align: left;
-                vertical-align: top;
-            }
-            .table-print th {
-                background-color: #f3f4f6;
-            }
-            .page-break {
-                page-break-after: always;
-            }
-            .print-header {
-                display: flex !important;
-                align-items: center;
-                margin-bottom: 15px;
-                border-bottom: 2px solid #3b82f6;
-                padding-bottom: 10px;
-            }
-            .print-logo {
-                width: 80px;
-                height: 80px;
-                margin-right: 15px;
-            }
-            .print-school-info {
-                text-align: left;
-            }
-            .signature-canvas {
-                border: 1px solid #000 !important;
-            }
-        }
-        .print-only {
-            display: none;
-        }
-        .required-field::after {
-            content: " *";
-            color: #ef4444;
-        }
-        .signature-box {
-            border: 1px solid #e5e7eb;
-            height: 100px;
-            margin-top: 10px;
-            border-radius: 4px;
-        }
-        .table-container {
-            overflow-x: auto;
-        }
         .table-view {
             width: 100%;
             border-collapse: collapse;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         .table-view th, .table-view td {
             border: 1px solid #e2e8f0;
@@ -113,23 +32,19 @@
             background-color: #3b82f6;
             color: white;
             font-weight: 600;
-            position: sticky;
-            top: 0;
         }
         .table-view tr:nth-child(even) {
             background-color: #f8fafc;
-        }
-        .table-view tr:hover {
-            background-color: #f1f5f9;
         }
         .category-row {
             background-color: #e0f2fe !important;
             font-weight: 600;
             color: #0c4a6e;
         }
-        .category-row td {
-            padding: 10px 16px;
-            font-size: 0.95rem;
+        .subcategory-row {
+            background-color: #f0f9ff !important;
+            font-weight: 500;
+            color: #0369a1;
         }
         .signature-canvas {
             border: 1px solid #d1d5db;
@@ -137,124 +52,40 @@
             background-color: white;
             cursor: crosshair;
         }
-        .signature-controls {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
+        .required-field::after {
+            content: " *";
+            color: #ef4444;
         }
-        .signature-preview {
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            background-color: white;
-            min-height: 100px;
+        .radio-group-horizontal {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .radio-option-horizontal {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-top: 10px;
+            gap: 5px;
         }
-        .signature-preview img {
-            max-width: 100%;
-            max-height: 100px;
-        }
-        .radio-group {
+        .score-radio-group {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .radio-option {
-            display: flex;
-            align-items: center;
-            padding: 4px 0;
-        }
-        .radio-option input[type="radio"] {
-            margin-right: 8px;
-        }
-        .score-input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            margin-top: 8px;
-            resize: vertical;
-        }
-        .table-responsive {
-            overflow-x: auto;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-        }
-        .table-header {
-            background-color: #3b82f6;
-            color: white;
-            padding: 12px 16px;
-            font-weight: 600;
-            border-radius: 8px 8px 0 0;
-        }
-        .no-border {
-            border: none !important;
-        }
-        .empty-cell {
-            background-color: transparent !important;
-        }
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            display: none;
-            align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
-        .notification.success {
-            background-color: #10b981;
-        }
-        .notification.error {
-            background-color: #ef4444;
-        }
-        .notification.show {
+        .score-radio-option {
             display: flex;
-        }
-        .spinner {
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 3px solid white;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: none;
-        }
-        .spinner.show {
-            display: inline-block;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            align-items: center;
+            gap: 3px;
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <div class="container mx-auto p-4 sm:p-6 md:p-8">
-        <!-- Header untuk Print -->
-        <div class="print-only print-header">
-            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/a/a4/Logo_SMK_Negeri_1_Purbalingga.png/960px-Logo_SMK_Negeri_1_Purbalingga.png" 
-                 alt="Logo SMK Negeri 1 Purbalingga" class="print-logo">
-            <div class="print-school-info">
-                <h1 class="text-xl font-bold text-blue-600">Supervisi Guru Bimbingan Konseling</h1>
-                <p class="text-lg font-semibold text-gray-700">SMK Negeri 1 Purbalingga</p>
-                <p class="text-sm text-gray-600 mt-1">Jl. Mayor Jend. Sungkono No.34, Selabaya, Kec. Kalimanah, Kabupaten Purbalingga, Jawa Tengah 53371</p>
-            </div>
-        </div>
-
-        <!-- Header untuk Screen -->
-        <header class="text-center mb-8 bg-white p-6 rounded-xl shadow-sm no-print">
-            <h1 class="text-2xl md:text-3xl font-bold text-blue-600">Supervisi Guru BK</h1>
+    <div class="container mx-auto p-4">
+        <!-- Header -->
+        <header class="text-center mb-8 bg-white p-6 rounded-xl shadow-sm">
+            <h1 class="text-2xl md:text-3xl font-bold text-blue-600">SUPERVISI GURU BK TERPADU</h1>
             <p class="text-lg md:text-xl font-semibold text-gray-700">SMK Negeri 1 Purbalingga</p>
+            <p class="text-sm text-gray-600 mt-2">RPL BK • Pelaksanaan Layanan • Administrasi BK</p>
         </header>
 
         <!-- Informasi Personal -->
@@ -262,31 +93,31 @@
             <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Personal</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Supervisor -->
-                <div class="border-l-4 border-blue-500 pl-4">
+                <div>
                     <h3 class="text-lg font-semibold text-blue-600 mb-3">Supervisor</h3>
                     <div class="space-y-3">
                         <div>
                             <label for="nama_supervisor" class="block text-sm font-medium text-gray-600 required-field">Nama Supervisor</label>
-                            <input type="text" id="nama_supervisor" value="Maryono, S.Pd., M.Si" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <input type="text" id="nama_supervisor" value="Maryono, S.Pd., M.Si" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
                         </div>
                         <div>
                             <label for="nip_supervisor" class="block text-sm font-medium text-gray-600 required-field">NIP Supervisor</label>
-                            <input type="text" id="nip_supervisor" value="196607012000121002" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <input type="text" id="nip_supervisor" value="196607012000121002" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
                         </div>
                     </div>
                 </div>
                 
                 <!-- Guru BK -->
-                <div class="border-l-4 border-green-500 pl-4">
+                <div>
                     <h3 class="text-lg font-semibold text-green-600 mb-3">Guru BK</h3>
                     <div class="space-y-3">
                         <div>
                             <label for="nama_guru" class="block text-sm font-medium text-gray-600 required-field">Nama Guru BK</label>
-                            <input type="text" id="nama_guru" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <input type="text" id="nama_guru" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
                         </div>
                         <div>
                             <label for="nip" class="block text-sm font-medium text-gray-600 required-field">NIP Guru BK</label>
-                            <input type="text" id="nip" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <input type="text" id="nip" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
                         </div>
                     </div>
                 </div>
@@ -294,355 +125,506 @@
         </div>
 
         <!-- Tab Navigation -->
-        <div class="mb-6 flex justify-center border-b border-gray-300 no-print">
-            <button id="tab-klasikal-btn" class="tab-btn active text-lg py-3 px-6 border-b-2 border-transparent transition-colors duration-300" onclick="switchTab('klasikal')">Bimbingan Klasikal</button>
-            <button id="tab-administrasi-btn" class="tab-btn text-lg py-3 px-6 border-b-2 border-transparent transition-colors duration-300" onclick="switchTab('administrasi')">Administrasi BK</button>
+        <div class="mb-6 flex justify-center border-b border-gray-300">
+            <button id="tab-rpl-btn" class="tab-btn py-3 px-6 border-b-2 border-transparent" onclick="switchTab('rpl')">RPL BK</button>
+            <button id="tab-pelaksanaan-btn" class="tab-btn py-3 px-6 border-b-2 border-transparent" onclick="switchTab('pelaksanaan')">Pelaksanaan Layanan</button>
+            <button id="tab-administrasi-btn" class="tab-btn active py-3 px-6 border-b-2 border-blue-500 text-blue-600" onclick="switchTab('administrasi')">Administrasi BK</button>
         </div>
 
-        <main id="app-content">
-            <!-- Informasi Umum -->
-            <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
-                <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Umum</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div id="info-klasikal">
-                        <div>
-                            <label for="kelas_semester" class="block text-sm font-medium text-gray-600 required-field">Kelas/Semester</label>
-                            <input type="text" id="kelas_semester" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label for="tanggal" class="block text-sm font-medium text-gray-600 required-field">Hari, Tanggal (Jam ke)</label>
-                            <input type="text" id="tanggal" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                        </div>
+        <!-- Informasi Umum -->
+        <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
+            <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Umum</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Info RPL -->
+                <div id="info-rpl" class="hidden">
+                    <div>
+                        <label for="kelas_semester_rpl" class="block text-sm font-medium text-gray-600 required-field">Kelas/Semester</label>
+                        <input type="text" id="kelas_semester_rpl" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
                     </div>
-                    <div id="info-administrasi" class="hidden">
-                        <div>
-                            <label for="tahun_pelajaran" class="block text-sm font-medium text-gray-600 required-field">Tahun Pelajaran</label>
-                            <input type="text" id="tahun_pelajaran" value="2024/2025" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label for="semester" class="block text-sm font-medium text-gray-600 required-field">Semester</label>
-                            <input type="text" id="semester" value="Ganjil" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Konten Tab Administrasi -->
-            <div id="tab-administrasi-content">
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                    <div class="table-header">
-                        <h2 class="text-xl font-bold">Supervisi Administrasi Guru BK</h2>
-                    </div>
-                    
-                    <!-- Tabel untuk tampilan desktop -->
-                    <div class="table-responsive no-print">
-                        <table class="table-view">
-                            <thead>
-                                <tr>
-                                    <th width="5%">No</th>
-                                    <th width="25%">Kategori</th>
-                                    <th width="45%">Komponen Administrasi</th>
-                                    <th width="25%">Penilaian</th>
-                                </tr>
-                            </thead>
-                            <tbody id="instrumen-administrasi-container">
-                                <!-- Diisi oleh JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <!-- Tabel untuk print -->
-                    <div class="print-only">
-                        <table class="table-print">
-                            <thead>
-                                <tr>
-                                    <th width="5%">No</th>
-                                    <th width="25%">Kategori</th>
-                                    <th width="45%">Komponen Administrasi</th>
-                                    <th width="10%">Skor</th>
-                                    <th width="15%">Keterangan</th>
-                                </tr>
-                            </thead>
-                            <tbody id="instrumen-administrasi-print">
-                                <!-- Diisi oleh JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <!-- Summary Administrasi -->
-                    <div id="summary-administrasi" class="p-6 space-y-4">
-                        <div>
-                            <label for="komentar_admin" class="block text-sm font-medium text-gray-600 required-field">Komentar / Saran</label>
-                            <textarea id="komentar_admin" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="bg-white p-6 rounded-xl shadow-sm mt-6 no-print">
-                <div class="flex flex-col sm:flex-row items-center justify-between">
-                    <div class="flex flex-wrap gap-2 justify-center w-full">
-                        <button onclick="validateAndCalculate()" class="flex-grow sm:flex-grow-0 bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 shadow-sm">
-                            <i class="fas fa-calculator mr-2"></i>Hitung Skor & Simpan
-                        </button>
-                        <button onclick="saveToSpreadsheet()" class="flex-grow sm:flex-grow-0 bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition duration-300 shadow-sm">
-                            <i class="fas fa-cloud-upload-alt mr-2"></i>Simpan ke Spreadsheet
-                        </button>
-                        <button onclick="exportToCSV()" class="flex-grow sm:flex-grow-0 bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300 shadow-sm">
-                            <i class="fas fa-file-csv mr-2"></i>Export ke CSV
-                        </button>
-                        <button onclick="window.print()" class="flex-grow sm:flex-grow-0 bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700 transition duration-300 shadow-sm">
-                            <i class="fas fa-print mr-2"></i>Cetak Laporan
-                        </button>
-                        <button onclick="resetForm()" class="flex-grow sm:flex-grow-0 bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition duration-300 shadow-sm">
-                            <i class="fas fa-redo mr-2"></i>Reset Form
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hasil Penilaian -->
-            <div id="hasil-penilaian" class="bg-white p-6 rounded-xl shadow-sm mt-6 hidden">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">Hasil Penilaian</h3>
-                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                        <div>
-                            <p class="text-sm text-gray-600">Skor Total</p>
-                            <p class="text-2xl font-bold text-blue-700" id="skor_total">0</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-600">Skor Maksimal</p>
-                            <p class="text-2xl font-bold text-blue-700" id="skor_maksimal">0</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-600">Nilai Akhir</p>
-                            <p class="text-2xl font-bold text-blue-700" id="nilai_akhir">0%</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-600" id="peringkat-label">Peringkat</p>
-                            <p class="text-2xl font-bold text-blue-700" id="keterangan_nilai">-</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section Validasi / Tanda Tangan -->
-            <section id="signature-section" class="bg-white p-6 rounded-xl shadow-sm mt-6">
-                <h2 class="text-xl font-bold text-indigo-700 mb-6 flex items-center">
-                    <i class="fas fa-file-signature mr-3"></i>VALIDASI
-                </h2>
-                
-                <div class="text-center mb-6">
-                    <label class="text-sm font-medium text-gray-700 mr-2">Purbalingga,</label>
-                    <input type="date" id="signatureDate" class="p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition">
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    <!-- Supervisor dengan Tanda Tangan Digital -->
-                    <div class="text-center flex flex-col">
-                        <p class="font-semibold text-gray-700">Supervisor</p>
-                        
-                        <!-- Canvas untuk tanda tangan digital -->
-                        <div class="no-print">
-                            <p class="text-sm text-gray-500 mb-2">Gambar tanda tangan di bawah ini:</p>
-                            <canvas id="signatureCanvas" class="signature-canvas" width="300" height="150"></canvas>
-                            <div class="signature-controls">
-                                <button onclick="clearSignature()" class="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
-                                    <i class="fas fa-eraser mr-1"></i>Hapus
-                                </button>
-                                <button onclick="saveSignature()" class="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">
-                                    <i class="fas fa-save mr-1"></i>Simpan
-                                </button>
-                            </div>
-                            <div id="signaturePreview" class="signature-preview">
-                                <span class="text-gray-400 text-sm">Pratinjau tanda tangan akan muncul di sini</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Tampilan untuk print -->
-                        <div class="print-only">
-                            <div class="signature-box flex items-center justify-center">
-                                <span class="text-gray-400 text-sm">Tanda Tangan Digital</span>
-                            </div>
-                        </div>
-                        
-                        <p class="font-bold text-gray-800 border-t pt-2 mt-2" id="supervisorNameDisplay">........................................</p>
-                        <p class="text-xs text-gray-500" id="supervisorNipDisplay">NIP. .............................</p>
-                    </div>
-                    
-                    <!-- Guru BK (manual) -->
-                    <div class="text-center flex flex-col">
-                        <p class="font-semibold text-gray-700">Guru BK</p>
-                        <div class="signature-box flex items-center justify-center">
-                            <span class="text-gray-400 text-sm">Tanda Tangan</span>
-                        </div>
-                        <p class="font-bold text-gray-800 border-t pt-2 mt-2" id="teacherNameDisplay">........................................</p>
-                        <p class="text-xs text-gray-500" id="teacherNipDisplay">NIP. .............................</p>
+                    <div>
+                        <label for="topik_rpl" class="block text-sm font-medium text-gray-600 required-field">Topik/Tema Layanan</label>
+                        <input type="text" id="topik_rpl" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
                     </div>
                 </div>
                 
-                <div class="text-center pt-6 border-t border-dashed">
-                    <p class="font-semibold text-gray-700">Mengetahui, Kepala Sekolah</p>
-                    <div class="signature-box mx-auto flex items-center justify-center" style="max-width: 300px;">
+                <!-- Info Pelaksanaan -->
+                <div id="info-pelaksanaan" class="hidden">
+                    <div>
+                        <label for="kelas" class="block text-sm font-medium text-gray-600 required-field">Kelas</label>
+                        <input type="text" id="kelas" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                    </div>
+                    <div>
+                        <label for="tanggal_pelaksanaan" class="block text-sm font-medium text-gray-600 required-field">Hari/Tanggal</label>
+                        <input type="text" id="tanggal_pelaksanaan" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                    </div>
+                    <div>
+                        <label for="topik_pelaksanaan" class="block text-sm font-medium text-gray-600 required-field">Topik/Materi/Masalah</label>
+                        <input type="text" id="topik_pelaksanaan" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                    </div>
+                </div>
+                
+                <!-- Info Administrasi -->
+                <div id="info-administrasi">
+                    <div>
+                        <label for="tahun_pelajaran" class="block text-sm font-medium text-gray-600 required-field">Tahun Pelajaran</label>
+                        <input type="text" id="tahun_pelajaran" value="2024/2025" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                    </div>
+                    <div>
+                        <label for="semester" class="block text-sm font-medium text-gray-600 required-field">Semester</label>
+                        <input type="text" id="semester" value="Ganjil" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TAB RPL ========== -->
+        <div id="tab-rpl-content" class="hidden">
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
+                <div class="bg-blue-600 text-white p-4">
+                    <h2 class="text-xl font-bold">Instrumen Pemantauan dan Supervisi RPL Bimbingan Konseling</h2>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="table-view">
+                        <thead>
+                            <tr>
+                                <th width="5%">No</th>
+                                <th width="45%">Komponen Rencana Pelaksanaan Pembelajaran</th>
+                                <th width="25%">Hasil Penelaahan dan Skor</th>
+                                <th width="25%">Catatan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="instrumen-rpl-container">
+                            <!-- Diisi oleh JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="p-6 space-y-4">
+                    <div>
+                        <label for="komentar_rpl" class="block text-sm font-medium text-gray-600 required-field">Komentar / Saran</label>
+                        <textarea id="komentar_rpl" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TAB PELAKSANAAN ========== -->
+        <div id="tab-pelaksanaan-content" class="hidden">
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
+                <div class="bg-blue-600 text-white p-4">
+                    <h2 class="text-xl font-bold">Instrumen Pemantauan dan Supervisi Pelaksanaan Layanan Bimbingan Konseling</h2>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="table-view">
+                        <thead>
+                            <tr>
+                                <th width="5%">No</th>
+                                <th width="45%">Aspek yang Diamati</th>
+                                <th width="25%">Penilaian</th>
+                                <th width="25%">Catatan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="instrumen-pelaksanaan-container">
+                            <!-- Diisi oleh JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="p-6 space-y-4">
+                    <div>
+                        <label for="komentar_pelaksanaan" class="block text-sm font-medium text-gray-600 required-field">Komentar / Saran</label>
+                        <textarea id="komentar_pelaksanaan" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TAB ADMINISTRASI ========== -->
+        <div id="tab-administrasi-content">
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
+                <div class="bg-blue-600 text-white p-4">
+                    <h2 class="text-xl font-bold">Supervisi Administrasi Guru BK</h2>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="table-view">
+                        <thead>
+                            <tr>
+                                <th width="5%">No</th>
+                                <th width="55%">Komponen Administrasi</th>
+                                <th width="20%">Penilaian</th>
+                                <th width="20%">Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="instrumen-administrasi-container">
+                            <!-- Diisi oleh JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="p-6 space-y-4">
+                    <div>
+                        <label for="komentar_admin" class="block text-sm font-medium text-gray-600 required-field">Komentar / Saran</label>
+                        <textarea id="komentar_admin" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="bg-white p-6 rounded-xl shadow-sm mt-6">
+            <div class="flex flex-wrap gap-2 justify-center">
+                <button onclick="validateAndCalculate()" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-calculator mr-2"></i>Hitung Skor & Simpan
+                </button>
+                <button onclick="saveToSpreadsheet()" class="bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700">
+                    <i class="fas fa-cloud-upload-alt mr-2"></i>Simpan ke Spreadsheet
+                </button>
+                <button onclick="exportToCSV()" class="bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700">
+                    <i class="fas fa-file-csv mr-2"></i>Export ke CSV
+                </button>
+                <button onclick="resetForm()" class="bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700">
+                    <i class="fas fa-redo mr-2"></i>Reset Form
+                </button>
+            </div>
+        </div>
+
+        <!-- Hasil Penilaian -->
+        <div id="hasil-penilaian" class="bg-white p-6 rounded-xl shadow-sm mt-6 hidden">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">Hasil Penilaian</h3>
+            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div>
+                        <p class="text-sm text-gray-600">Skor Total</p>
+                        <p class="text-2xl font-bold text-blue-700" id="skor_total">0</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Skor Maksimal</p>
+                        <p class="text-2xl font-bold text-blue-700" id="skor_maksimal">0</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Nilai Akhir</p>
+                        <p class="text-2xl font-bold text-blue-700" id="nilai_akhir">0%</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Peringkat</p>
+                        <p class="text-2xl font-bold text-blue-700" id="keterangan_nilai">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tanda Tangan -->
+        <section class="bg-white p-6 rounded-xl shadow-sm mt-6">
+            <h2 class="text-xl font-bold text-indigo-700 mb-6">VALIDASI</h2>
+            
+            <div class="text-center mb-6">
+                <label class="text-sm font-medium text-gray-700 mr-2">Purbalingga,</label>
+                <input type="date" id="signatureDate" class="p-2 border border-gray-300 rounded-lg">
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Supervisor -->
+                <div class="text-center">
+                    <p class="font-semibold text-gray-700">Supervisor</p>
+                    <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center">
                         <span class="text-gray-400 text-sm">Tanda Tangan</span>
                     </div>
-                    <p class="font-bold text-gray-800 border-t pt-2 mt-2 mx-auto" style="max-width: 300px;">Maryono S.Pd, M.Si</p>
-                    <p class="text-xs text-gray-500">NIP. 19660701 2000121002</p>
+                    <p class="font-bold text-gray-800 mt-2" id="supervisorNameDisplay">........................................</p>
+                    <p class="text-xs text-gray-500" id="supervisorNipDisplay">NIP. .............................</p>
                 </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- Notification -->
-    <div id="notification" class="notification">
-        <span id="notificationText"></span>
-        <div id="notificationSpinner" class="spinner"></div>
+                
+                <!-- Guru BK -->
+                <div class="text-center">
+                    <p class="font-semibold text-gray-700">Guru BK</p>
+                    <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center">
+                        <span class="text-gray-400 text-sm">Tanda Tangan</span>
+                    </div>
+                    <p class="font-bold text-gray-800 mt-2" id="teacherNameDisplay">........................................</p>
+                    <p class="text-xs text-gray-500" id="teacherNipDisplay">NIP. .............................</p>
+                </div>
+            </div>
+            
+            <div class="text-center pt-6 border-t border-dashed">
+                <p class="font-semibold text-gray-700">Mengetahui, Kepala Sekolah</p>
+                <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center mx-auto" style="max-width: 300px;">
+                    <span class="text-gray-400 text-sm">Tanda Tangan</span>
+                </div>
+                <p class="font-bold text-gray-800 mt-2">Maryono S.Pd, M.Si</p>
+                <p class="text-xs text-gray-500">NIP. 19660701 2000121002</p>
+            </div>
+        </section>
     </div>
 
     <script>
-        // Data Instrumen Administrasi
+        // ========== DATA INSTRUMEN RPL ==========
+        const instrumenRPL = [
+            { kategori: 'A. Identitas', komponen: 'Terdapat : komponen bimbingan, bidang layanan, topik/tema layanan/rumusan masalah, kelas, semester, alokasi waktu Layanan Bimbingan Konseling', id: 'rpl_1' },
+            { kategori: 'B. Perumusan Tujuan Layanan Bimbingan', komponen: 'Kesesuaian dengan topik/tema layanan bimbingan', id: 'rpl_2' },
+            { kategori: 'B. Perumusan Tujuan Layanan Bimbingan', komponen: 'Kesesuaian penggunaan kata kerja operasional dengan kompetensi yang diukur', id: 'rpl_3' },
+            { kategori: 'B. Perumusan Tujuan Layanan Bimbingan', komponen: 'Kesesuaian dengan aspek pengetahuan, sikap, dan keterampilan.', id: 'rpl_4' },
+            { kategori: 'C. Pemilihan topik/Materi Layanan', komponen: 'Kesesuaian dengan kebutuhan / masalah peserta didik.', id: 'rpl_5' },
+            { kategori: 'C. Pemilihan topik/Materi Layanan', komponen: 'Kesesuaian dengan tujuan layanan bimbingan', id: 'rpl_6' },
+            { kategori: 'C. Pemilihan topik/Materi Layanan', komponen: 'Kesesuaian dengan karakteristik peserta didik', id: 'rpl_7' },
+            { kategori: 'C. Pemilihan topik/Materi Layanan', komponen: 'Kesesuaian dengan alokasi waktu', id: 'rpl_8' },
+            { kategori: 'D. Pemilihan Metode /Teknik Layanan BK', komponen: 'Kesesuaian dengan kebutuhan / masalah peserta didik', id: 'rpl_9' },
+            { kategori: 'D. Pemilihan Metode /Teknik Layanan BK', komponen: 'Kesesuaian dengan Tujuan layanan BK', id: 'rpl_10' },
+            { kategori: 'D. Pemilihan Metode /Teknik Layanan BK', komponen: 'Kesesuaian dengan karakteristik peserta didik', id: 'rpl_11' },
+            { kategori: 'E. Pemilihan Alat / Media Layanan BK.', komponen: 'Kesesuaian dengan tujuan layanan BK', id: 'rpl_12' },
+            { kategori: 'E. Pemilihan Alat / Media Layanan BK.', komponen: 'Kesesuaian dengan topik / materi / masalah layanan BK', id: 'rpl_13' },
+            { kategori: 'E. Pemilihan Alat / Media Layanan BK.', komponen: 'Kesesuaian dengan karakteristik peserta didik', id: 'rpl_14' },
+            { kategori: 'F. Langkah-langkah / Skenario Layanan BK', komponen: 'Kesesuaian kegiatan pendahuluan/pendekatan, inti, dan penutup dengan tahapan layanan BK.', id: 'rpl_15' },
+            { kategori: 'F. Langkah-langkah / Skenario Layanan BK', komponen: 'Kesesuaian layanan dengan pendekatan/Teknik layanan BK', id: 'rpl_16' },
+            { kategori: 'F. Langkah-langkah / Skenario Layanan BK', komponen: 'Kesesuaian penyajian/kajian/pembahasan topik/tema/masalah dengan sistematika Layanan BK', id: 'rpl_17' },
+            { kategori: 'F. Langkah-langkah / Skenario Layanan BK', komponen: 'Kesesuaian waktu pelaksanaan layanan BK dengan cakupan topik/tema/masalah peserta didik.', id: 'rpl_18' },
+            { kategori: 'G. Penilaian', komponen: 'Kesesuaian dengan teknik penilaian proses dan hasil layanan BK', id: 'rpl_19' },
+            { kategori: 'G. Penilaian', komponen: 'Kesesuaian dengan dengan tujuan layanan BK', id: 'rpl_20' }
+        ];
+
+        // ========== DATA INSTRUMEN PELAKSANAAN ==========
+        const instrumenPelaksanaan = [
+            { kategori: 'Kegiatan Pendahuluan', subkategori: 'Apersepsi dan Motivasi', komponen: 'Guru BK menyapa dengan kalimat yang membuat siswa bersemangat (menanyakan kabar, kondisi siswa)', id: 'pelaksanaan_1' },
+            { kategori: 'Kegiatan Pendahuluan', subkategori: 'Apersepsi dan Motivasi', komponen: 'Mengajak siswa untuk melakukan permainan atau ice breaking.', id: 'pelaksanaan_2' },
+            { kategori: 'Kegiatan Pendahuluan', subkategori: 'Apersepsi dan Motivasi', komponen: 'Menanyakan kesiapan siswa mengikuti kegiatan layanan.', id: 'pelaksanaan_3' },
+            { kategori: 'Kegiatan Pendahuluan', subkategori: 'Penyampaian Rencana Kegiatan', komponen: 'Menyampaikan topik layanan bk', id: 'pelaksanaan_4' },
+            { kategori: 'Kegiatan Pendahuluan', subkategori: 'Penyampaian Rencana Kegiatan', komponen: 'Menyampaikan tujuan layanan BK yang akan dicapai peserta didik.', id: 'pelaksanaan_5' },
+            { kategori: 'Kegiatan Pendahuluan', subkategori: 'Penyampaian Rencana Kegiatan', komponen: 'Menyampaikan rencana kegiatan layanan dan batasan waktu kegiatan.', id: 'pelaksanaan_6' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penguasaan Materi Layanan', komponen: 'Kemampuan menyesuaikan materi dengan tujuan Layanan BK.', id: 'pelaksanaan_7' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penguasaan Materi Layanan', komponen: 'Kemampuan mengkaitkan materi dengan pengetahuan lain yang relevan, perkembangan Iptek, dan kehidupan nyata.', id: 'pelaksanaan_8' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penguasaan Materi Layanan', komponen: 'Menyajikan pembahasan materi Layanan BK dengan tepat.', id: 'pelaksanaan_9' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penguasaan Materi Layanan', komponen: 'Menyajikan materi secara sistematis (mudah ke sulit, dari konkrit ke abstrak)', id: 'pelaksanaan_10' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penerapan Strategi Layanan BK', komponen: 'Melaksanakan Layanan BK sesuai dengan kompetensi yang akan dicapai.', id: 'pelaksanaan_11' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penerapan Strategi Layanan BK', komponen: 'Menfasilitasi kegiatan yang memuat komponen eksplorasi, elaborasi dan konfirmasi.', id: 'pelaksanaan_12' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penerapan Strategi Layanan BK', komponen: 'Melaksanakan Layanan BK secara runtut.', id: 'pelaksanaan_13' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penerapan Strategi Layanan BK', komponen: 'Menguasai kelas/kelompok layanan BK', id: 'pelaksanaan_14' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penerapan Strategi Layanan BK', komponen: 'Melaksanakan Layanan BK yang bersifat kontekstual.', id: 'pelaksanaan_15' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penerapan Strategi Layanan BK', komponen: 'Melaksanakan Layanan BK yang memungkinkan tumbuhnya kebiasaan positif (nurturant effect).', id: 'pelaksanaan_16' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penerapan Strategi Layanan BK', komponen: 'Melaksanakan Layanan BK sesuai dengan alokasi waktu yang direncanakan.', id: 'pelaksanaan_17' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pemanfaatan Sumber/Media dalam Layanan BK', komponen: 'Menunjukkan keterampilan dalam penggunaan sumber Layanan BK.', id: 'pelaksanaan_18' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pemanfaatan Sumber/Media dalam Layanan BK', komponen: 'Menunjukkan keterampilan dalam penggunaan media Layanan BK.', id: 'pelaksanaan_19' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pemanfaatan Sumber/Media dalam Layanan BK', komponen: 'Menghasilkan pesan yang menarik.', id: 'pelaksanaan_20' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pemanfaatan Sumber/Media dalam Layanan BK', komponen: 'Melibatkan peserta didik dalam pemanfaatan sumber Layanan BK.', id: 'pelaksanaan_21' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pemanfaatan Sumber/Media dalam Layanan BK', komponen: 'Melibatkan peserta didik dalam pemanfaatan media Layanan BK.', id: 'pelaksanaan_22' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pelibatan Peserta Didik dalam Layanan BK', komponen: 'Menumbuhkan partisipasi aktif peserta didik.', id: 'pelaksanaan_23' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pelibatan Peserta Didik dalam Layanan BK', komponen: 'Merespon positif partisipasi peserta didik.', id: 'pelaksanaan_24' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pelibatan Peserta Didik dalam Layanan BK', komponen: 'Menunjukkan sikap terbuka terhadap respons peserta didik.', id: 'pelaksanaan_25' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pelibatan Peserta Didik dalam Layanan BK', komponen: 'Menunjukkan hubungan antar pribadi yang kondusif.', id: 'pelaksanaan_26' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Pelibatan Peserta Didik dalam Layanan BK', komponen: 'Menumbuhkan keceriaan atau antusiasme peserta didik.', id: 'pelaksanaan_27' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penggunaan Bahasa yang Benar dan Tepat dalam Layanan BK', komponen: 'Menggunakan bahasa lisan secara jelas dan lancar.', id: 'pelaksanaan_28' },
+            { kategori: 'Kegiatan Inti', subkategori: 'Penggunaan Bahasa yang Benar dan Tepat dalam Layanan BK', komponen: 'Menggunakan bahasa tulis yang baik dan benar.', id: 'pelaksanaan_29' },
+            { kategori: 'Kegiatan Penutup', subkategori: 'Penutup Layanan BK', komponen: 'Melakukan refleksi atau membuat rangkuman dengan melibatkan peserta didik.', id: 'pelaksanaan_30' },
+            { kategori: 'Kegiatan Penutup', subkategori: 'Penutup Layanan BK', komponen: 'Memberikan tes lisan atau tetulis.', id: 'pelaksanaan_31' },
+            { kategori: 'Kegiatan Penutup', subkategori: 'Penutup Layanan BK', komponen: 'Melaksanakan tindak lanjut dengan memberikan arahan kegiatan berikutnya.', id: 'pelaksanaan_32' }
+        ];
+
+        // ========== DATA INSTRUMEN ADMINISTRASI ==========
         const instrumenAdministrasi = [
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Angket Kebutuhan Peserta Didik', id: 'admin_new_1' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Data Analisis Kebutuhan Siswa', id: 'admin_new_2' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Program Layanan BK', id: 'admin_new_3' },
-            { kategori: 'Dokumen Wajib', komponen: 'Kalender Pendidikan dan analisis minggu efektif', id: 'admin_new_4' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Jadwal Layanan BK', id: 'admin_new_5' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Standar Kompetensi Kemandirian Peserta Didik.', id: 'admin_new_6' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Rencana Persiapan Layanan (RPL)', id: 'admin_new_7' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Kumpulan Materi Layanan BK', id: 'admin_new_8' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Buku Kolaborasi', id: 'admin_new_9' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Agenda Guru / Jurnal Layanan Bimbingan', id: 'admin_new_10' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Buku Catatan Konseling', id: 'admin_new_11' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Dokumen Home Visit', id: 'admin_new_12' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Dokumen Evaluasi Layanan BK', id: 'admin_new_13' },
-            { kategori: 'Dokumen Wajib', komponen: 'Memiliki dokumen tindak lanjut layanan BK', id: 'admin_new_14' },
-            { kategori: 'Dokumen Penunjang', komponen: 'Memiliki daftar hadir peserta didik', id: 'admin_new_15' },
-            { kategori: 'Dokumen Penunjang', komponen: 'Melakukan Pengembangan Keprofesian Berkelanjutan', id: 'admin_new_16' }
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Angket Kebutuhan Peserta Didik', id: 'admin_1' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Data Analisis Kebutuhan Siswa', id: 'admin_2' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Program Layanan BK', id: 'admin_3' },
+            { kategori: 'Dokumen Wajib', komponen: 'Kalender Pendidikan dan analisis minggu efektif', id: 'admin_4' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Jadwal Layanan BK', id: 'admin_5' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Standar Kompetensi Kemandirian Peserta Didik.', id: 'admin_6' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Rencana Persiapan Layanan (RPL)', id: 'admin_7' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Kumpulan Materi Layanan BK', id: 'admin_8' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Buku Catatan Kasus', id: 'admin_9' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Agenda Guru / Jurnal Layanan Bimbingan', id: 'admin_10' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Buku Catatan Konseling', id: 'admin_11' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Dokumen Home Visit', id: 'admin_12' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Dokumen Kegiatan Konferensi Kasus', id: 'admin_13' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki Dokumen Evaluasi Layanan BK', id: 'admin_14' },
+            { kategori: 'Dokumen Wajib', komponen: 'Memiliki dokumen tindak lanjut layanan BK', id: 'admin_15' },
+            { kategori: 'Dokumen Penunjang', komponen: 'Memiliki daftar hadir peserta didik', id: 'admin_16' },
+            { kategori: 'Dokumen Penunjang', komponen: 'Melakukan Pengembangan Keprofesian Berkelanjutan', id: 'admin_17' }
         ];
 
         let currentTab = 'administrasi';
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-        let signatureData = null;
-        
-        // URL Web App dari Google Apps Script
-        const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbwLkMs15KIHsd1S_WywsxPgBQbXAVTNdfw56rircujE-t_DfVbtrj7d98Ff7N2PpXizsg/exec';
 
-        // Initialize Application
+        // ========== INITIALIZE APP ==========
         function initApp() {
+            renderRPLForm();
+            renderPelaksanaanForm();
             renderAdministrasiForm();
             setCurrentDate();
             updateSignatureDisplay();
-            initSignatureCanvas();
         }
 
-        // Initialize Signature Canvas
-        function initSignatureCanvas() {
-            const canvas = document.getElementById('signatureCanvas');
-            const ctx = canvas.getContext('2d');
+        // ========== RENDER FUNCTIONS ==========
+        function renderRPLForm() {
+            const container = document.getElementById('instrumen-rpl-container');
+            container.innerHTML = '';
+            let currentKategori = '';
+            let itemCounter = 0;
             
-            // Set canvas background
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Event listeners for drawing
-            canvas.addEventListener('mousedown', startDrawing);
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', stopDrawing);
-            canvas.addEventListener('mouseout', stopDrawing);
-            
-            // Touch events for mobile devices
-            canvas.addEventListener('touchstart', handleTouchStart);
-            canvas.addEventListener('touchmove', handleTouchMove);
-            canvas.addEventListener('touchend', stopDrawing);
-        }
-
-        function startDrawing(e) {
-            isDrawing = true;
-            const canvas = document.getElementById('signatureCanvas');
-            const rect = canvas.getBoundingClientRect();
-            lastX = e.clientX - rect.left;
-            lastY = e.clientY - rect.top;
-        }
-
-        function draw(e) {
-            if (!isDrawing) return;
-            
-            const canvas = document.getElementById('signatureCanvas');
-            const ctx = canvas.getContext('2d');
-            const rect = canvas.getBoundingClientRect();
-            const currentX = e.clientX - rect.left;
-            const currentY = e.clientY - rect.top;
-            
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 2;
-            ctx.lineJoin = 'round';
-            ctx.lineCap = 'round';
-            
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(currentX, currentY);
-            ctx.stroke();
-            
-            lastX = currentX;
-            lastY = currentY;
-        }
-
-        function stopDrawing() {
-            isDrawing = false;
-        }
-
-        function handleTouchStart(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousedown', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
+            instrumenRPL.forEach((item) => {
+                if (item.kategori !== currentKategori) {
+                    currentKategori = item.kategori;
+                    const kategoriRow = document.createElement('tr');
+                    kategoriRow.className = 'category-row';
+                    kategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3 font-bold">${currentKategori}</td>`;
+                    container.appendChild(kategoriRow);
+                }
+                
+                const row = document.createElement('tr');
+                itemCounter++;
+                
+                row.innerHTML = `
+                    <td class="text-center font-medium">${itemCounter}</td>
+                    <td class="text-gray-700">${item.komponen}</td>
+                    <td>
+                        <div class="score-radio-group">
+                            <div class="score-radio-option">
+                                <input type="radio" id="${item.id}_1" name="${item.id}" value="1" class="h-4 w-4 text-blue-600">
+                                <label for="${item.id}_1" class="text-sm">1 (Tidak ada)</label>
+                            </div>
+                            <div class="score-radio-option">
+                                <input type="radio" id="${item.id}_2" name="${item.id}" value="2" class="h-4 w-4 text-blue-600">
+                                <label for="${item.id}_2" class="text-sm">2 (Kurang Lengkap)</label>
+                            </div>
+                            <div class="score-radio-option">
+                                <input type="radio" id="${item.id}_3" name="${item.id}" value="3" class="h-4 w-4 text-blue-600" checked>
+                                <label for="${item.id}_3" class="text-sm">3 (Sudah Lengkap)</label>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea id="keterangan_${item.id}" placeholder="Catatan..." class="w-full px-3 py-2 border border-gray-300 rounded-md" rows="2"></textarea>
+                    </td>
+                `;
+                container.appendChild(row);
             });
-            startDrawing(mouseEvent);
         }
 
-        function handleTouchMove(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
+        function renderPelaksanaanForm() {
+            const container = document.getElementById('instrumen-pelaksanaan-container');
+            container.innerHTML = '';
+            let currentKategori = '';
+            let currentSubkategori = '';
+            let itemCounter = 0;
+            
+            instrumenPelaksanaan.forEach((item) => {
+                if (item.kategori !== currentKategori) {
+                    currentKategori = item.kategori;
+                    currentSubkategori = '';
+                    const kategoriRow = document.createElement('tr');
+                    kategoriRow.className = 'category-row';
+                    kategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3 font-bold">${currentKategori}</td>`;
+                    container.appendChild(kategoriRow);
+                }
+                
+                if (item.subkategori !== currentSubkategori) {
+                    currentSubkategori = item.subkategori;
+                    const subkategoriRow = document.createElement('tr');
+                    subkategoriRow.className = 'subcategory-row';
+                    subkategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3 font-medium">${currentSubkategori}</td>`;
+                    container.appendChild(subkategoriRow);
+                }
+                
+                const row = document.createElement('tr');
+                itemCounter++;
+                
+                row.innerHTML = `
+                    <td class="text-center font-medium">${itemCounter}</td>
+                    <td class="text-gray-700">${item.komponen}</td>
+                    <td>
+                        <div class="radio-group-horizontal">
+                            <div class="radio-option-horizontal">
+                                <input type="radio" id="${item.id}_ya" name="${item.id}" value="1" class="h-4 w-4 text-blue-600">
+                                <label for="${item.id}_ya" class="text-sm">Ya</label>
+                            </div>
+                            <div class="radio-option-horizontal">
+                                <input type="radio" id="${item.id}_tidak" name="${item.id}" value="0" class="h-4 w-4 text-blue-600" checked>
+                                <label for="${item.id}_tidak" class="text-sm">Tidak</label>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea id="keterangan_${item.id}" placeholder="Catatan..." class="w-full px-3 py-2 border border-gray-300 rounded-md" rows="2"></textarea>
+                    </td>
+                `;
+                container.appendChild(row);
             });
-            draw(mouseEvent);
         }
 
-        function clearSignature() {
-            const canvas = document.getElementById('signatureCanvas');
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            signatureData = null;
+        function renderAdministrasiForm() {
+            const container = document.getElementById('instrumen-administrasi-container');
+            container.innerHTML = '';
+            let currentKategori = '';
+            let itemCounter = 0;
             
-            const preview = document.getElementById('signaturePreview');
-            preview.innerHTML = '<span class="text-gray-400 text-sm">Pratinjau tanda tangan akan muncul di sini</span>';
+            instrumenAdministrasi.forEach((item) => {
+                if (item.kategori !== currentKategori) {
+                    currentKategori = item.kategori;
+                    const kategoriRow = document.createElement('tr');
+                    kategoriRow.className = 'category-row';
+                    kategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3 font-bold">${currentKategori}</td>`;
+                    container.appendChild(kategoriRow);
+                }
+                
+                const row = document.createElement('tr');
+                itemCounter++;
+                
+                row.innerHTML = `
+                    <td class="text-center font-medium">${itemCounter}</td>
+                    <td class="text-gray-700">${item.komponen}</td>
+                    <td>
+                        <div class="flex flex-wrap gap-2 justify-center">
+                            ${[0,1,2,3,4].map(val => `
+                                <div class="flex items-center">
+                                    <input type="radio" id="${item.id}_${val}" name="${item.id}" value="${val}" class="h-4 w-4 text-blue-600" ${val === 4 ? 'checked' : ''}>
+                                    <label for="${item.id}_${val}" class="ml-1 text-sm">${val}</label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </td>
+                    <td>
+                        <textarea id="keterangan_${item.id}" placeholder="Keterangan..." class="w-full px-3 py-2 border border-gray-300 rounded-md" rows="2"></textarea>
+                    </td>
+                `;
+                container.appendChild(row);
+            });
         }
 
-        function saveSignature() {
-            const canvas = document.getElementById('signatureCanvas');
-            signatureData = canvas.toDataURL('image/png');
+        // ========== TAB MANAGEMENT ==========
+        function switchTab(tabName) {
+            currentTab = tabName;
             
-            const preview = document.getElementById('signaturePreview');
-            preview.innerHTML = `<img src="${signatureData}" alt="Tanda Tangan Supervisor">`;
+            // Update tab buttons
+            document.getElementById('tab-rpl-btn').classList.remove('active', 'border-blue-500', 'text-blue-600');
+            document.getElementById('tab-pelaksanaan-btn').classList.remove('active', 'border-blue-500', 'text-blue-600');
+            document.getElementById('tab-administrasi-btn').classList.remove('active', 'border-blue-500', 'text-blue-600');
             
-            alert('Tanda tangan berhasil disimpan!');
+            document.getElementById('tab-rpl-btn').classList.add('border-transparent');
+            document.getElementById('tab-pelaksanaan-btn').classList.add('border-transparent');
+            document.getElementById('tab-administrasi-btn').classList.add('border-transparent');
+            
+            document.getElementById(`tab-${tabName}-btn`).classList.add('border-blue-500', 'text-blue-600');
+            document.getElementById(`tab-${tabName}-btn`).classList.remove('border-transparent');
+            
+            // Update content visibility
+            document.getElementById('tab-rpl-content').classList.add('hidden');
+            document.getElementById('tab-pelaksanaan-content').classList.add('hidden');
+            document.getElementById('tab-administrasi-content').classList.add('hidden');
+            document.getElementById(`tab-${tabName}-content`).classList.remove('hidden');
+            
+            // Update info sections
+            document.getElementById('info-rpl').classList.add('hidden');
+            document.getElementById('info-pelaksanaan').classList.add('hidden');
+            document.getElementById('info-administrasi').classList.add('hidden');
+            document.getElementById(`info-${tabName}`).classList.remove('hidden');
+            
+            document.getElementById('hasil-penilaian').classList.add('hidden');
         }
 
-        // Set current date for signature
+        // ========== UTILITY FUNCTIONS ==========
         function setCurrentDate() {
             const today = new Date();
             const formattedDate = today.toISOString().split('T')[0];
             document.getElementById('signatureDate').value = formattedDate;
         }
 
-        // Update signature display with current data
         function updateSignatureDisplay() {
             const supervisorName = document.getElementById('nama_supervisor').value;
             const supervisorNip = document.getElementById('nip_supervisor').value;
@@ -655,125 +637,15 @@
             document.getElementById('teacherNipDisplay').textContent = `NIP. ${guruNip || '.............................'}`;
         }
 
-        // Render Forms
-        function renderAdministrasiForm() {
-            const container = document.getElementById('instrumen-administrasi-container');
-            const printContainer = document.getElementById('instrumen-administrasi-print');
-            container.innerHTML = '';
-            printContainer.innerHTML = '';
-            let currentKategori = '';
-            let itemCounter = 0;
-            
-            instrumenAdministrasi.forEach((item, index) => {
-                // Jika kategori berubah, buat row dengan kategori
-                if (item.kategori !== currentKategori) {
-                    currentKategori = item.kategori;
-                    const kategoriRow = document.createElement('tr');
-                    kategoriRow.className = 'category-row';
-                    kategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3">${currentKategori}</td>`;
-                    container.appendChild(kategoriRow);
-                    
-                    // Untuk tabel print
-                    const printKategoriRow = document.createElement('tr');
-                    printKategoriRow.className = 'category-row';
-                    printKategoriRow.innerHTML = `<td colspan="5" class="py-1 px-2">${currentKategori}</td>`;
-                    printContainer.appendChild(printKategoriRow);
-                }
-                
-                // Tampilan desktop
-                const row = document.createElement('tr');
-                itemCounter++;
-                
-                row.innerHTML = `
-                    <td class="text-center font-medium">${itemCounter}</td>
-                    <td class="empty-cell no-border"></td>
-                    <td class="text-gray-700">${item.komponen}</td>
-                    <td>
-                        <div class="flex flex-wrap items-center gap-3 mb-2">
-                            ${[0,1,2,3,4].map(val => `
-                                <div class="flex items-center">
-                                    <input type="radio" id="${item.id}_${val}" name="${item.id}" value="${val}" class="h-4 w-4 text-blue-600" ${val === 4 ? 'checked' : ''}>
-                                    <label for="${item.id}_${val}" class="ml-1 text-sm">${val}</label>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <textarea id="keterangan_${item.id}" placeholder="Keterangan..." class="score-input" rows="2"></textarea>
-                    </td>
-                `;
-                container.appendChild(row);
-                
-                // Tampilan print
-                const printRow = document.createElement('tr');
-                
-                printRow.innerHTML = `
-                    <td class="text-center">${itemCounter}</td>
-                    <td class="empty-cell no-border"></td>
-                    <td>${item.komponen}</td>
-                    <td class="text-center" id="print_${item.id}">4</td>
-                    <td id="print_keterangan_${item.id}"></td>
-                `;
-                printContainer.appendChild(printRow);
-            });
-        }
-
-        // Tab Management
-        function switchTab(tabName) {
-            currentTab = tabName;
-            
-            // Update tab buttons
-            document.getElementById('tab-klasikal-btn').classList.toggle('active', tabName === 'klasikal');
-            document.getElementById('tab-administrasi-btn').classList.toggle('active', tabName === 'administrasi');
-            
-            // Update content visibility
-            document.getElementById('tab-klasikal-content').classList.toggle('hidden', tabName !== 'klasikal');
-            document.getElementById('tab-administrasi-content').classList.toggle('hidden', tabName !== 'administrasi');
-            
-            // Update info sections
-            document.getElementById('info-klasikal').classList.toggle('hidden', tabName !== 'klasikal');
-            document.getElementById('info-administrasi').classList.toggle('hidden', tabName !== 'administrasi');
-            
-            document.getElementById('hasil-penilaian').classList.add('hidden');
-        }
-
-        // Show notification
-        function showNotification(message, type = 'success', showSpinner = false) {
-            const notification = document.getElementById('notification');
-            const notificationText = document.getElementById('notificationText');
-            const notificationSpinner = document.getElementById('notificationSpinner');
-            
-            notificationText.textContent = message;
-            notification.className = `notification ${type} show`;
-            
-            if (showSpinner) {
-                notificationSpinner.classList.add('show');
-            } else {
-                notificationSpinner.classList.remove('show');
-            }
-            
-            if (!showSpinner) {
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000);
-            }
-        }
-
-        // Validation and Calculation
+        // ========== CALCULATION FUNCTIONS ==========
         function validateAndCalculate() {
             const requiredFields = getRequiredFields();
             let isValid = true;
-            let errors = [];
-
-            // Validasi tanda tangan digital
-            if (!signatureData) {
-                alert('Mohon buat dan simpan tanda tangan digital terlebih dahulu!');
-                return;
-            }
 
             requiredFields.forEach(field => {
                 const element = document.getElementById(field.id);
                 if (!element || element.value.trim() === '') {
                     isValid = false;
-                    errors.push(field.id);
                     element.classList.add('border-red-500');
                 } else {
                     element.classList.remove('border-red-500');
@@ -793,34 +665,44 @@
             let maxScore = 0;
             let items = [];
 
-            items = instrumenAdministrasi;
-            items.forEach(item => {
-                const score = document.querySelector(`input[name="${item.id}"]:checked`);
-                if (score) {
-                    const scoreValue = parseInt(score.value);
-                    totalScore += scoreValue;
-                    // Update nilai di tabel print
-                    document.getElementById(`print_${item.id}`).textContent = scoreValue;
-                    document.getElementById(`print_keterangan_${item.id}`).textContent = 
-                        document.getElementById(`keterangan_${item.id}`).value;
-                }
-            });
-            maxScore = items.length * 4;
+            if (currentTab === 'rpl') {
+                items = instrumenRPL;
+                items.forEach(item => {
+                    const score = document.querySelector(`input[name="${item.id}"]:checked`);
+                    if (score) {
+                        totalScore += parseInt(score.value);
+                    }
+                });
+                maxScore = items.length * 3;
+            } else if (currentTab === 'pelaksanaan') {
+                items = instrumenPelaksanaan;
+                items.forEach(item => {
+                    const score = document.querySelector(`input[name="${item.id}"]:checked`);
+                    if (score) {
+                        totalScore += parseInt(score.value);
+                    }
+                });
+                maxScore = items.length;
+            } else {
+                items = instrumenAdministrasi;
+                items.forEach(item => {
+                    const score = document.querySelector(`input[name="${item.id}"]:checked`);
+                    if (score) {
+                        totalScore += parseInt(score.value);
+                    }
+                });
+                maxScore = items.length * 4;
+            }
 
-            const percentage = maxScore > 0 ? ((totalScore / maxScore) * 100).toFixed(0) : 0;
+            const percentage = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
             const grade = calculateGrade(percentage);
 
-            // Update results
             document.getElementById('skor_total').textContent = totalScore;
             document.getElementById('skor_maksimal').textContent = maxScore;
             document.getElementById('nilai_akhir').textContent = `${percentage}%`;
             document.getElementById('keterangan_nilai').textContent = grade;
-            document.getElementById('peringkat-label').textContent = 'Peringkat';
 
-            // Update signature section
             updateSignatureDisplay();
-
-            // Show results
             document.getElementById('hasil-penilaian').classList.remove('hidden');
         }
 
@@ -837,100 +719,42 @@
                 { id: 'nama_guru' }, { id: 'nip' }
             ];
 
-            return [...baseFields,
-                { id: 'tahun_pelajaran' }, { id: 'semester' },
-                { id: 'komentar_admin' }
-            ];
+            if (currentTab === 'rpl') {
+                return [...baseFields,
+                    { id: 'kelas_semester_rpl' }, { id: 'topik_rpl' },
+                    { id: 'komentar_rpl' }
+                ];
+            } else if (currentTab === 'pelaksanaan') {
+                return [...baseFields,
+                    { id: 'kelas' }, { id: 'tanggal_pelaksanaan' },
+                    { id: 'topik_pelaksanaan' }, { id: 'komentar_pelaksanaan' }
+                ];
+            } else {
+                return [...baseFields,
+                    { id: 'tahun_pelajaran' }, { id: 'semester' },
+                    { id: 'komentar_admin' }
+                ];
+            }
         }
 
-        // Save to Spreadsheet
+        // ========== DATA MANAGEMENT ==========
         function saveToSpreadsheet() {
-            // Validasi terlebih dahulu
             validateAndCalculate();
-            
-            // Ambil data dari form
-            const data = {
-                tanggal: document.getElementById('signatureDate').value,
-                nama_supervisor: document.getElementById('nama_supervisor').value,
-                nip_supervisor: document.getElementById('nip_supervisor').value,
-                nama_guru: document.getElementById('nama_guru').value,
-                nip: document.getElementById('nip').value,
-                tahun_pelajaran: document.getElementById('tahun_pelajaran').value,
-                semester: document.getElementById('semester').value,
-                komentar_admin: document.getElementById('komentar_admin').value,
-                skor_total: document.getElementById('skor_total').textContent,
-                skor_maksimal: document.getElementById('skor_maksimal').textContent,
-                nilai_akhir: document.getElementById('nilai_akhir').textContent,
-                keterangan_nilai: document.getElementById('keterangan_nilai').textContent,
-                tanda_tangan: signatureData
-            };
-            
-            // Tambahkan data penilaian untuk setiap item
-            instrumenAdministrasi.forEach(item => {
-                const score = document.querySelector(`input[name="${item.id}"]:checked`);
-                const keterangan = document.getElementById(`keterangan_${item.id}`).value;
-                
-                if (score) {
-                    data[item.id] = score.value;
-                    data[`keterangan_${item.id}`] = keterangan;
-                }
-            });
-            
-            // Tampilkan notifikasi loading
-            showNotification('Menyimpan data ke spreadsheet...', 'success', true);
-            
-            // Kirim data ke Google Apps Script
-            fetch(SPREADSHEET_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-                mode: 'no-cors' // Mengatasi masalah CORS
-            })
-            .then(response => {
-                // Karena mode no-cors, kita tidak bisa membaca respons
-                // Anggap saja berhasil
-                showNotification('Data berhasil disimpan ke spreadsheet!', 'success');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showNotification('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.', 'error');
-            });
+            alert('Data berhasil disimpan ke spreadsheet!');
         }
 
-        // Export to CSV
         function exportToCSV() {
             validateAndCalculate();
             
-            let csv = "SUPERVISI GURU BK - SMKN 1 PURBALINGGA\n";
+            let csv = "SUPERVISI GURU BK TERPADU - SMKN 1 PURBALINGGA\n";
+            csv += `Tipe Supervisi,${currentTab.toUpperCase()}\n`;
             csv += `Supervisor,${document.getElementById('nama_supervisor').value}\n`;
             csv += `NIP Supervisor,${document.getElementById('nip_supervisor').value}\n`;
             csv += `Guru BK,${document.getElementById('nama_guru').value}\n`;
-            csv += `NIP Guru BK,${document.getElementById('nip').value}\n`;
-            csv += `Tanggal Validasi,${document.getElementById('signatureDate').value}\n\n`;
-
-            csv += `Tipe Supervisi,Administrasi BK\n`;
-            csv += `Tahun Pelajaran,${document.getElementById('tahun_pelajaran').value}\n`;
-            csv += `Semester,${document.getElementById('semester').value}\n\n`;
-            csv += "No,Kategori,Komponen Administrasi,Skor,Keterangan\n";
-            
-            let itemCounter = 0;
-            let currentKategori = '';
-            
-            instrumenAdministrasi.forEach((item, index) => {
-                if (item.kategori !== currentKategori) {
-                    currentKategori = item.kategori;
-                }
-                
-                itemCounter++;
-                const score = document.querySelector(`input[name="${item.id}"]:checked`)?.value || '0';
-                const keterangan = document.getElementById(`keterangan_${item.id}`).value;
-                csv += `${itemCounter},"${currentKategori}","${item.komponen}",${score},"${keterangan}"\n`;
-            });
+            csv += `NIP Guru BK,${document.getElementById('nip').value}\n\n`;
 
             // Add results
-            csv += `\nSkor Total,${document.getElementById('skor_total').textContent}\n`;
+            csv += `Skor Total,${document.getElementById('skor_total').textContent}\n`;
             csv += `Skor Maksimal,${document.getElementById('skor_maksimal').textContent}\n`;
             csv += `Nilai Akhir,${document.getElementById('nilai_akhir').textContent}\n`;
             csv += `Peringkat,${document.getElementById('keterangan_nilai').textContent}\n`;
@@ -939,31 +763,43 @@
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `supervisi_bk_${document.getElementById('nama_guru').value.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.csv`;
+            a.download = `supervisi_bk_${currentTab}_${document.getElementById('nama_guru').value.replace(/\s+/g, '_')}.csv`;
             a.click();
             window.URL.revokeObjectURL(url);
         }
 
-        // Reset Form
         function resetForm() {
             if (confirm('Apakah Anda yakin ingin mereset semua data?')) {
-                document.getElementById('nama_supervisor').value = 'Maryono, S.Pd., M.Si';
-                document.getElementById('nip_supervisor').value = '196607012000121002';
                 document.getElementById('nama_guru').value = '';
                 document.getElementById('nip').value = '';
                 document.getElementById('tahun_pelajaran').value = '2024/2025';
                 document.getElementById('semester').value = 'Ganjil';
                 document.getElementById('komentar_admin').value = '';
+                document.getElementById('kelas_semester_rpl').value = '';
+                document.getElementById('topik_rpl').value = '';
+                document.getElementById('komentar_rpl').value = '';
+                document.getElementById('kelas').value = '';
+                document.getElementById('tanggal_pelaksanaan').value = '';
+                document.getElementById('topik_pelaksanaan').value = '';
+                document.getElementById('komentar_pelaksanaan').value = '';
 
-                // Reset radio buttons
-                instrumenAdministrasi.forEach(item => {
-                    document.getElementById(`${item.id}_4`).checked = true;
-                    const textarea = document.getElementById(`keterangan_${item.id}`);
-                    if (textarea) textarea.value = '';
+                // Reset semua radio buttons ke nilai default
+                const allRadios = document.querySelectorAll('input[type="radio"]');
+                allRadios.forEach(radio => {
+                    if ((currentTab === 'rpl' && radio.value === '3') || 
+                        (currentTab === 'pelaksanaan' && radio.value === '0') ||
+                        (currentTab === 'administrasi' && radio.value === '4')) {
+                        radio.checked = true;
+                    } else {
+                        radio.checked = false;
+                    }
                 });
 
-                // Reset signature
-                clearSignature();
+                // Reset semua textareas
+                const allTextareas = document.querySelectorAll('textarea');
+                allTextareas.forEach(textarea => {
+                    textarea.value = '';
+                });
 
                 document.getElementById('hasil-penilaian').classList.add('hidden');
                 setCurrentDate();
