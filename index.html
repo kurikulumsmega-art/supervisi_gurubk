@@ -76,6 +76,46 @@
             align-items: center;
             gap: 3px;
         }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                font-size: 12pt;
+                line-height: 1.3;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .bg-white {
+                background-color: white !important;
+                box-shadow: none !important;
+            }
+            .table-view {
+                page-break-inside: auto;
+            }
+            .table-view tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+            .table-view td, .table-view th {
+                padding: 6px 8px;
+            }
+            .action-buttons {
+                display: none !important;
+            }
+            .signature-section {
+                margin-top: 30px;
+            }
+            @page {
+                margin: 1cm;
+                size: A4;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -274,7 +314,7 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="bg-white p-6 rounded-xl shadow-sm mt-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm mt-6 action-buttons">
             <div class="flex flex-wrap gap-2 justify-center">
                 <button onclick="validateAndCalculate()" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700">
                     <i class="fas fa-calculator mr-2"></i>Hitung Skor & Simpan
@@ -282,8 +322,14 @@
                 <button onclick="saveToSpreadsheet()" class="bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700">
                     <i class="fas fa-cloud-upload-alt mr-2"></i>Simpan ke Spreadsheet
                 </button>
+                <button onclick="viewSavedData()" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700">
+                    <i class="fas fa-database mr-2"></i>Lihat Data Tersimpan
+                </button>
                 <button onclick="exportToCSV()" class="bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700">
                     <i class="fas fa-file-csv mr-2"></i>Export ke CSV
+                </button>
+                <button onclick="window.print()" class="bg-orange-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-700">
+                    <i class="fas fa-print mr-2"></i>Cetak Form
                 </button>
                 <button onclick="resetForm()" class="bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700">
                     <i class="fas fa-redo mr-2"></i>Reset Form
@@ -317,7 +363,7 @@
         </div>
 
         <!-- Tanda Tangan -->
-        <section class="bg-white p-6 rounded-xl shadow-sm mt-6">
+        <section class="bg-white p-6 rounded-xl shadow-sm mt-6 signature-section">
             <h2 class="text-xl font-bold text-indigo-700 mb-6">VALIDASI</h2>
             
             <div class="text-center mb-6">
@@ -356,6 +402,55 @@
                 <p class="text-xs text-gray-500">NIP. 19660701 2000121002</p>
             </div>
         </section>
+    </div>
+
+    <!-- Modal untuk menampilkan data tersimpan -->
+    <div id="dataModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
+        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Data Supervisi Tersimpan</h3>
+                    <button onclick="closeDataModal()" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="mt-2 px-7 py-3">
+                    <div class="mb-4">
+                        <label for="filterTab" class="block text-sm font-medium text-gray-700 mb-2">Filter berdasarkan tipe supervisi:</label>
+                        <select id="filterTab" class="w-full px-3 py-2 border border-gray-300 rounded-md" onchange="filterData()">
+                            <option value="all">Semua</option>
+                            <option value="rpl">RPL BK</option>
+                            <option value="pelaksanaan">Pelaksanaan Layanan</option>
+                            <option value="administrasi">Administrasi BK</option>
+                        </select>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipe</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guru BK</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nilai</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="savedDataContainer" class="bg-white divide-y divide-gray-200">
+                                <!-- Data akan dimuat di sini -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="noDataMessage" class="text-center py-4 text-gray-500 hidden">
+                        Tidak ada data tersimpan
+                    </div>
+                </div>
+                <div class="items-center px-4 py-3 border-t border-gray-200 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button onclick="closeDataModal()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Notification Element -->
@@ -451,6 +546,7 @@
         ];
 
         let currentTab = 'administrasi';
+        let savedData = [];
 
         // ========== URL WEB APP ANDA ==========
         const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbx5JCLNrJ0kWSk3-9i4kKE8doszruSbwguRIcHewr4-5RdVNh1atqJSmzISIX1XG2hbCA/exec';
@@ -462,6 +558,7 @@
             renderAdministrasiForm();
             setCurrentDate();
             updateSignatureDisplay();
+            loadSavedData();
         }
 
         // ========== RENDER FUNCTIONS ==========
@@ -804,14 +901,177 @@
             .then(result => {
                 if (result.status === 'success') {
                     showNotification('Data berhasil disimpan ke spreadsheet!', 'success');
+                    // Simpan data lokal juga
+                    saveDataLocally(data);
                 } else {
                     showNotification('Gagal menyimpan data: ' + result.message, 'error');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                showNotification('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.', 'error');
+                showNotification('Terjadi kesalahan saat menyimpan data. Menyimpan secara lokal...', 'error');
+                // Simpan data lokal jika gagal mengirim ke server
+                saveDataLocally(data);
             });
+        }
+
+        function saveDataLocally(data) {
+            // Tambahkan ID unik dan timestamp
+            data.id = Date.now().toString();
+            data.timestamp = new Date().toISOString();
+            
+            // Ambil data yang sudah ada dari localStorage
+            const existingData = JSON.parse(localStorage.getItem('supervisiData') || '[]');
+            
+            // Tambahkan data baru
+            existingData.push(data);
+            
+            // Simpan kembali ke localStorage
+            localStorage.setItem('supervisiData', JSON.stringify(existingData));
+            
+            // Update variabel savedData
+            savedData = existingData;
+            
+            showNotification('Data berhasil disimpan secara lokal!', 'success');
+        }
+
+        function loadSavedData() {
+            // Ambil data dari localStorage
+            const storedData = localStorage.getItem('supervisiData');
+            if (storedData) {
+                savedData = JSON.parse(storedData);
+            } else {
+                savedData = [];
+            }
+        }
+
+        function viewSavedData() {
+            // Tampilkan modal
+            document.getElementById('dataModal').classList.remove('hidden');
+            
+            // Tampilkan data
+            displaySavedData();
+        }
+
+        function displaySavedData(filter = 'all') {
+            const container = document.getElementById('savedDataContainer');
+            const noDataMessage = document.getElementById('noDataMessage');
+            
+            // Filter data
+            let filteredData = savedData;
+            if (filter !== 'all') {
+                filteredData = savedData.filter(item => item.tipe_supervisi === filter);
+            }
+            
+            // Kosongkan container
+            container.innerHTML = '';
+            
+            // Periksa apakah ada data
+            if (filteredData.length === 0) {
+                noDataMessage.classList.remove('hidden');
+                return;
+            } else {
+                noDataMessage.classList.add('hidden');
+            }
+            
+            // Tampilkan data
+            filteredData.forEach(item => {
+                const row = document.createElement('tr');
+                
+                // Format tanggal
+                const date = new Date(item.tanggal);
+                const formattedDate = date.toLocaleDateString('id-ID');
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${formattedDate}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.tipe_supervisi.toUpperCase()}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.nama_guru}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.nilai_akhir}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button onclick="loadData('${item.id}')" class="text-indigo-600 hover:text-indigo-900 mr-2">Muat</button>
+                        <button onclick="deleteData('${item.id}')" class="text-red-600 hover:text-red-900">Hapus</button>
+                    </td>
+                `;
+                
+                container.appendChild(row);
+            });
+        }
+
+        function filterData() {
+            const filterValue = document.getElementById('filterTab').value;
+            displaySavedData(filterValue);
+        }
+
+        function loadData(id) {
+            // Cari data berdasarkan ID
+            const data = savedData.find(item => item.id === id);
+            
+            if (!data) {
+                showNotification('Data tidak ditemukan!', 'error');
+                return;
+            }
+            
+            // Isi form dengan data
+            document.getElementById('nama_supervisor').value = data.nama_supervisor;
+            document.getElementById('nip_supervisor').value = data.nip_supervisor;
+            document.getElementById('nama_guru').value = data.nama_guru;
+            document.getElementById('nip').value = data.nip;
+            document.getElementById('signatureDate').value = data.tanggal;
+            document.getElementById('tahun_pelajaran').value = data.tahun_pelajaran;
+            document.getElementById('semester').value = data.semester;
+            
+            // Pindah ke tab yang sesuai
+            switchTab(data.tipe_supervisi);
+            
+            // Isi field spesifik berdasarkan tipe
+            if (data.tipe_supervisi === 'rpl') {
+                document.getElementById('kelas_semester_rpl').value = data.kelas_semester;
+                document.getElementById('topik_rpl').value = data.topik;
+                document.getElementById('komentar_rpl').value = data.komentar;
+            } else if (data.tipe_supervisi === 'pelaksanaan') {
+                document.getElementById('kelas').value = data.kelas;
+                document.getElementById('tanggal_pelaksanaan').value = data.tanggal_pelaksanaan;
+                document.getElementById('topik_pelaksanaan').value = data.topik;
+                document.getElementById('komentar_pelaksanaan').value = data.komentar;
+            } else {
+                document.getElementById('komentar_admin').value = data.komentar;
+            }
+            
+            // Tampilkan hasil penilaian
+            document.getElementById('skor_total').textContent = data.skor_total;
+            document.getElementById('skor_maksimal').textContent = data.skor_maksimal;
+            document.getElementById('nilai_akhir').textContent = data.nilai_akhir;
+            document.getElementById('keterangan_nilai').textContent = data.keterangan_nilai;
+            document.getElementById('hasil-penilaian').classList.remove('hidden');
+            
+            // Update tanda tangan
+            updateSignatureDisplay();
+            
+            // Tutup modal
+            closeDataModal();
+            
+            showNotification('Data berhasil dimuat!', 'success');
+        }
+
+        function deleteData(id) {
+            if (!confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                return;
+            }
+            
+            // Hapus data dari array
+            savedData = savedData.filter(item => item.id !== id);
+            
+            // Simpan kembali ke localStorage
+            localStorage.setItem('supervisiData', JSON.stringify(savedData));
+            
+            // Tampilkan kembali data
+            displaySavedData(document.getElementById('filterTab').value);
+            
+            showNotification('Data berhasil dihapus!', 'success');
+        }
+
+        function closeDataModal() {
+            document.getElementById('dataModal').classList.add('hidden');
         }
 
         function exportToCSV() {
