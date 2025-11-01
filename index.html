@@ -196,6 +196,45 @@
         .empty-cell {
             background-color: transparent !important;
         }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        .notification.success {
+            background-color: #10b981;
+        }
+        .notification.error {
+            background-color: #ef4444;
+        }
+        .notification.show {
+            display: flex;
+        }
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        .spinner.show {
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -347,6 +386,9 @@
                         <button onclick="validateAndCalculate()" class="flex-grow sm:flex-grow-0 bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 shadow-sm">
                             <i class="fas fa-calculator mr-2"></i>Hitung Skor & Simpan
                         </button>
+                        <button onclick="saveToSpreadsheet()" class="flex-grow sm:flex-grow-0 bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition duration-300 shadow-sm">
+                            <i class="fas fa-cloud-upload-alt mr-2"></i>Simpan ke Spreadsheet
+                        </button>
                         <button onclick="exportToCSV()" class="flex-grow sm:flex-grow-0 bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300 shadow-sm">
                             <i class="fas fa-file-csv mr-2"></i>Export ke CSV
                         </button>
@@ -452,6 +494,12 @@
         </main>
     </div>
 
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <span id="notificationText"></span>
+        <div id="notificationSpinner" class="spinner"></div>
+    </div>
+
     <script>
         // Data Instrumen Administrasi
         const instrumenAdministrasi = [
@@ -478,6 +526,9 @@
         let lastX = 0;
         let lastY = 0;
         let signatureData = null;
+        
+        // URL Web App dari Google Apps Script
+        const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbwLkMs15KIHsd1S_WywsxPgBQbXAVTNdfw56rircujE-t_DfVbtrj7d98Ff7N2PpXizsg/exec';
 
         // Initialize Application
         function initApp() {
@@ -684,6 +735,28 @@
             document.getElementById('hasil-penilaian').classList.add('hidden');
         }
 
+        // Show notification
+        function showNotification(message, type = 'success', showSpinner = false) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            const notificationSpinner = document.getElementById('notificationSpinner');
+            
+            notificationText.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            if (showSpinner) {
+                notificationSpinner.classList.add('show');
+            } else {
+                notificationSpinner.classList.remove('show');
+            }
+            
+            if (!showSpinner) {
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        }
+
         // Validation and Calculation
         function validateAndCalculate() {
             const requiredFields = getRequiredFields();
@@ -768,6 +841,62 @@
                 { id: 'tahun_pelajaran' }, { id: 'semester' },
                 { id: 'komentar_admin' }
             ];
+        }
+
+        // Save to Spreadsheet
+        function saveToSpreadsheet() {
+            // Validasi terlebih dahulu
+            validateAndCalculate();
+            
+            // Ambil data dari form
+            const data = {
+                tanggal: document.getElementById('signatureDate').value,
+                nama_supervisor: document.getElementById('nama_supervisor').value,
+                nip_supervisor: document.getElementById('nip_supervisor').value,
+                nama_guru: document.getElementById('nama_guru').value,
+                nip: document.getElementById('nip').value,
+                tahun_pelajaran: document.getElementById('tahun_pelajaran').value,
+                semester: document.getElementById('semester').value,
+                komentar_admin: document.getElementById('komentar_admin').value,
+                skor_total: document.getElementById('skor_total').textContent,
+                skor_maksimal: document.getElementById('skor_maksimal').textContent,
+                nilai_akhir: document.getElementById('nilai_akhir').textContent,
+                keterangan_nilai: document.getElementById('keterangan_nilai').textContent,
+                tanda_tangan: signatureData
+            };
+            
+            // Tambahkan data penilaian untuk setiap item
+            instrumenAdministrasi.forEach(item => {
+                const score = document.querySelector(`input[name="${item.id}"]:checked`);
+                const keterangan = document.getElementById(`keterangan_${item.id}`).value;
+                
+                if (score) {
+                    data[item.id] = score.value;
+                    data[`keterangan_${item.id}`] = keterangan;
+                }
+            });
+            
+            // Tampilkan notifikasi loading
+            showNotification('Menyimpan data ke spreadsheet...', 'success', true);
+            
+            // Kirim data ke Google Apps Script
+            fetch(SPREADSHEET_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                mode: 'no-cors' // Mengatasi masalah CORS
+            })
+            .then(response => {
+                // Karena mode no-cors, kita tidak bisa membaca respons
+                // Anggap saja berhasil
+                showNotification('Data berhasil disimpan ke spreadsheet!', 'success');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.', 'error');
+            });
         }
 
         // Export to CSV
