@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ... (SEMUA CSS ANDA TETAP SAMA) ... */
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -137,7 +138,6 @@
             <p class="text-lg md:text-xl font-semibold text-gray-700">SMK Negeri 1 Purbalingga</p>
             <p class="text-sm text-gray-600 mt-2">RPL BK • Pelaksanaan Layanan • Administrasi BK</p>
         </header>
-
         <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
             <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Supervisi</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -163,21 +163,25 @@
             </div>
         </div>
 
+
         <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
             <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Personal</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <h3 class="text-lg font-semibold text-green-600 mb-3">Guru BK</h3>
                     <div class="space-y-3">
+                        
                         <div>
                             <label for="nama_guru" class="block text-sm font-medium text-gray-600 required-field">Nama Guru BK</label>
-                            <input type="text" id="nama_guru" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                            <select id="nama_guru" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" onchange="updateNIP()">
+                                <option value="">Pilih Guru BK</option>
+                                </select>
                         </div>
                         <div>
                             <label for="nip" class="block text-sm font-medium text-gray-600 required-field">NIP Guru BK</label>
                             <input type="text" id="nip" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
                         </div>
-                    </div>
+                        </div>
                 </div>
                 
                 <div>
@@ -201,13 +205,11 @@
             <button id="tab-pelaksanaan-btn" class="tab-btn py-3 px-6 border-b-2 border-transparent" onclick="switchTab('pelaksanaan')">Pelaksanaan Layanan</button>
             <button id="tab-administrasi-btn" class="tab-btn active py-3 px-6 border-b-2 border-blue-500 text-blue-600" onclick="switchTab('administrasi')">Administrasi BK</button>
         </div>
-
         <div id="tab-rpl-content" class="tab-content hidden">
             <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
                 <div class="bg-blue-600 text-white p-4">
                     <h2 class="text-xl font-bold">Instrumen Pemantauan dan Supervisi RPL Bimbingan Konseling</h2>
                 </div>
-                
                 <div class="overflow-x-auto">
                     <table class="table-view">
                         <thead>
@@ -219,10 +221,9 @@
                             </tr>
                         </thead>
                         <tbody id="instrumen-rpl-container">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
-                
                 <div class="p-6 space-y-4">
                     <div>
                         <label for="jenis_layanan_rpl" class="block text-sm font-medium text-gray-600 required-field">Jenis Layanan</label>
@@ -243,13 +244,11 @@
                 </div>
             </div>
         </div>
-
         <div id="tab-pelaksanaan-content" class="tab-content hidden">
             <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
                 <div class="bg-blue-600 text-white p-4">
                     <h2 class="text-xl font-bold">Instrumen Pemantauan dan Supervisi Pelaksanaan Layanan Bimbingan Konseling</h2>
                 </div>
-                
                 <div class="overflow-x-auto">
                     <table class="table-view">
                         <thead>
@@ -261,10 +260,9 @@
                             </tr>
                         </thead>
                         <tbody id="instrumen-pelaksanaan-container">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
-                
                 <div class="p-6 space-y-4">
                     <div>
                         <label for="jenis_layanan_pelaksanaan" class="block text-sm font-medium text-gray-600 required-field">Jenis Layanan</label>
@@ -285,13 +283,11 @@
                 </div>
             </div>
         </div>
-
         <div id="tab-administrasi-content" class="tab-content">
             <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
                 <div class="bg-blue-600 text-white p-4">
                     <h2 class="text-xl font-bold">Supervisi Administrasi Guru BK</h2>
                 </div>
-                
                 <div class="overflow-x-auto">
                     <table class="table-view">
                         <thead>
@@ -303,10 +299,9 @@
                             </tr>
                         </thead>
                         <tbody id="instrumen-administrasi-container">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
-                
                 <div class="p-6 space-y-4">
                     <div>
                         <label for="jenis_layanan_admin" class="block text-sm font-medium text-gray-600 required-field">Jenis Layanan</label>
@@ -327,7 +322,6 @@
                 </div>
             </div>
         </div>
-
         <div class="bg-white p-6 rounded-xl shadow-sm mt-6 action-buttons">
             <div class="flex flex-wrap gap-2 justify-center">
                 <button onclick="validateAndCalculate()" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700">
@@ -350,7 +344,6 @@
                 </button>
             </div>
         </div>
-
         <div id="hasil-penilaian" class="bg-white p-6 rounded-xl shadow-sm mt-6 hidden">
             <h3 class="text-lg font-bold text-gray-800 mb-4">Hasil Penilaian</h3>
             <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
@@ -374,15 +367,12 @@
                 </div>
             </div>
         </div>
-
         <section class="bg-white p-6 rounded-xl shadow-sm mt-6 signature-section">
             <h2 class="text-xl font-bold text-indigo-700 mb-6">VALIDASI</h2>
-            
             <div class="text-center mb-6">
                 <label class="text-sm font-medium text-gray-700 mr-2">Purbalingga,</label>
                 <input type="date" id="signatureDate" class="p-2 border border-gray-300 rounded-lg">
             </div>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div class="text-center">
                     <p class="font-semibold text-gray-700">Supervisor</p>
@@ -392,7 +382,6 @@
                     <p class="font-bold text-gray-800 mt-2" id="supervisorNameDisplay">........................................</p>
                     <p class="text-xs text-gray-500" id="supervisorNipDisplay">NIP. .............................</p>
                 </div>
-                
                 <div class="text-center">
                     <p class="font-semibold text-gray-700">Guru BK</p>
                     <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center">
@@ -402,7 +391,6 @@
                     <p class="text-xs text-gray-500" id="teacherNipDisplay">NIP. .............................</p>
                 </div>
             </div>
-            
             <div class="text-center pt-6 border-t border-dashed">
                 <p class="font-semibold text-gray-700">Mengetahui, Kepala Sekolah</p>
                 <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center mx-auto" style="max-width: 300px;">
@@ -413,7 +401,6 @@
             </div>
         </section>
     </div>
-
     <div id="dataModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
         <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
             <div class="mt-3">
@@ -445,7 +432,7 @@
                                 </tr>
                             </thead>
                             <tbody id="savedDataContainer" class="bg-white divide-y divide-gray-200">
-                                </tbody>
+                            </tbody>
                         </table>
                     </div>
                     <div id="noDataMessage" class="text-center py-4 text-gray-500 hidden">
@@ -460,7 +447,6 @@
             </div>
         </div>
     </div>
-
     <div id="notification" class="fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 hidden">
         <div class="flex items-center gap-3">
             <span id="notificationText"></span>
@@ -471,7 +457,7 @@
     </div>
 
     <script>
-        // ========== DATA INSTRUMEN RPL ==========
+        // ... (Data Instrumen RPL dan Pelaksanaan tetap sama) ...
         const instrumenRPL = [
             { kategori: 'A. Identitas', komponen: 'Terdapat : komponen bimbingan, bidang layanan, topik/tema layanan/rumusan masalah, kelas, semester, alokasi waktu Layanan Bimbingan Konseling', id: 'rpl_1' },
             { kategori: 'B. Perumusan Tujuan Layanan Bimbingan', komponen: 'Kesesuaian dengan topik/tema layanan bimbingan', id: 'rpl_2' },
@@ -494,8 +480,6 @@
             { kategori: 'G. Penilaian', komponen: 'Kesesuaian dengan teknik penilaian proses dan hasil layanan BK', id: 'rpl_19' },
             { kategori: 'G. Penilaian', komponen: 'Kesesuaian dengan dengan tujuan layanan BK', id: 'rpl_20' }
         ];
-
-        // ========== DATA INSTRUMEN PELAKSANAAN ==========
         const instrumenPelaksanaan = [
             { kategori: 'Kegiatan Pendahuluan', subkategori: 'Apersepsi dan Motivasi', komponen: 'Guru BK menyapa dengan kalimat yang membuat siswa bersemangat (menanyakan kabar, kondisi siswa)', id: 'pelaksanaan_1' },
             { kategori: 'Kegiatan Pendahuluan', subkategori: 'Apersepsi dan Motivasi', komponen: 'Mengajak siswa untuk melakukan permainan atau ice breaking.', id: 'pelaksanaan_2' },
@@ -552,6 +536,17 @@
             { kategori: 'Dokumen Penunjang', komponen: 'Melakukan Pengembangan Keprofesian Berkelanjutan', id: 'admin_17' }
         ];
 
+        // =========== PERUBAHAN JAVASCRIPT 2: DATA GURU BK ===========
+        const dataGuruBK = {
+            "Agus Wuryanto, S.Pd": "197503222006041002",
+            "Nelly Amaliyah, S.Psi": "197907032010012019",
+            "Novaristya Widyasmara Pamungkas, S.Pd": "198811042022211004",
+            "Safa Aulia Astri, S.Sos": "199607212024212021",
+            "Rindhi Rezqi Hertindha, M.Pd.": "-",
+            "Lainnya...": "lainnya" // Opsi untuk input manual
+        };
+        // =========== AKHIR PERUBAHAN JAVASCRIPT 2 ===========
+
         let currentTab = 'administrasi';
         let savedData = [];
 
@@ -567,15 +562,19 @@
             setCurrentDate();
             updateSignatureDisplay();
             loadSavedData();
+            
+            // =========== PERUBAHAN JAVASCRIPT 3: MEMANGGIL FUNGSI DROPDOWN ===========
+            populateGuruDropdown();
+            // =========== AKHIR PERUBAHAN JAVASCRIPT 3 ===========
         }
 
         // ========== RENDER FUNCTIONS ==========
+        // ... (Fungsi renderRPLForm, renderPelaksanaanForm, renderAdministrasiForm tetap sama) ...
         function renderRPLForm() {
             const container = document.getElementById('instrumen-rpl-container');
             container.innerHTML = '';
             let currentKategori = '';
             let itemCounter = 0;
-            
             instrumenRPL.forEach((item) => {
                 if (item.kategori !== currentKategori) {
                     currentKategori = item.kategori;
@@ -584,10 +583,8 @@
                     kategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3 font-bold">${currentKategori}</td>`;
                     container.appendChild(kategoriRow);
                 }
-                
                 const row = document.createElement('tr');
                 itemCounter++;
-                
                 row.innerHTML = `
                     <td class="text-center font-medium">${itemCounter}</td>
                     <td class="text-gray-700">${item.komponen}</td>
@@ -614,14 +611,12 @@
                 container.appendChild(row);
             });
         }
-
         function renderPelaksanaanForm() {
             const container = document.getElementById('instrumen-pelaksanaan-container');
             container.innerHTML = '';
             let currentKategori = '';
             let currentSubkategori = '';
             let itemCounter = 0;
-            
             instrumenPelaksanaan.forEach((item) => {
                 if (item.kategori !== currentKategori) {
                     currentKategori = item.kategori;
@@ -631,7 +626,6 @@
                     kategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3 font-bold">${currentKategori}</td>`;
                     container.appendChild(kategoriRow);
                 }
-                
                 if (item.subkategori !== currentSubkategori) {
                     currentSubkategori = item.subkategori;
                     const subkategoriRow = document.createElement('tr');
@@ -639,10 +633,8 @@
                     subkategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3 font-medium">${currentSubkategori}</td>`;
                     container.appendChild(subkategoriRow);
                 }
-                
                 const row = document.createElement('tr');
                 itemCounter++;
-                
                 row.innerHTML = `
                     <td class="text-center font-medium">${itemCounter}</td>
                     <td class="text-gray-700">${item.komponen}</td>
@@ -665,13 +657,11 @@
                 container.appendChild(row);
             });
         }
-
         function renderAdministrasiForm() {
             const container = document.getElementById('instrumen-administrasi-container');
             container.innerHTML = '';
             let currentKategori = '';
             let itemCounter = 0;
-            
             instrumenAdministrasi.forEach((item) => {
                 if (item.kategori !== currentKategori) {
                     currentKategori = item.kategori;
@@ -680,10 +670,8 @@
                     kategoriRow.innerHTML = `<td colspan="4" class="py-2 px-3 font-bold">${currentKategori}</td>`;
                     container.appendChild(kategoriRow);
                 }
-                
                 const row = document.createElement('tr');
                 itemCounter++;
-                
                 row.innerHTML = `
                     <td class="text-center font-medium">${itemCounter}</td>
                     <td class="text-gray-700">${item.komponen}</td>
@@ -706,71 +694,57 @@
         }
 
         // ========== TAB MANAGEMENT ==========
+        // ... (Fungsi switchTab tetap sama) ...
         function switchTab(tabName) {
             currentTab = tabName;
-            
-            // Update tab buttons
             document.getElementById('tab-rpl-btn').classList.remove('active', 'border-blue-500', 'text-blue-600');
             document.getElementById('tab-pelaksanaan-btn').classList.remove('active', 'border-blue-500', 'text-blue-600');
             document.getElementById('tab-administrasi-btn').classList.remove('active', 'border-blue-500', 'text-blue-600');
-            
             document.getElementById('tab-rpl-btn').classList.add('border-transparent');
             document.getElementById('tab-pelaksanaan-btn').classList.add('border-transparent');
             document.getElementById('tab-administrasi-btn').classList.add('border-transparent');
-            
             document.getElementById(`tab-${tabName}-btn`).classList.add('border-blue-500', 'text-blue-600');
             document.getElementById(`tab-${tabName}-btn`).classList.remove('border-transparent');
-            
-            // Update content visibility
             document.getElementById('tab-rpl-content').classList.add('hidden');
             document.getElementById('tab-pelaksanaan-content').classList.add('hidden');
             document.getElementById('tab-administrasi-content').classList.add('hidden');
             document.getElementById(`tab-${tabName}-content`).classList.remove('hidden');
-            
             document.getElementById('hasil-penilaian').classList.add('hidden');
         }
 
         // ========== UTILITY FUNCTIONS ==========
+        // ... (Fungsi setCurrentDate, updateSignatureDisplay, printAllTabs tetap sama) ...
         function setCurrentDate() {
             const today = new Date();
             const formattedDate = today.toISOString().split('T')[0];
             document.getElementById('signatureDate').value = formattedDate;
             document.getElementById('tanggal_supervisi').value = formattedDate;
         }
-
         function updateSignatureDisplay() {
             const supervisorName = document.getElementById('nama_supervisor').value;
             const supervisorNip = document.getElementById('nip_supervisor').value;
             const guruName = document.getElementById('nama_guru').value;
             const guruNip = document.getElementById('nip').value;
-
             document.getElementById('supervisorNameDisplay').textContent = supervisorName || '........................................';
             document.getElementById('supervisorNipDisplay').textContent = `NIP. ${supervisorNip || '.............................'}`;
             document.getElementById('teacherNameDisplay').textContent = guruName || '........................................';
             document.getElementById('teacherNipDisplay').textContent = `NIP. ${guruNip || '.............................'}`;
         }
-
-        // ========== PRINT ALL TABS FUNCTION ==========
         function printAllTabs() {
-            // Show all tabs temporarily
             document.getElementById('tab-rpl-content').classList.remove('hidden');
             document.getElementById('tab-pelaksanaan-content').classList.remove('hidden');
             document.getElementById('tab-administrasi-content').classList.remove('hidden');
-            
-            // Trigger print
             window.print();
-            
-            // Restore original state after print dialog closes
             setTimeout(() => {
                 switchTab(currentTab);
             }, 1000);
         }
 
         // ========== CALCULATION FUNCTIONS ==========
+        // ... (Fungsi validateAndCalculate, calculateScores, calculateGrade, getRequiredFields tetap sama) ...
         function validateAndCalculate() {
             const requiredFields = getRequiredFields();
             let isValid = true;
-
             requiredFields.forEach(field => {
                 const element = document.getElementById(field.id);
                 if (!element || element.value.trim() === '') {
@@ -780,20 +754,16 @@
                     element.classList.remove('border-red-500');
                 }
             });
-
             if (!isValid) {
                 alert('Mohon lengkapi semua field yang wajib diisi!');
                 return;
             }
-
             calculateScores();
         }
-
         function calculateScores() {
             let totalScore = 0;
             let maxScore = 0;
             let items = [];
-
             if (currentTab === 'rpl') {
                 items = instrumenRPL;
                 items.forEach(item => {
@@ -822,26 +792,21 @@
                 });
                 maxScore = items.length * 4;
             }
-
             const percentage = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
             const grade = calculateGrade(percentage);
-
             document.getElementById('skor_total').textContent = totalScore;
             document.getElementById('skor_maksimal').textContent = maxScore;
             document.getElementById('nilai_akhir').textContent = `${percentage}%`;
             document.getElementById('keterangan_nilai').textContent = grade;
-
             updateSignatureDisplay();
             document.getElementById('hasil-penilaian').classList.remove('hidden');
         }
-
         function calculateGrade(percentage) {
             if (percentage > 90) return 'Amat Baik (AB)';
             if (percentage > 80) return 'Baik (B)';
             if (percentage > 70) return 'Cukup (C)';
             return 'Kurang (K)';
         }
-
         function getRequiredFields() {
             const baseFields = [
                 { id: 'nama_supervisor' }, { id: 'nip_supervisor' },
@@ -849,8 +814,6 @@
                 { id: 'tahun_pelajaran' }, { id: 'semester' },
                 { id: 'kelas' }, { id: 'tanggal_supervisi' }
             ];
-
-            // Tambahkan field jenis layanan sesuai tab
             if (currentTab === 'rpl') {
                 return [...baseFields, { id: 'jenis_layanan_rpl' }, { id: 'komentar_rpl' }];
             } else if (currentTab === 'pelaksanaan') {
@@ -861,11 +824,9 @@
         }
 
         // ========== DATA MANAGEMENT - FUNGSI DIPERBARUI ==========
+        // ... (Fungsi saveToSpreadsheet, saveDataLocally, loadSavedData, dll... tetap sama) ...
         function saveToSpreadsheet() {
-            // Validasi terlebih dahulu
             validateAndCalculate();
-            
-            // Ambil data dari form
             const data = {
                 timestamp: new Date().toISOString(),
                 tanggal_supervisi: document.getElementById('tanggal_supervisi').value,
@@ -882,8 +843,6 @@
                 nilai_akhir: document.getElementById('nilai_akhir').textContent,
                 keterangan_nilai: document.getElementById('keterangan_nilai').textContent
             };
-            
-            // Ambil jenis layanan sesuai tab
             if (currentTab === 'rpl') {
                 data.jenis_layanan = document.getElementById('jenis_layanan_rpl').value;
                 data.komentar = document.getElementById('komentar_rpl').value;
@@ -894,61 +853,40 @@
                 data.jenis_layanan = document.getElementById('jenis_layanan_admin').value;
                 data.komentar = document.getElementById('komentar_admin').value;
             }
-            
-            // Tampilkan loading
             showNotification('Menyimpan data ke spreadsheet...', 'success', true);
-            
-            // Kirim data ke Google Apps Script
             fetch(SPREADSHEET_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
-                // Hapus 'mode: no-cors' agar kita bisa membaca respons
             })
-            .then(response => response.json()) // Baca respons dari Apps Script
+            .then(response => response.json())
             .then(res => {
                 if (res.result === 'success') {
                     showNotification('Data berhasil disimpan ke spreadsheet!', 'success');
-                    // Tetap simpan data lokal sebagai backup
                     saveDataLocally(data);
                 } else {
-                    // Tampilkan pesan error jika skrip gagal
                     console.error('Apps Script Error:', res.message);
                     showNotification('Gagal simpan ke spreadsheet. Menyimpan lokal.', 'warning');
                     saveDataLocally(data);
                 }
             })
             .catch(error => {
-                // Error jaringan atau lainnya
                 console.error('Fetch Error:', error);
                 showNotification('Error jaringan. Data disimpan secara lokal.', 'warning');
                 saveDataLocally(data);
             });
         }
-
         function saveDataLocally(data) {
-            // Tambahkan ID unik
             data.id = Date.now().toString();
-            
-            // Ambil data yang sudah ada dari localStorage
             const existingData = JSON.parse(localStorage.getItem('supervisiData') || '[]');
-            
-            // Tambahkan data baru
             existingData.push(data);
-            
-            // Simpan kembali ke localStorage
             localStorage.setItem('supervisiData', JSON.stringify(existingData));
-            
-            // Update variabel savedData
             savedData = existingData;
-            
             showNotification('Data berhasil disimpan secara lokal!', 'success');
         }
-
         function loadSavedData() {
-            // Ambil data dari localStorage
             const storedData = localStorage.getItem('supervisiData');
             if (storedData) {
                 savedData = JSON.parse(storedData);
@@ -956,74 +894,51 @@
                 savedData = [];
             }
         }
-
         function viewSavedData() {
-            // Tampilkan modal
             document.getElementById('dataModal').classList.remove('hidden');
-            
-            // Tampilkan data
             displaySavedData();
         }
-
         function displaySavedData(filter = 'all') {
             const container = document.getElementById('savedDataContainer');
             const noDataMessage = document.getElementById('noDataMessage');
-            
-            // Filter data
             let filteredData = savedData;
             if (filter !== 'all') {
                 filteredData = savedData.filter(item => item.tipe_supervisi === filter);
             }
-            
-            // Kosongkan container
             container.innerHTML = '';
-            
-            // Periksa apakah ada data
             if (filteredData.length === 0) {
                 noDataMessage.classList.remove('hidden');
                 return;
             } else {
                 noDataMessage.classList.add('hidden');
             }
-            
-            // Tampilkan data
             filteredData.forEach(item => {
                 const row = document.createElement('tr');
-                
-                // Format tanggal
                 const date = new Date(item.tanggal_supervisi);
                 const formattedDate = date.toLocaleDateString('id-ID');
-                
                 row.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${formattedDate}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.tipe_supervisi.toUpperCase()}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.nama_guru}</td>
-                    <td class="px-6 py-4 whitespace-nowMrap text-sm text-gray-900">${item.nilai_akhir}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.nilai_akhir}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button onclick="loadData('${item.id}')" class="text-indigo-600 hover:text-indigo-900 mr-2">Muat</button>
                         <button onclick="deleteData('${item.id}')" class="text-red-600 hover:text-red-900">Hapus</button>
                     </td>
                 `;
-                
                 container.appendChild(row);
             });
         }
-
         function filterData() {
             const filterValue = document.getElementById('filterTab').value;
             displaySavedData(filterValue);
         }
-
         function loadData(id) {
-            // Cari data berdasarkan ID
             const data = savedData.find(item => item.id === id);
-            
             if (!data) {
                 showNotification('Data tidak ditemukan!', 'error');
                 return;
             }
-            
-            // Isi form dengan data
             document.getElementById('nama_supervisor').value = data.nama_supervisor;
             document.getElementById('nip_supervisor').value = data.nip_supervisor;
             document.getElementById('nama_guru').value = data.nama_guru;
@@ -1033,11 +948,7 @@
             document.getElementById('kelas').value = data.kelas;
             document.getElementById('tanggal_supervisi').value = data.tanggal_supervisi;
             document.getElementById('signatureDate').value = data.tanggal_supervisi;
-            
-            // Pindah ke tab yang sesuai
             switchTab(data.tipe_supervisi);
-            
-            // Isi jenis layanan dan komentar berdasarkan tipe
             if (data.tipe_supervisi === 'rpl') {
                 document.getElementById('jenis_layanan_rpl').value = data.jenis_layanan;
                 document.getElementById('komentar_rpl').value = data.komentar;
@@ -1048,55 +959,39 @@
                 document.getElementById('jenis_layanan_admin').value = data.jenis_layanan;
                 document.getElementById('komentar_admin').value = data.komentar;
             }
-            
-            // Tampilkan hasil penilaian
             document.getElementById('skor_total').textContent = data.skor_total;
             document.getElementById('skor_maksimal').textContent = data.skor_maksimal;
             document.getElementById('nilai_akhir').textContent = data.nilai_akhir;
             document.getElementById('keterangan_nilai').textContent = data.keterangan_nilai;
             document.getElementById('hasil-penilaian').classList.remove('hidden');
-            
-            // Update tanda tangan
             updateSignatureDisplay();
             
-            // Tutup modal
-            closeDataModal();
+            // Panggil updateNIP untuk mengatur readonly NIP
+            updateNIP(); 
             
+            closeDataModal();
             showNotification('Data berhasil dimuat!', 'success');
         }
-
         function deleteData(id) {
             if (!confirm('Apakah Anda yakin ingin menghapus data ini?')) {
                 return;
             }
-            
-            // Hapus data dari array
             savedData = savedData.filter(item => item.id !== id);
-            
-            // Simpan kembali ke localStorage
             localStorage.setItem('supervisiData', JSON.stringify(savedData));
-            
-            // Tampilkan kembali data
             displaySavedData(document.getElementById('filterTab').value);
-            
             showNotification('Data berhasil dihapus!', 'success');
         }
-
         function closeDataModal() {
             document.getElementById('dataModal').classList.add('hidden');
         }
-
         function exportToCSV() {
             validateAndCalculate();
-            
             let csv = "SUPERVISI GURU BK TERPADU - SMKN 1 PURBALINGGA\n";
             csv += `Tipe Supervisi,${currentTab.toUpperCase()}\n`;
             csv += `Tanggal Supervisi,${document.getElementById('tanggal_supervisi').value}\n`;
             csv += `Tahun Pelajaran,${document.getElementById('tahun_pelajaran').value}\n`;
             csv += `Semester,${document.getElementById('semester').value}\n`;
             csv += `Kelas,${document.getElementById('kelas').value}\n`;
-            
-            // Ambil jenis layanan sesuai tab
             let jenisLayanan = '';
             if (currentTab === 'rpl') {
                 jenisLayanan = document.getElementById('jenis_layanan_rpl').value;
@@ -1106,18 +1001,14 @@
                 jenisLayanan = document.getElementById('jenis_layanan_admin').value;
             }
             csv += `Jenis Layanan,${jenisLayanan}\n`;
-            
             csv += `Supervisor,${document.getElementById('nama_supervisor').value}\n`;
             csv += `NIP Supervisor,${document.getElementById('nip_supervisor').value}\n`;
             csv += `Guru BK,${document.getElementById('nama_guru').value}\n`;
             csv += `NIP Guru BK,${document.getElementById('nip').value}\n\n`;
-
-            // Add results
             csv += `Skor Total,${document.getElementById('skor_total').textContent}\n`;
             csv += `Skor Maksimal,${document.getElementById('skor_maksimal').textContent}\n`;
             csv += `Nilai Akhir,${document.getElementById('nilai_akhir').textContent}\n`;
             csv += `Peringkat,${document.getElementById('keterangan_nilai').textContent}\n`;
-
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -1142,7 +1033,12 @@
                 document.getElementById('komentar_rpl').value = '';
                 document.getElementById('komentar_pelaksanaan').value = '';
 
-                // Reset semua radio buttons ke nilai default
+                // =========== PERUBAHAN JAVASCRIPT 4b: RESET NIP FIELD ===========
+                const nipElement = document.getElementById('nip');
+                nipElement.readOnly = false;
+                nipElement.classList.remove('bg-gray-100');
+                // =========== AKHIR PERUBAHAN JAVASCRIPT 4b ===========
+
                 const allRadios = document.querySelectorAll('input[type="radio"]');
                 allRadios.forEach(radio => {
                     if ((currentTab === 'rpl' && radio.value === '3') || 
@@ -1153,32 +1049,26 @@
                         radio.checked = false;
                     }
                 });
-
-                // Reset semua textareas
                 const allTextareas = document.querySelectorAll('textarea');
                 allTextareas.forEach(textarea => {
                     if (!textarea.id.includes('komentar')) {
                         textarea.value = '';
                     }
                 });
-
                 document.getElementById('hasil-penilaian').classList.add('hidden');
                 setCurrentDate();
                 updateSignatureDisplay();
-                
                 alert('Form telah direset!');
             }
         }
-
+        
         // ========== NOTIFICATION SYSTEM ==========
+        // ... (Fungsi showNotification tetap sama) ...
         function showNotification(message, type = 'success', showSpinner = false) {
             const notification = document.getElementById('notification');
             const notificationText = document.getElementById('notificationText');
             const notificationSpinner = document.getElementById('notificationSpinner');
-            
             notificationText.textContent = message;
-            
-            // Set background color based on type
             if (type === 'success') {
                 notification.className = 'fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 bg-green-500 text-white flex items-center gap-3';
             } else if (type === 'warning') {
@@ -1186,24 +1076,79 @@
             } else {
                 notification.className = 'fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 bg-red-500 text-white flex items-center gap-3';
             }
-            
-            // Show/hide spinner
             if (showSpinner) {
                 notificationSpinner.classList.remove('hidden');
             } else {
                 notificationSpinner.classList.add('hidden');
             }
-            
-            // Show notification
             notification.classList.remove('hidden');
-            
-            // Auto hide after 3 seconds if not showing spinner
             if (!showSpinner) {
                 setTimeout(() => {
                     notification.classList.add('hidden');
                 }, 3000);
             }
         }
+
+
+        // =========== PERUBAHAN JAVASCRIPT 4: FUNGSI BARU UNTUK NIP OTOMATIS ===========
+
+        /**
+         * Mengisi dropdown nama guru saat halaman dimuat
+         */
+        function populateGuruDropdown() {
+            const selectElement = document.getElementById('nama_guru');
+            selectElement.innerHTML = ''; // Kosongkan opsi lama
+
+            // Tambahkan opsi default "Pilih Guru"
+            const defaultOption = document.createElement('option');
+            defaultOption.value = "";
+            defaultOption.textContent = "Pilih Guru BK";
+            selectElement.appendChild(defaultOption);
+
+            // Tambahkan semua guru dari dataGuruBK
+            Object.keys(dataGuruBK).forEach(nama => {
+                const option = document.createElement('option');
+                option.value = nama;
+                option.textContent = nama;
+                selectElement.appendChild(option);
+            });
+        }
+
+        /**
+         * Mengupdate NIP secara otomatis berdasarkan nama guru yang dipilih
+         */
+        function updateNIP() {
+            const selectElement = document.getElementById('nama_guru');
+            const nipElement = document.getElementById('nip');
+            const selectedName = selectElement.value;
+
+            if (dataGuruBK[selectedName]) {
+                const nip = dataGuruBK[selectedName];
+                
+                if (nip === 'lainnya') {
+                    // Jika memilih "Lainnya..."
+                    nipElement.value = ''; // Kosongkan NIP
+                    nipElement.readOnly = false; // Buat bisa diedit
+                    nipElement.classList.remove('bg-gray-100'); // Hapus style 'disabled'
+                    nipElement.focus(); // Fokus ke NIP
+                } else {
+                    // Jika memilih nama guru
+                    nipElement.value = nip; // Isi NIP
+                    nipElement.readOnly = true; // Kunci NIP
+                    nipElement.classList.add('bg-gray-100'); // Beri style 'disabled'
+                }
+            } else {
+                // Jika memilih "Pilih Guru BK" (value = "")
+                nipElement.value = '';
+                nipElement.readOnly = false; // Pastikan bisa diedit
+                nipElement.classList.remove('bg-gray-100');
+            }
+            
+            // Selalu update display tanda tangan setiap kali ada perubahan
+            updateSignatureDisplay();
+        }
+        // =========== AKHIR PERUBAHAN JAVASCRIPT 4 ===========
+
 
         // Initialize when page loads
         window.onload = initApp;
