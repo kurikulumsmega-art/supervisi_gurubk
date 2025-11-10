@@ -132,14 +132,12 @@
 <body class="bg-gray-50 text-gray-800">
 
     <div class="container mx-auto p-4">
-        <!-- Header -->
         <header class="text-center mb-8 bg-white p-6 rounded-xl shadow-sm">
             <h1 class="text-2xl md:text-3xl font-bold text-blue-600">SUPERVISI GURU BK TERPADU</h1>
             <p class="text-lg md:text-xl font-semibold text-gray-700">SMK Negeri 1 Purbalingga</p>
             <p class="text-sm text-gray-600 mt-2">RPL BK • Pelaksanaan Layanan • Administrasi BK</p>
         </header>
 
-        <!-- Informasi Supervisi (Pindah ke Atas) -->
         <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
             <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Supervisi</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -165,11 +163,9 @@
             </div>
         </div>
 
-        <!-- Informasi Personal (Urutan Diubah) -->
         <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
             <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Personal</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Guru BK (Kiri) -->
                 <div>
                     <h3 class="text-lg font-semibold text-green-600 mb-3">Guru BK</h3>
                     <div class="space-y-3">
@@ -184,7 +180,6 @@
                     </div>
                 </div>
                 
-                <!-- Supervisor (Kanan) -->
                 <div>
                     <h3 class="text-lg font-semibold text-blue-600 mb-3">Supervisor</h3>
                     <div class="space-y-3">
@@ -201,14 +196,12 @@
             </div>
         </div>
 
-        <!-- Tab Navigation -->
         <div class="mb-6 flex justify-center border-b border-gray-300 tab-nav">
             <button id="tab-rpl-btn" class="tab-btn py-3 px-6 border-b-2 border-transparent" onclick="switchTab('rpl')">RPL BK</button>
             <button id="tab-pelaksanaan-btn" class="tab-btn py-3 px-6 border-b-2 border-transparent" onclick="switchTab('pelaksanaan')">Pelaksanaan Layanan</button>
             <button id="tab-administrasi-btn" class="tab-btn active py-3 px-6 border-b-2 border-blue-500 text-blue-600" onclick="switchTab('administrasi')">Administrasi BK</button>
         </div>
 
-        <!-- ========== TAB RPL ========== -->
         <div id="tab-rpl-content" class="tab-content hidden">
             <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
                 <div class="bg-blue-600 text-white p-4">
@@ -226,12 +219,10 @@
                             </tr>
                         </thead>
                         <tbody id="instrumen-rpl-container">
-                            <!-- Diisi oleh JavaScript -->
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
                 
-                <!-- Jenis Layanan (Dipindah ke sini) -->
                 <div class="p-6 space-y-4">
                     <div>
                         <label for="jenis_layanan_rpl" class="block text-sm font-medium text-gray-600 required-field">Jenis Layanan</label>
@@ -253,7 +244,6 @@
             </div>
         </div>
 
-        <!-- ========== TAB PELAKSANAAN ========== -->
         <div id="tab-pelaksanaan-content" class="tab-content hidden">
             <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
                 <div class="bg-blue-600 text-white p-4">
@@ -271,12 +261,10 @@
                             </tr>
                         </thead>
                         <tbody id="instrumen-pelaksanaan-container">
-                            <!-- Diisi oleh JavaScript -->
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
                 
-                <!-- Jenis Layanan (Dipindah ke sini) -->
                 <div class="p-6 space-y-4">
                     <div>
                         <label for="jenis_layanan_pelaksanaan" class="block text-sm font-medium text-gray-600 required-field">Jenis Layanan</label>
@@ -298,7 +286,6 @@
             </div>
         </div>
 
-        <!-- ========== TAB ADMINISTRASI ========== -->
         <div id="tab-administrasi-content" class="tab-content">
             <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
                 <div class="bg-blue-600 text-white p-4">
@@ -316,12 +303,10 @@
                             </tr>
                         </thead>
                         <tbody id="instrumen-administrasi-container">
-                            <!-- Diisi oleh JavaScript -->
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
                 
-                <!-- Jenis Layanan (Dipindah ke sini) -->
                 <div class="p-6 space-y-4">
                     <div>
                         <label for="jenis_layanan_admin" class="block text-sm font-medium text-gray-600 required-field">Jenis Layanan</label>
@@ -343,7 +328,6 @@
             </div>
         </div>
 
-        <!-- Action Buttons -->
         <div class="bg-white p-6 rounded-xl shadow-sm mt-6 action-buttons">
             <div class="flex flex-wrap gap-2 justify-center">
                 <button onclick="validateAndCalculate()" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700">
@@ -367,7 +351,6 @@
             </div>
         </div>
 
-        <!-- Hasil Penilaian -->
         <div id="hasil-penilaian" class="bg-white p-6 rounded-xl shadow-sm mt-6 hidden">
             <h3 class="text-lg font-bold text-gray-800 mb-4">Hasil Penilaian</h3>
             <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
@@ -392,7 +375,6 @@
             </div>
         </div>
 
-        <!-- Tanda Tangan -->
         <section class="bg-white p-6 rounded-xl shadow-sm mt-6 signature-section">
             <h2 class="text-xl font-bold text-indigo-700 mb-6">VALIDASI</h2>
             
@@ -402,7 +384,6 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <!-- Supervisor -->
                 <div class="text-center">
                     <p class="font-semibold text-gray-700">Supervisor</p>
                     <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center">
@@ -412,7 +393,6 @@
                     <p class="text-xs text-gray-500" id="supervisorNipDisplay">NIP. .............................</p>
                 </div>
                 
-                <!-- Guru BK -->
                 <div class="text-center">
                     <p class="font-semibold text-gray-700">Guru BK</p>
                     <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center">
@@ -434,7 +414,6 @@
         </section>
     </div>
 
-    <!-- Modal untuk menampilkan data tersimpan -->
     <div id="dataModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
         <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
             <div class="mt-3">
@@ -466,8 +445,7 @@
                                 </tr>
                             </thead>
                             <tbody id="savedDataContainer" class="bg-white divide-y divide-gray-200">
-                                <!-- Data akan dimuat di sini -->
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                     <div id="noDataMessage" class="text-center py-4 text-gray-500 hidden">
@@ -483,7 +461,6 @@
         </div>
     </div>
 
-    <!-- Notification Element -->
     <div id="notification" class="fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 hidden">
         <div class="flex items-center gap-3">
             <span id="notificationText"></span>
@@ -579,8 +556,8 @@
         let savedData = [];
 
         // ========== URL WEB APP ANDA ==========
-        // URL baru yang diberikan
-        const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbyvOqUohtnIUqLehaHFVmwtNRCOfZ5GrUWYyTJdNfkkeJG6CZu7l5IcwpOfZ8IR8ZjMFg/exec';
+        // URL BARU ANDA TELAH DISEMATKAN DI SINI
+        const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbzMsdvkUyvv_YXD3iUadW09weqBDh2otv-SQJMxWTed2zf1cE-K0NHthmNSagOfXEEu_Q/exec';
 
         // ========== INITIALIZE APP ==========
         function initApp() {
@@ -883,7 +860,7 @@
             }
         }
 
-        // ========== DATA MANAGEMENT - UPDATED FOR YOUR WEB APP ==========
+        // ========== DATA MANAGEMENT - FUNGSI DIPERBARUI ==========
         function saveToSpreadsheet() {
             // Validasi terlebih dahulu
             validateAndCalculate();
@@ -921,25 +898,32 @@
             // Tampilkan loading
             showNotification('Menyimpan data ke spreadsheet...', 'success', true);
             
-            // Kirim data ke Google Apps Script dengan URL baru
+            // Kirim data ke Google Apps Script
             fetch(SPREADSHEET_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
-                mode: 'no-cors' // Tambahkan mode no-cors
+                // Hapus 'mode: no-cors' agar kita bisa membaca respons
             })
-            .then(response => {
-                // Karena mode no-cors, kita tidak bisa membaca response
-                // Anggap berhasil jika tidak ada error
-                showNotification('Data berhasil dikirim ke spreadsheet!', 'success');
-                saveDataLocally(data);
+            .then(response => response.json()) // Baca respons dari Apps Script
+            .then(res => {
+                if (res.result === 'success') {
+                    showNotification('Data berhasil disimpan ke spreadsheet!', 'success');
+                    // Tetap simpan data lokal sebagai backup
+                    saveDataLocally(data);
+                } else {
+                    // Tampilkan pesan error jika skrip gagal
+                    console.error('Apps Script Error:', res.message);
+                    showNotification('Gagal simpan ke spreadsheet. Menyimpan lokal.', 'warning');
+                    saveDataLocally(data);
+                }
             })
             .catch(error => {
-                console.error('Error:', error);
-                showNotification('Menggunakan mode cadangan. Data disimpan secara lokal.', 'warning');
-                // Simpan data lokal jika gagal mengirim ke server
+                // Error jaringan atau lainnya
+                console.error('Fetch Error:', error);
+                showNotification('Error jaringan. Data disimpan secara lokal.', 'warning');
                 saveDataLocally(data);
             });
         }
@@ -1014,7 +998,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${formattedDate}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.tipe_supervisi.toUpperCase()}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.nama_guru}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.nilai_akhir}</td>
+                    <td class="px-6 py-4 whitespace-nowMrap text-sm text-gray-900">${item.nilai_akhir}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button onclick="loadData('${item.id}')" class="text-indigo-600 hover:text-indigo-900 mr-2">Muat</button>
                         <button onclick="deleteData('${item.id}')" class="text-red-600 hover:text-red-900">Hapus</button>
