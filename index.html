@@ -267,6 +267,38 @@
                 gap: 5px !important;
             }
             
+            /* PERBAIKAN LAYOUT TANDA TANGAN */
+            .signature-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            .signature-row {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .signature-item {
+                flex: 1;
+                text-align: center;
+                margin: 0 15px;
+            }
+            .signature-box {
+                border: 1px solid #000;
+                height: 80px;
+                margin-bottom: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .headmaster-signature {
+                text-align: center;
+                margin-top: 20px;
+                width: 100%;
+            }
+            
             @page {
                 margin: 0.5cm; /* Margin halaman dikurangi */
                 size: A4;
@@ -279,7 +311,7 @@
     <div class="print-header">
         <img src="https://upload.wikimedia.org/wikipedia/id/thumb/a/a4/Logo_SMK_Negeri_1_Purbalingga.png/960px-Logo_SMK_Negeri_1_Purbalingga.png?20230826040914" alt="Logo SMK Negeri 1 Purbalingga">
         <div class="print-header-text">
-            <h1>SUPERVISI AKADEMIK GURU BK</h1>
+            <h1>Supervisi akademik guru BK</h1>
             <h2>SMK NEGERI 1 PURBALINGGA</h2>
             <p>Jl. Mayjend Sungkono, Selabaya, KP 34, Kalimanah, Purbalingga, Jawa Tengah 53371.</p>
         </div>
@@ -538,42 +570,51 @@
 
             </div>
 
+            <!-- BAGIAN VALIDASI YANG DIPERBAIKI -->
             <section class="bg-white p-4 rounded-xl shadow-sm mt-4 signature-section">
                 <h2 class="text-xl font-bold text-indigo-700 mb-4">VALIDASI</h2>
                 
-                <div class="text-center mb-4">
+                <div class="text-center mb-6">
                     <label class="text-sm font-medium text-gray-700 mr-2">Purbalingga,</label>
                     <input type="date" id="signatureDate" class="p-2 border border-gray-300 rounded-lg no-print">
                     <span class="print-only hidden"></span>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="text-center">
-                        <p class="font-semibold text-gray-700">Supervisor</p>
-                        <div class="border border-gray-300 h-20 mt-2 rounded flex items-center justify-center">
-                            <span class="text-gray-400 text-sm">Tanda Tangan</span>
+                <!-- Container untuk tanda tangan sejajar -->
+                <div class="signature-container">
+                    <!-- Baris pertama: Guru BK dan Supervisor sejajar -->
+                    <div class="signature-row">
+                        <!-- Guru BK -->
+                        <div class="signature-item">
+                            <p class="font-semibold text-gray-700 mb-2">Guru BK</p>
+                            <div class="signature-box">
+                                <span class="text-gray-400 text-sm">Tanda Tangan</span>
+                            </div>
+                            <p class="font-bold text-gray-800 mt-2" id="teacherNameDisplay">........................................</p>
+                            <p class="text-xs text-gray-500" id="teacherNipDisplay">NIP. .............................</p>
                         </div>
-                        <p class="font-bold text-gray-800 mt-2" id="supervisorNameDisplay">........................................</p>
-                        <p class="text-xs text-gray-500" id="supervisorNipDisplay">NIP. .............................</p>
+                        
+                        <!-- Supervisor -->
+                        <div class="signature-item">
+                            <p class="font-semibold text-gray-700 mb-2">Supervisor</p>
+                            <div class="signature-box">
+                                <span class="text-gray-400 text-sm">Tanda Tangan</span>
+                            </div>
+                            <p class="font-bold text-gray-800 mt-2" id="supervisorNameDisplay">........................................</p>
+                            <p class="text-xs text-gray-500" id="supervisorNipDisplay">NIP. .............................</p>
+                        </div>
                     </div>
                     
-                    <div class="text-center">
-                        <p class="font-semibold text-gray-700">Guru BK</p>
-                        <div class="border border-gray-300 h-20 mt-2 rounded flex items-center justify-center">
+                    <!-- Baris kedua: Kepala Sekolah di tengah -->
+                    <div class="headmaster-signature">
+                        <p class="font-semibold text-gray-700 mb-2">Mengetahui,</p>
+                        <p class="font-semibold text-gray-700 mb-2">Kepala Sekolah</p>
+                        <div class="signature-box mx-auto" style="max-width: 250px;">
                             <span class="text-gray-400 text-sm">Tanda Tangan</span>
                         </div>
-                        <p class="font-bold text-gray-800 mt-2" id="teacherNameDisplay">........................................</p>
-                        <p class="text-xs text-gray-500" id="teacherNipDisplay">NIP. .............................</p>
+                        <p class="font-bold text-gray-800 mt-2">Maryono S.Pd, M.Si</p>
+                        <p class="text-xs text-gray-500">NIP. 19660701 2000121002</p>
                     </div>
-                </div>
-                
-                <div class="text-center pt-4 border-t border-dashed">
-                    <p class="font-semibold text-gray-700">Mengetahui, Kepala Sekolah</p>
-                    <div class="border border-gray-300 h-20 mt-2 rounded flex items-center justify-center mx-auto" style="max-width: 250px;">
-                        <span class="text-gray-400 text-sm">Tanda Tangan</span>
-                    </div>
-                    <p class="font-bold text-gray-800 mt-2">Maryono S.Pd, M.Si</p>
-                    <p class="text-xs text-gray-500">NIP. 19660701 2000121002</p>
                 </div>
             </section>
         </div>
@@ -1505,4 +1546,3 @@
     </script>
 </body>
 </html>
-
