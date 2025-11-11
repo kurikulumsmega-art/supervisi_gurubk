@@ -19,7 +19,7 @@
         }
         .table-view th, .table-view td {
             border: 1px solid #e2e8f0;
-            padding: 12px 16px;
+            padding: 8px 10px;
             text-align: left;
             vertical-align: top;
         }
@@ -47,23 +47,23 @@
         }
         .radio-group-horizontal {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             align-items: center;
         }
         .radio-option-horizontal {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 3px;
         }
         .score-radio-group {
             display: flex;
-            gap: 10px;
+            gap: 5px;
             flex-wrap: wrap;
         }
         .score-radio-option {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
         }
 
         /* ========== CSS BARU UNTUK KOP SURAT PRINT ========== */
@@ -140,49 +140,51 @@
             box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
         }
         
-        /* Print Styles */
+        /* Print Styles - DIPERBAIKI untuk cetak modul ajar */
         @media print {
             /* ========== GAYA KOP SURAT BARU UNTUK PRINT ========== */
             .print-header {
                 display: flex;
                 align-items: center;
-                gap: 20px; /* Jarak antara logo dan teks */
-                margin-bottom: 20px;
-                border-bottom: 3px solid #000;
-                padding-bottom: 15px;
+                gap: 15px; /* Jarak antara logo dan teks dikurangi */
+                margin-bottom: 10px; /* Margin bawah dikurangi */
+                border-bottom: 2px solid #000; /* Border lebih tipis */
+                padding-bottom: 8px; /* Padding bawah dikurangi */
                 page-break-inside: avoid;
             }
             .print-header img {
-                width: 80px; /* Sesuaikan ukuran logo */
-                height: 80px;
+                width: 60px; /* Ukuran logo diperkecil */
+                height: 60px;
                 object-fit: contain;
             }
             .print-header-text {
                 /* Teks akan otomatis di sebelah kanan logo */
             }
             .print-header-text h1 {
-                font-size: 18pt;
+                font-size: 14pt; /* Font size diperkecil */
                 font-weight: bold;
                 margin: 0;
                 color: #000;
             }
             .print-header-text h2 {
-                font-size: 16pt; /* Nama Sekolah */
+                font-size: 12pt; /* Font size diperkecil */
                 font-weight: bold;
-                margin: 2px 0;
+                margin: 1px 0; /* Margin dikurangi */
                 color: #000;
             }
             .print-header-text p {
-                font-size: 10pt;
+                font-size: 9pt; /* Font size diperkecil */
                 margin: 0;
                 color: #000;
             }
             /* ==================================================== */
 
             body {
-                font-size: 12pt;
-                line-height: 1.3;
+                font-size: 10pt; /* Font size lebih kecil untuk cetak */
+                line-height: 1.2; /* Line height dikurangi */
                 background: white;
+                margin: 0;
+                padding: 0;
             }
             .no-print {
                 display: none !important;
@@ -190,42 +192,83 @@
             .container {
                 max-width: 100%;
                 margin: 0;
-                padding: 10px;
+                padding: 5px; /* Padding container dikurangi */
             }
             .bg-white {
                 background-color: white !important;
                 box-shadow: none !important;
                 page-break-inside: avoid;
+                margin-bottom: 8px !important; /* Margin antar section dikurangi */
             }
 
             /* Tampilkan semua langkah saat print */
             .step-content {
                 display: block !important;
-                page-break-before: always;
-            }
-            .step-content:first-child {
-                page-break-before: auto; /* Halaman pertama tidak break */
+                page-break-before: auto; /* Hapus page break sebelum setiap step */
+                margin-bottom: 10px; /* Margin antar step dikurangi */
             }
 
             .table-view {
                 page-break-inside: auto;
+                font-size: 9pt; /* Font size tabel diperkecil */
             }
             .table-view tr {
                 page-break-inside: avoid;
                 page-break-after: auto;
             }
             .table-view td, .table-view th {
-                padding: 6px 8px;
+                padding: 4px 6px; /* Padding cell dikurangi */
             }
             .action-buttons, .step-navigation, .step-navigation-buttons {
                 display: none !important;
             }
             .signature-section {
-                margin-top: 30px;
+                margin-top: 15px; /* Margin atas dikurangi */
                 page-break-inside: avoid;
+                padding: 10px !important; /* Padding signature section dikurangi */
             }
+            
+            /* Perbaikan untuk form input saat print */
+            input, select, textarea {
+                border: none !important;
+                background: transparent !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+            }
+            
+            /* Perbaikan untuk radio buttons saat print */
+            input[type="radio"] {
+                display: none;
+            }
+            .radio-group-horizontal, .score-radio-group {
+                display: none;
+            }
+            
+            /* Tampilkan nilai radio yang dipilih saat print */
+            .print-radio-value {
+                display: block !important;
+                font-weight: bold;
+            }
+            
+            /* Perbaikan layout untuk cetak */
+            .grid {
+                display: block !important;
+            }
+            .grid > div {
+                margin-bottom: 5px;
+            }
+            
+            /* Perbaikan untuk hasil penilaian */
+            #hasil-penilaian > div {
+                margin-bottom: 8px !important;
+            }
+            #hasil-penilaian .grid {
+                gap: 5px !important;
+            }
+            
             @page {
-                margin: 1.5cm;
+                margin: 0.5cm; /* Margin halaman dikurangi */
                 size: A4;
             }
         }
@@ -242,13 +285,13 @@
         </div>
     </div>
     <div class="container mx-auto p-4">
-        <header class="text-center mb-8 bg-white p-6 rounded-xl shadow-sm no-print">
+        <header class="text-center mb-6 bg-white p-4 rounded-xl shadow-sm no-print">
             <h1 class="text-2xl md:text-3xl font-bold text-blue-600">SUPERVISI GURU BK TERPADU</h1>
             <p class="text-lg md:text-xl font-semibold text-gray-700">SMK Negeri 1 Purbalingga</p>
             <p class="text-sm text-gray-600 mt-2">RPL BK • Pelaksanaan Layanan • Administrasi BK</p>
         </header>
 
-        <div class="bg-white p-4 rounded-xl shadow-sm mb-6 sticky top-2 z-10 no-print">
+        <div class="bg-white p-4 rounded-xl shadow-sm mb-4 sticky top-2 z-10 no-print">
             <div id="step-navigation-container" class="flex flex-wrap justify-between">
                 <div id="step-btn-1" class="step active" onclick="goToStep(1)">
                     <div class="step-number">1</div>
@@ -273,9 +316,9 @@
             </div>
         </div>
         <div id="step-content-1" class="step-content active">
-            <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
-                <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Langkah 1: Informasi Supervisi</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-xl shadow-sm mb-4">
+                <h2 class="text-xl font-bold mb-3 border-b pb-2 text-gray-700">Langkah 1: Informasi Supervisi</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
                         <label for="tahun_pelajaran" class="block text-sm font-medium text-gray-600 required-field">Tahun Pelajaran</label>
                         <input type="text" id="tahun_pelajaran" value="2025/2026" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
@@ -298,12 +341,12 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
-                <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">Informasi Personal</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-4 rounded-xl shadow-sm mb-4">
+                <h2 class="text-xl font-bold mb-3 border-b pb-2 text-gray-700">Informasi Personal</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <h3 class="text-lg font-semibold text-green-600 mb-3">Guru BK</h3>
-                        <div class="space-y-3">
+                        <h3 class="text-lg font-semibold text-green-600 mb-2">Guru BK</h3>
+                        <div class="space-y-2">
                             <div>
                                 <label for="nama_guru" class="block text-sm font-medium text-gray-600 required-field">Nama Guru BK</label>
                                 <select id="nama_guru" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" onchange="updateNIP()">
@@ -318,8 +361,8 @@
                     </div>
                     
                     <div>
-                        <h3 class="text-lg font-semibold text-blue-600 mb-3">Supervisor</h3>
-                        <div class="space-y-3">
+                        <h3 class="text-lg font-semibold text-blue-600 mb-2">Supervisor</h3>
+                        <div class="space-y-2">
                             <div>
                                 <label for="nama_supervisor" class="block text-sm font-medium text-gray-600 required-field">Nama Supervisor</label>
                                 <input type="text" id="nama_supervisor" value="Maryono, S.Pd., M.Si" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
@@ -334,8 +377,8 @@
             </div>
         </div>
         <div id="step-content-2" class="step-content">
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
-                <div class="bg-blue-600 text-white p-4">
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-4">
+                <div class="bg-blue-600 text-white p-3">
                     <h2 class="text-xl font-bold">Langkah 2: Supervisi Administrasi Guru BK</h2>
                 </div>
                 
@@ -356,8 +399,8 @@
             </div>
         </div>
         <div id="step-content-3" class="step-content">
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
-                <div class="bg-blue-600 text-white p-4">
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-4">
+                <div class="bg-blue-600 text-white p-3">
                     <h2 class="text-xl font-bold">Langkah 3: Instrumen Supervisi RPL Bimbingan Konseling</h2>
                 </div>
                 
@@ -378,8 +421,8 @@
             </div>
         </div>
         <div id="step-content-4" class="step-content">
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
-                <div class="bg-blue-600 text-white p-4">
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-4">
+                <div class="bg-blue-600 text-white p-3">
                     <h2 class="text-xl font-bold">Langkah 4: Instrumen Supervisi Pelaksanaan Layanan</h2>
                 </div>
                 
@@ -400,13 +443,13 @@
             </div>
         </div>
         <div id="step-content-5" class="step-content">
-            <div id="hasil-penilaian" class="bg-white p-6 rounded-xl shadow-sm mb-6">
-                <h2 class="text-xl font-bold text-gray-700 mb-4 border-b pb-2">Langkah 5: Hasil Penilaian</h2>
+            <div id="hasil-penilaian" class="bg-white p-4 rounded-xl shadow-sm mb-4">
+                <h2 class="text-xl font-bold text-gray-700 mb-3 border-b pb-2">Langkah 5: Hasil Penilaian</h2>
                 
-                <div class="mb-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-3">A. Hasil Supervisi Administrasi</h3>
-                    <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">A. Hasil Supervisi Administrasi</h3>
+                    <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
                             <div>
                                 <p class="text-sm text-gray-600">Skor Total</p>
                                 <p class="text-2xl font-bold text-blue-700" id="skor_total_admin">0</p>
@@ -427,10 +470,10 @@
                     </div>
                 </div>
 
-                <div class="mb-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-3">B. Hasil Supervisi RPL</h3>
-                    <div class="p-4 bg-green-50 rounded-lg border border-green-200">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">B. Hasil Supervisi RPL</h3>
+                    <div class="p-3 bg-green-50 rounded-lg border border-green-200">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
                             <div>
                                 <p class="text-sm text-gray-600">Skor Total</p>
                                 <p class="text-2xl font-bold text-green-700" id="skor_total_rpl">0</p>
@@ -451,10 +494,10 @@
                     </div>
                 </div>
 
-                <div class="mb-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-3">C. Hasil Supervisi Pelaksanaan</h3>
-                    <div class="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">C. Hasil Supervisi Pelaksanaan</h3>
+                    <div class="p-3 bg-indigo-50 rounded-lg border border-indigo-200">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
                             <div>
                                 <p class="text-sm text-gray-600">Skor Total</p>
                                 <p class="text-2xl font-bold text-indigo-700" id="skor_total_pelaksanaan">0</p>
@@ -475,9 +518,9 @@
                     </div>
                 </div>
 
-                <div class="mb-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-3">D. Komentar & Saran (Wajib Diisi)</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">D. Komentar & Saran (Wajib Diisi)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
                             <label for="komentar_admin" class="block text-sm font-medium text-gray-600 required-field">Saran Administrasi</label>
                             <textarea id="komentar_admin" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"></textarea>
@@ -495,19 +538,19 @@
 
             </div>
 
-            <section class="bg-white p-6 rounded-xl shadow-sm mt-6 signature-section">
-                <h2 class="text-xl font-bold text-indigo-700 mb-6">VALIDASI</h2>
+            <section class="bg-white p-4 rounded-xl shadow-sm mt-4 signature-section">
+                <h2 class="text-xl font-bold text-indigo-700 mb-4">VALIDASI</h2>
                 
-                <div class="text-center mb-6">
+                <div class="text-center mb-4">
                     <label class="text-sm font-medium text-gray-700 mr-2">Purbalingga,</label>
                     <input type="date" id="signatureDate" class="p-2 border border-gray-300 rounded-lg no-print">
                     <span class="print-only hidden"></span>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div class="text-center">
                         <p class="font-semibold text-gray-700">Supervisor</p>
-                        <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center">
+                        <div class="border border-gray-300 h-20 mt-2 rounded flex items-center justify-center">
                             <span class="text-gray-400 text-sm">Tanda Tangan</span>
                         </div>
                         <p class="font-bold text-gray-800 mt-2" id="supervisorNameDisplay">........................................</p>
@@ -516,7 +559,7 @@
                     
                     <div class="text-center">
                         <p class="font-semibold text-gray-700">Guru BK</p>
-                        <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center">
+                        <div class="border border-gray-300 h-20 mt-2 rounded flex items-center justify-center">
                             <span class="text-gray-400 text-sm">Tanda Tangan</span>
                         </div>
                         <p class="font-bold text-gray-800 mt-2" id="teacherNameDisplay">........................................</p>
@@ -524,9 +567,9 @@
                     </div>
                 </div>
                 
-                <div class="text-center pt-6 border-t border-dashed">
+                <div class="text-center pt-4 border-t border-dashed">
                     <p class="font-semibold text-gray-700">Mengetahui, Kepala Sekolah</p>
-                    <div class="border border-gray-300 h-24 mt-2 rounded flex items-center justify-center mx-auto" style="max-width: 300px;">
+                    <div class="border border-gray-300 h-20 mt-2 rounded flex items-center justify-center mx-auto" style="max-width: 250px;">
                         <span class="text-gray-400 text-sm">Tanda Tangan</span>
                     </div>
                     <p class="font-bold text-gray-800 mt-2">Maryono S.Pd, M.Si</p>
@@ -534,28 +577,28 @@
                 </div>
             </section>
         </div>
-        <div class="flex justify-between mt-8 no-print step-navigation-buttons">
-            <button id="prev-step-btn" onclick="prevStep()" class="bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700 disabled:opacity-50" disabled>
+        <div class="flex justify-between mt-6 no-print step-navigation-buttons">
+            <button id="prev-step-btn" onclick="prevStep()" class="bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 disabled:opacity-50" disabled>
                 <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
             </button>
-            <button id="next-step-btn" onclick="nextStep()" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700">
+            <button id="next-step-btn" onclick="nextStep()" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700">
                 Berikutnya<i class="fas fa-arrow-right ml-2"></i>
             </button>
         </div>
 
 
-        <div class="bg-white p-6 rounded-xl shadow-sm mt-6 action-buttons no-print">
+        <div class="bg-white p-4 rounded-xl shadow-sm mt-4 action-buttons no-print">
             <div class="flex flex-wrap gap-2 justify-center">
-                <button onclick="saveAndPrint()" class="bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700">
+                <button onclick="saveAndPrint()" class="bg-purple-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-700">
                     <i class="fas fa-save mr-2"></i>Simpan & Cetak
                 </button>
-                <button onclick="viewSavedData()" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700">
+                <button onclick="viewSavedData()" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700">
                     <i class="fas fa-database mr-2"></i>Lihat Data Tersimpan
                 </button>
-                <button onclick="exportToCSV()" class="bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700">
+                <button onclick="exportToCSV()" class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700">
                     <i class="fas fa-file-csv mr-2"></i>Export ke CSV
                 </button>
-                <button onclick="resetForm()" class="bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700">
+                <button onclick="resetForm()" class="bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700">
                     <i class="fas fa-redo mr-2"></i>Reset Form
                 </button>
             </div>
@@ -728,9 +771,6 @@
             
             // Hitung skor awal
             calculateAllScores();
-            
-            // Tambahkan event listener untuk autosave
-            setupAutosave();
         }
 
         // ========== RENDER FUNCTIONS ==========
@@ -766,6 +806,9 @@
                                 <input type="radio" id="${item.id}_3" name="${item.id}" value="3" class="h-4 w-4 text-blue-600" checked onchange="calculateAllScores()">
                                 <label for="${item.id}_3" class="text-sm">3 (Sudah Lengkap)</label>
                             </div>
+                        </div>
+                        <div class="print-radio-value hidden">
+                            <span class="text-sm font-bold">3 (Sudah Lengkap)</span>
                         </div>
                     </td>
                     <td>
@@ -814,6 +857,9 @@
                                 <label for="${item.id}_tidak" class="text-sm">Tidak</label>
                             </div>
                         </div>
+                        <div class="print-radio-value hidden">
+                            <span class="text-sm font-bold">Ya</span>
+                        </div>
                     </td>
                     <td>
                         <textarea id="keterangan_${item.id}" placeholder="Catatan..." class="w-full px-3 py-2 border border-gray-300 rounded-md" rows="2"></textarea>
@@ -849,6 +895,9 @@
                                     <label for="${item.id}_${val}" class="ml-1 text-sm">${val}</label>
                                 </div>
                             `).join('')}
+                        </div>
+                        <div class="print-radio-value hidden">
+                            <span class="text-sm font-bold">4</span>
                         </div>
                     </td>
                     <td>
@@ -960,6 +1009,11 @@
                 document.getElementById('signatureDate').classList.add('hidden');
             }
 
+            // Tampilkan nilai radio yang dipilih saat print
+            document.querySelectorAll('.print-radio-value').forEach(el => {
+                el.classList.remove('hidden');
+            });
+
             // Trigger print
             window.print();
 
@@ -968,6 +1022,11 @@
                 dateSpan.classList.add('hidden');
                 document.getElementById('signatureDate').classList.remove('hidden');
             }
+            
+            // Sembunyikan kembali nilai radio
+            document.querySelectorAll('.print-radio-value').forEach(el => {
+                el.classList.add('hidden');
+            });
         }
 
         // ========== CALCULATION FUNCTIONS ==========
@@ -1439,17 +1498,6 @@
                 nipElement.classList.remove('bg-gray-100');
             }
             updateSignatureDisplay();
-        }
-
-        // ========== AUTOSAVE FUNCTIONALITY ==========
-        function setupAutosave() {
-            // Simpan data setiap 30 detik
-            setInterval(() => {
-                if (validateStep(1)) { // Hanya simpan jika langkah 1 valid
-                    saveDataLocally();
-                    console.log('Autosave berhasil');
-                }
-            }, 30000);
         }
 
         // Initialize when page loads
